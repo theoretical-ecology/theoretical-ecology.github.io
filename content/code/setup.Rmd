@@ -1,0 +1,21 @@
+---
+title: "Introduction to the course"
+---
+
+
+### Reading
+
+- [syllabus](https://theoreticalEcology.github.io/syllabus/)
+
+
+### Notes
+
+- [Download R](https://www.r-project.org/) as we will be using it to simulate some of the models we go over. 
+
+
+
+
+
+
+
+

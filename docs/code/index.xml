@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Codes on Theoretical Ecology</title>
+    <link>/code/</link>
+    <description>Recent content in Codes on Theoretical Ecology</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Population growth</title>
+      <link>/code/popgrowth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/popgrowth/</guid>
+      <description>What controls the dynamics of species populations through time? An essential question in population ecology, with clear fundamental and applied aspects. For instance, fundamentally, understanding what causes populations to fluctuate over time and across environmental gradients underlies much of population ecology. In an applied sense, the ability to forecast population dynamics and estimate population growth rates is essential to the management and conservation of species (e.g., think of fisheries).</description>
+    </item>
+    
+  </channel>
+</rss>

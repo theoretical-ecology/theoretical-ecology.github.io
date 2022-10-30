@@ -1,0 +1,157 @@
+lessons:
+  - module: "<i class='material-icons'>home</i>"
+    topics: "Course design, goals, introduction, and setup"
+    date: "Week 1"
+    reading: "read/setup"
+
+
+  - module: ""
+    date: " "
+    topics: "<b> MODULE 1: Single species population dynamics </b>"
+
+  - module: "<i class='fa fa-lg fa-terminal'></i>"
+    date: "Week 2 "
+    topics: "Population growth"
+    reading: "read/popgrowth"
+    code: "code/popgrowth"
+            
+  - module: "<i class='fa fa-lg fa-terminal'></i>"
+    date: "Week 3"
+    topics: "Age structured populations"
+    reading: "read/agestructure"
+    code: "code/agestructure"
+
+  - module: "<i class='fa fa-lg fa-terminal'></i>"
+    date: "Week 4"
+    topics: "Constrained population growth"
+    reading: "read/constrainedgrowth"
+    code: "code/constrainedgrowth"
+    homework: "https://classroom.github.com/" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  - module: " "
+    date: " "
+    topics: "<b> MODULE 2: Life history evolution </b>"
+
+  - module: "<i class='fa fa-lg fa-user-plus'></i>"
+    date: "Week 5"
+    topics: "Life history tradeoffs"
+    reading: "read/lifehistory"
+    code: "code/lifehistory"
+    
+  - module: "<i class='fa fa-lg fa-user-plus'></i>"
+    date: "Week 6"
+    topics: "Evolutionary theory of aging"
+    reading: "read/aging"
+    code: "code/aging"
+
+  - module: "<i class='fa fa-lg fa-user-plus'></i>"
+    date: "Week 7"
+    topics: "Density-dependent selection"
+    reading: "read/selection"
+    code: "code/selection"
+    homework: "https://classroom.github.com/" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  - module: " "
+    date: ""
+    topics: "<b>MODULE 3: Species interactions </b>"
+    
+  - module: "<i class='fa fa-lg fa-line-chart'></i>"
+    date: "Week 8"
+    topics: "Resources and predator-prey"
+    reading: "read/predation"
+    code: "code/predation"
+
+  - module: "<i class='fa fa-lg fa-thumbs-o-up'></i>"
+    date: "Spring break"
+    topics: " --- "
+
+  - module: "<i class='fa fa-lg fa-line-chart'></i>"
+    date: "Week 10"
+    topics: "Competition"
+    reading: "read/competition"
+    code: "code/competition"
+    homework: "https://classroom.github.com/" 
+
+  - module: "<i class='fa fa-lg fa-line-chart'></i>"
+    date: "Week 11"
+    topics: "Multi-species communities"
+    reading: "read/communities"
+
+
+
+
+
+
+
+
+
+  - module: " "
+    date: ""
+    topics: "<b>MODULE 4: Metapopulations and disease </b>"
+    
+  - module: "<i class='fa fa-lg fa-map'></i>"
+    date: "Week 12"
+    topics: "Metapopulations"
+    reading: "read/metapopulations"
+    code: "code/metapopulations"
+    
+  - module: "<i class='fa fa-lg fa-map'></i>"
+    date: "Week 13"
+    topics: "Disease"
+    reading: "read/disease"
+    code: "code/disease"
+    
+  - module: "<i class='fa fa-lg fa-map'></i>"
+    date: "Week 14"
+    topics: "Macroecology"
+    reading: "read/macroecology"
+    code: "code/macroecology"
+
+  - module: "<i class='fa fa-lg fa-map'></i>"
+    date: "Week 15"
+    topics: "Wrap up"
+    reading: ""
+    homework: "https://classroom.github.com/a/xIzNwgWw" 
+
+
+
+
+
+
+  - module: " "
+    date: ""
+    topics: "<b>FINAL PROJECTS</b>"
+  
+  - module: "<i class='material-icons'>school</i>"
+    date: "Week 16 (GIVE ACTUAL DATE HERE)"
+    topics: "Final Project Presentations"
+   

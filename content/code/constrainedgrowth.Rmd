@@ -1,0 +1,70 @@
+---
+title: "Constrained growth"
+---
+
+
+
+## Logistic growth
+
+It may be more realistic to assume that populations intrinsically limit themselves. That is, competition for space, resources, and mates, produces an upper limit to the population size (but not the growth rate). One way to think about this is that you can have a garden in which the number of individual plants is limited by available space or light, but the growth rates of each of the individual plants could be independent of these effects. 
+
+
+
+
+### Discrete model
+
+In the discrete model, we see that the population still grows at rate $\lambda$, but overall population size is discounted by a scaling term which relates the population size ($N_t$) to an upper threshold. This threshold is the \textbf{carrying capacity ($K$)}, which is the maximum sustainable population size, given potentially limiting resource such as resources, space, etc. 
+
+
+\begin{equation}
+N_{t+1} = N_{t} + (ln(\lambda) * N_{t} * (1 - \frac{N_t}{K}))
+\end{equation}
+
+
+
+
+
+
+### Continuous model
+
+In the continuous model, time step size goes to 0 in the limit (i.e., the time steps are really tiny). When the population size exceeds $K$ (for either discrete or continuous models) population growth becomes negative, leading to a tendency for the system to go to $K$. However, this is sensitive to population growth rate ($\lambda$ or $r$), as large growth rates can lead to complex dynamics, including damped oscillations, limit cycles, and chaos. 
+
+
+\begin{equation}
+\frac{dN}{dt} = rN \left[1- \frac{N}{K}\right], \ \ \ \ \ \  r, K > 0
+\end{equation}
+
+Note: in this model, $r$ and $K$ must be greater than 0.
+
+$\lambda <$ 1, $r <$ 0: population decrease to 0 \\
+$\lambda =$ 1, $r =$ 0: population does not change \\
+$\lambda >$ 1, $r >$ 0: population increase to carrying capacity ($K$) \\
+
+
+### Assumptions of the logistic model:
+
+
++ Constant carrying capacity
++ Linear density dependence (population size limits population growth, with each additional individual reducing growth rate equally).
+
+
+
+
+
+
+### Equilibria:
+
+$N = K, 0 < r < 3.5$ (stable) 
+$N = 0, 0 < r < 3.5$ (unstable) 
+
+$N = K, r < 0$ (unstable) 
+$N = 0, r < 0$ (stable) 
+
+
+
+
+$K$ can vary temporally. What happens when this is the case? 
+
+If $r$ is low, the population doesn't really track changes in $K$, but if the potential response can be high (i.e., if $r$ is large), the population will cycle around $K$, slightly out of phase. $N$ will be shifted to the right of the $K$ wave. Why is this? 
+
+
