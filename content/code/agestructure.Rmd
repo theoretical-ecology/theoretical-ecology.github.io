@@ -269,7 +269,7 @@ In terms of age-structured populations, $N_t$ becomes a vector (Case refers to t
 
 In this case, if we wanted to know the population at time $T$ = 2, we would multiply the Leslie matrix $L$ by itself. What we ultimately want to estimate is $\lambda$, the maximum achievable population growth rate. That is, can we find single value $\lambda$ that satisfies the following equation?
 
-\[ \mathbf{L * x} = \lambda * \mathbf{x}]
+\[ \mathbf{L * x} = \lambda * \mathbf{x} \]
 
 Note that on the left, we have the Leslie matrix, and on the right we have $\lambda$, which is a vector the length of the number of age classes $x$. $\lambda$ is what we care about, and we will estimate it as the dominant eigenvalue of the Leslie matrix. The details of why this works are presented in Case, and we can go into this if folks are interested, but it is a bit advanced. Instead, I will show how to do this in $R$. 
 
