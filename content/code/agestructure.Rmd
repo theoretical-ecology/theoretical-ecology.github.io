@@ -38,11 +38,11 @@ The term $s(x)$ refers to the number of individuals from a particular cohort tha
 
 The term $l(x)$ represents the probability of surviving from age $x$ to age $x+1$. This is called survival rate or **survivorship**. To understand how survivorship of a single age class corresponds to the ability of a newborn to survive through multiple age classes, we have to consider the product of these survival rates. That is, think of survivorship as a probability of surviving that age class. To combine probabilities, we multiply them. For instance, the probability of a newborn (age class 0 in the table above) surviving is 1, meaning all newborns survive. However, if we wanted to calculate the probability of an individual surviving until they were 3 years old in the above life table, we would have to consider each probability separately.
 
-\[ l_x = s_0 * s_1 * s_2 ... * s_{x-1}] 
+\[ l_x = s_0 * s_1 * s_2 ... * s_{x-1} \] 
 
 or
 
-\[ l_x = \Pi_{i=1}^{x-1}s_i]
+\[ l_x = \Pi_{i=1}^{x-1}s_i \]
 
 So for the above example of an individual surviving until 3 years old, we would multiply $1 * 0.8 * 0.4$, for a survivorship probability of $l_3$ = 0.32. 
 
@@ -260,7 +260,7 @@ To start to explore this, we will consider exponential growth we discussed earli
 
 or to project to any time $T$, we can consider 
 
-\[ N_t = N_0 \lambda^{T}] 
+\[ N_t = N_0 \lambda^{T} \] 
 
 In terms of age-structured populations, $N_t$ becomes a vector (Case refers to this as a scalar) and $\lambda$ is the Leslie matrix (\textbf{L}). Note that the notation is such that scalars and matrices are now bolded. 
 
@@ -341,7 +341,7 @@ colz <- c(grey(0.1,0.9), 'dodgerblue', 'firebrick', 'forestgreen')
 stageDynamics <- getStageDynamics(projMatrix, abund0, steps=50)
 
 plot(stageDynamics[,1], type='l', lwd=2,
-  col=colz[1],
+  col=colz[1], ylim=c(0,100),
   ylab='Abundance', xlab='Time')
 lines(stageDynamics[,2], lwd=2, col=colz[2])
 lines(stageDynamics[,3], lwd=2, col=colz[3])
