@@ -2,4 +2,122 @@
 title: "Life history"
 ---
 
+### Life history strategies 
+
+In previous models, we modeled populations of a given species, without recognizing variation among species in traits and approaches to reproduction. This chapter will go into differences among species in their life history strategies as a way to highlight the diversity of life history strategies and how these would be incorporated appropriately into demographic models. For now, let's think about life history variation within a single species. Species may produce clutches of some size $n$ and have an inter-clutch period of $t$ days. We might think that the way to maximize the contribution of that individual to the genetics of the population will be by having as many offspring as possible. In the case above, we can do this by maximizing $n$ or minimizing $t$; either having lots of offspring per reproductive event or minimizing the time between reproductive events. However, this ignores two different things, which we will explore in more detail. For one, these offspring must be able to survive, such that maximizing $n$ at the cost of survival is perhaps not the best strategy. Meanwhile, having few offspring with very high survival probability is the opposite of this life history strategy. 
+
+In Box 7.1, Case explores how this tradeoff between survival and birth rate influences life history schedules and resulting population growth rate $r$. The data come from Lewontin (1965), who studied two different population of fruit flies, showing how the age at peak birth rate (panel a), age at birth pulse (panel b), and different birth structure shapes (panel c) all can influence population growth rates. The important part of this is that population growth rate is a function of both birth rate ($b_x$) and survival ($l_x$). We might look at panel d of this box and think that the Brisbane fruit fly population will have a much higher lifetime reproductive potential due to the longer-term survival of this population -- it's true, the $R_0$ for Brisbane is over 4 times as large as teh Rabaul population -- the actual population growth rates for both populations are the same ($r$ = 0.16). This example presents a clear instance where the tradeoff between birth rate, age, and offspring survival create an instance where quite different life histories can produce the same population growth rate. Let's explore the tradeoff offspring number and offspring survival further. 
+
+
+### Optimal clutch size 
+
+Using birds as an example, we can imagine how the number of offspring per reproductive season may be constrained by a number of factors. We could imagine a situation in which larger clutches have lower survival, if offspring in large clutch sizes are more likely to get eaten by a predator, or if parents cannot bring back enough food for all offspring. We can explore this by defining reproductive success in any year as the product of the 
+
++ number of breeding attempts per year 
++ average number of eggs per nest 
++ probability of offspring survival 
+
+This simple conceptual model leads to some interesting (and testable) conclusions. If we impose a negative relationship of some shape between juvenile survival and clutch size, we create a hump-shaped curve between breeding success and clutch size. The point that maximizes this hump is the optimal clutch size. Also, lowering juvenile survival -- while keeping the shape of the survival curve the same -- results in lower optimal clutch sizes. 
+
+
+### David Lack's conceptual model of bird clutch size evolution
+
+> Natural selection should favor genotypes that have highest breeding success
+
+Assumes:
++ Variation in clutch size has a heritable component 
++ tradeoff between clutch size and survival is clear between genotypes (phenotypic and environmental variability alone do not drive it)
+
+**empirical support**
+
+This conceptual model seems to hold in many natural systems, with some interesting caveats. The addition of eggs to a nest at the optimum tended to reduce nestling survival in experimental populations. 
+
+Latitude influences clutch size, such that birds at lower latitudes tended to have smaller clutches, a pattern seen both _interspecifically_ and _intraspecifically_. This makes sense with Lack's conceptual model, as predation may be higher towards the tropics, reducing optimal clutch size by reducing nestling survival. This is further evidenced by higher clutch sizes in cavity-nesting birds, where we might think predation is lower. However, island birds tend to have smaller clutches, even though predation pressure should be reduced for island populations. 
+
+
+
+### Iteroparity 
+
+Lack's model concerns itself with optimal clutch size for a standardized adult in a given reproductive season. Importantly, it considers each reproductive event to be independent, apart from heritable variation in clutch size through time. Might reproductive strategy influence Lack's conceptual model? Think about the variation in life history strategy. For instance, many species are \textit{iteroparous} (having multiple reproductive events in their lifetime), while others may be \textit{semelparous} (having a single reproductive event). This becomes important when we think about the timing of reproduction, as reproduction earlier in life -- notably for iteroparous species -- should allow those young to also reproduce earlier, and potentially have a competitive advantage for resources or mates. 
+
+
+### Cole's paradox
+
+In plants, two groups are annuals and perennials, where annuals die after each year (or reproductive event) and perennials stay alive to reproduce later. Cole noted that if annual species were to have one more offspring, on average, the population growth rate of an annual and perennial would be the same. So given the potential ease of having one more individual relative to the burden of adult survival, Cole argued that the perennial life history strategy should not even exist. Let's explore this. 
+
+\begin{equation}
+N_{t+1} = N_t \left( s_{0}B + s_{a} \right) = N_{t}\lambda 
+\end{equation}
+
+
+where $B$ is births for all stages, $s_0$ is newborn survival, and $s_a$ is annual survial of adults. $B$ times $s_0$ is equal to fecundity ($F$). Therefore, solving for $\lambda$ above, we get 
+
+\begin{equation}
+\lambda = F + s_a
+\end{equation}
+
+This means that an annual plant with $F$ = 11 would have the same population growth rate as a perennial with $F$ = 10, as $s_a$ is either 0 (annual) or 1 (perennial). But under what conditions would one lifestyle be favored over the other. We can start to understand this by setting the two equations in an inequality, and trying to determine when we might expect the annual life history strategy to result in higher $\lambda$ than the perennial strategy. 
+
+\begin{align*}
+s_{0}B_{A} \geq B_{P}s_{0} + s_{a} \\
+B_{A} \geq B_{P} + \frac{s_a}{s_0} \\ 
+B_{a} - B_{P} \geq \frac{s_a}{s_0}
+\end{align*}
+
+Alright. So this means that we would expect population growth rates to favor annual species when the survival ratio between adults and newborns is high. An assumption that Cole baked in was that $s_a$ was equal to $s_0$, but this is not really tenable, as often adult survival would be far greater than newborn survival. For instance, if $s_a$ is 0.8 and $s_0$ is 0.001, the annual would have to produce 800 more offspring to have equal fitness to the perennial. So we really need to consider adult survival when thinking about these tradeoffs in reproductive life history strategy. 
+
+
+### Optimization of reproductive effort
+
+Many bird species tend to lay less than the expected optimal number of eggs given the Lack model. Why is this? It is a result of yet another tradeoff, and that is between reproduction and adult survival. \textit{Reproductive effort} is the amount of energy an adult uses towards reproduction. Energy used towards reproduction fundamentally cannot be used for storage, growth, defense, or other energetic tasks which may enhance adult survival. This creates a tradeoff between adult survival and reproductive effort (Figure 7.9). Other tradeoffs exist. For instance, what is the relationship between fecundity and reproductive effort? Generally positive, but lots of fun potential shapes (Figure 7.8 in the Case text). The shape of this relationship is fundamentally linked to environmental quality (most concretely the amount of resource available). 
+
+So given all these tradeoffs, what is the optimal reproductive effort ($\theta$)? Recall that what we want to maximize is the population growth rate $\lambda$, and recall that $\lambda = F + s_a$. So by combining the tradeoffs between fecundity ($F$) and reproductive effort, and the tradeoff between adult survival ($s_a$) and reproductive output, we can find the optimal reproductive output ($\theta$) which maximizes population growth rate ($\lambda$). For a clear demonstration, see Figures 7.13 and 7.14 in the Case text. So fecundity maximization is not the goal, as this does not maximize population growth rate. This is why Lack's conceptual model tended to overpredict optimal clutch sizes, as optimal reproductive effort will almost always be lower than the reproductive effort which maximizes fecundity. 
+
+The tradeoff between reproductive effort and adult survival also provides an explanation for the disconnect between Lack's conceptual model and island bird species. Islands tend to have lower predation pressures, leading to higher adult survival, while newborn survival may be less variable. This affects the survival ratio $\frac{s_0}{s_a}$, and leads to a different optimal reproductive effort (Figure 7.15). That is, by increasing adult survival, a lower optimal reproductive effort is favored, leading to lower clutch sizes. 
+
+
+### Temporal variability and optimal reproductive effort
+
+How does year to year variation influence optimal reproductive effort? Let's consider a simple term $e$ which is either added or subtracted from juvenile survival (we assume here that 'good' and 'bad' years affect juvenile survival). Let's compare $\lambda$ values for two years, one considering a constant $\lambda$ and the other considering good ($\lambda_g$) and bad ($\lambda_b$) years. 
+
+**One bad year and one good year**
+
+
+\begin{align*}
+\lambda_{g} \lambda_{b} = \left( B(s_{o} + e)+s_{a} \right) \left( B(s_{o} - e)+s_{a} \right) \\
+ = s_{0}^{2}B^{2} + 2s_{a}Bs_{0} + s_{a}^{2} - \mathbf{B^{2}e^{2}}
+\end{align*}
+
+
+**Two alright years**
+
+\begin{equation}
+\lambda^{2} = s_{0}^{2}B^{2} + 2s_{a}Bs_{0} + s_{a}^{2} 
+\end{equation}
+
+This suggests that fluctuations in juvenile survival rate as a function of environmental variability (here incorporated only be considering years to be 'good' or 'bad') reduce $\lambda$, favoring lower optimal reproductive effort in variable environments. 
+
+
+
+### A graphical technique for optimal life history determination
+
+Recall Figure 7.13, which shows the relationship between reproductive effort and both fecundity ($F$) and adult survival ($s_a$). Since both fecundity and adult survival are functions of reproductive effort ($\theta$), we can simply relate $F$ and $s_a$ directly (Figure 7.18). Summing the values in this two-dimensional plane gives us the $\lambda$ value for that combination of fecundity and adult survival given reproductive effort, as $\lambda = F + s_a$. Due to some fun expression of fecundity and adult survival as a series of lines with slope -1 but with $\lambda$ allowed to vary. The maximum $\lambda$ which still touches the \textit{fitness set} is the optimal $\lambda$ (see Figure 7.21 and 7.22 for the visualizations). 
+
+
+### Egg size and parental care 
+
+All of the above describes the optimal reproductive output (and all the tradeoffs involved), but once we have the optimal reproductive output, how should this output be allocated among offspring? Recall that producing more offspring will trade-off with offspring survival. For instance, annual plants may care more about offspring survival, and invest more in producing fewer high-quality offspring, where quality is proportional here with seed size (as seed size is a measure of energetic input). 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
