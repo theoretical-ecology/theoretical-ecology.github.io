@@ -1,6 +1,301 @@
 ---
 title: "Aging"
+theme: "cosmo"
+highlight: "pygments"
+output:
+  html_document:
+    toc: true 
 ---
+
+<style type="text/css">
+.main-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+
+
+As we saw previously, considering age-structure in population dynamic models is important to understanding how populations will fluctuate. In the last chapter, we explored how age may tradeoff with survival to influence reproduction and life history. In this chapter, we'll be exploring the evolutionary theory of aging. 
+
+
+### Reproduction and Aging
+
+Different age groups contribute differentially to population dynamics. Older individuals may be larger-bodied and have larger clutch sizes. This suggests that different age groups contribute differentially to population persistence. This is important to consider the effect of harvesting on resulting population dynamics. For instance, to support local fish populations, there is often a minimum size the individual must be in order to not have to release it. 
+
+Recall the Leslie matrix structure from previous lectures. 
+
+\begin{table}
+\centering
+\caption{A Leslie matrix -- also called a \textit{population projection matrix} describing the survival and fecundity relationships between life stages ($J$, $T$, and $A$)}
+\label{tab:transition}
+\vspace{0.5cm}
+\begin{tabular}{cccc}
+  & J & T & A \\
+  \hline
+J & $F_{J}$  &  $F_{T}$  & $F_{A}$ \\
+T & $S_{J}$  & -         & -      \\
+A & -        & $S_{T}$   & $S_{A}$  \\
+\hline
+\end{tabular}
+\end{table}
+
+
+Let's consider an example where we have 4 age classes in our Leslie matrix. 
+\[
+L = \begin{bmatrix}
+0 & 2 & 0.5 & 0.1 \\
+0.5 & 0 & 0 & 0 \\
+0 & 0.6 & 0 & 0 \\
+0 & 0 & 0.5 & 0 \\
+\end{bmatrix}
+\]
+
+
+
+```{r}
+
+projMatrix <- matrix(
+  c(
+    0,2, 0.5,0.1,
+    0.5, 0,0,0,
+    0, 0.6,0,0,
+    0,0,0.5,0
+  )
+  ,nrow=4,ncol=4,byrow=T
+)
+
+abund0 <- matrix(c(20,20,20,20), ncol=1)
+
+colz <- c(grey(0.1,0.9), 'dodgerblue', 'firebrick', 'forestgreen')
+
+```
+
+
+```{r}
+
+getStageDynamics <- function(projMatrix, abund, steps=100){
+  ret <- matrix(0, ncol=length(abund), nrow=steps+1)
+  ret[1,] <- abund
+  for(i in 1:steps){
+    ret[i+1, ] <- projMatrix %*% matrix(ret[i,],ncol=1) 
+  }
+  return(ret)
+}
+```
+
+
+
+Starting every age class at the same initial abundance 
+
+```{r}
+
+stageDynamics <- getStageDynamics(projMatrix, abund0, steps=50)
+
+plot(stageDynamics[,1], type='l', lwd=2,
+  col=colz[1], ylim=c(0,400),
+  ylab='Abundance', xlab='Time')
+lines(stageDynamics[,2], lwd=2, col=colz[2])
+lines(stageDynamics[,3], lwd=2, col=colz[3])
+lines(stageDynamics[,4], lwd=2, col=colz[4])
+legend('topleft', pch=16, col=colz[1:4],
+  legend=c(1:4), title='age', bty='n')
+
+```
+
+
+
+Starting with all individuals at the first age class
+
+```{r}
+
+stageDynamics <- getStageDynamics(projMatrix, 
+  abund=matrix(c(80,0,0,0), ncol=1), steps=50)
+
+plot(stageDynamics[,1], type='l', lwd=2,
+  col=colz[1], ylim=c(0,400),
+  ylab='Abundance', xlab='Time', las=1)
+lines(stageDynamics[,2], lwd=2, col=colz[2])
+lines(stageDynamics[,3], lwd=2, col=colz[3])
+lines(stageDynamics[,4], lwd=2, col=colz[4])
+legend('topleft', pch=16, col=colz[1:4],
+  legend=c(1:4), title='age', bty='n')
+
+```
+
+
+We start to notice small differences in dynamics for each age class. Let's consider the total population abundance, and explore how initial composition influences outcomes. 
+
+
+```{r}
+
+stageDynamics0 <- getStageDynamics(projMatrix, 
+  abund=matrix(c(80,0,0,0), ncol=1), steps=50)
+stageDynamics1 <- getStageDynamics(projMatrix, 
+  abund=matrix(c(0,80,0,0), ncol=1), steps=50)
+stageDynamics2 <- getStageDynamics(projMatrix, 
+  abund=matrix(c(0,0,80,0), ncol=1), steps=50)
+stageDynamics3 <- getStageDynamics(projMatrix, 
+  abund=matrix(c(0,0,0,80), ncol=1), steps=50)
+
+
+plot(rowSums(stageDynamics0), type='l', lwd=2,
+  col=colz[1], ylim=c(0,1000),
+  ylab='Abundance', xlab='Time', las=1)
+lines(rowSums(stageDynamics1), lwd=2, col=colz[2])
+lines(rowSums(stageDynamics2), lwd=2, col=colz[3])
+lines(rowSums(stageDynamics3), lwd=2, col=colz[4])
+legend('topleft', pch=16, col=colz[1:4],
+  legend=c(1:4), title='age', bty='n')
+
+```
+
+
+What is the rate of population growth and the stable age distribution of this age-structured population? 
+
+```{r}
+
+eigen(projMatrix)$values[1]
+
+eigen(projMatrix)$vectors[,1]
+
+```
+
+But how do we know the value of each age class to overall reproduction, independent of considering the population at the stable age distribution? We can start from a simple assumption that the fecundity of the age class is directly equivalent to reproductive value ($V_x$). 
+
+
+\[ V_x = F_x \]
+
+> What's wrong with this interpretation, in light of what we know about age-structured populations and age-specific bits from the last chapter on optimal clutch size and life history strategy? 
+
+Early reproduction should be rewarded, as survivorship needs to be considered in the reproductive value of an individual. Fisher came up with a formulation of reproductive value which considers the influence of survivorship. The argument underlying it is that the future reproductive potential of individuals age $x$ is equivalent to the number of female offspring produced by mothers that are age $x$ \textit{and older} divided by the number of mothers that are age $x$ this year, assuming the population is at the stable age structure distribution. We'll explore what this means mathematically now, separating the numerator from the denominator. 
+
+
+\textbf{Numerator}: the number of female offspring produced this year by mothers age x or older
+
+\begin{equation}
+\sum_{t=x} b_{t} c_{t} N(T)
+\end{equation}
+
+where $c_{t}$ is the proportion of individuals in class $t$ (age $t$) compared to other age classes. This can be simplified (or rather expanded) to treat $c_{t}$ as the number of individuals in age class $t$ divided by the total of all ages ($M$). 
+
+\begin{equation}
+\sum_{t=x} b_{t} \left( \frac{l_{t} \lambda_{t}}{M} \right) N(T)
+\end{equation}
+
+
+\textbf{Denominator}: the number of mothers of age $x$ this year. 
+
+Earlier, we learned that the $c_{t}$ is a function of the overall population growth rate scaled by survival, taking the formulation
+
+\[ c_{t} = \lambda^{-t}l_{t} \]
+
+Given the stable age distribution, this means that the number of mothers that are age $t$ this year is 
+
+\[ \frac{l_{t}\lambda_{t}}{M} N(T) \]
+
+Combining these two components to get at $V_x$, we get
+
+
+\begin{equation}
+V_x = \frac{\lambda_x}{l_x} \sum_t=x \lambda^{-t}l_{t} b_{t}
+\label{vx}
+\end{equation}
+
+In the textbook, Case goes into how $b_t$ (the raw birth rate of age class $t$) can be replaced by the fecundity ($F_t$) data from the Leslie matrix, where $F_x = s_o b_x$. Note that this will change $\lambda^{-t}$ to $\lambda^{-(t+1)}$ in Equation \ref{vx}.
+
+So now we have a way to estimate reproductive value $V_x$, which considers the total reproductive potential of mothers in age class $x$ to future offspring. That is, $V_x$ is fundamentally composed of \textit{two parts}
+
+\begin{itemize}
+  \item the reproduction of age class $x$ ($b_x$)
+  \item future reproduction discounted by survival ($V_{x}^{*} = V_{x+1}(\frac{s_x}{\lambda})$ ) 
+\end{itemize}
+
+
+Such that $V_x$, the reproductive value, for age class $x$ is 
+
+\begin{equation}
+V_x = b_x + V_{x+1}(\frac{s_x}{\lambda})
+\end{equation}
+
+
+
+Consider the example life table below. Calculate $V_x$ for all age groups. 
+
+| age group ($x$)  | $s_x$  | $b_x$  | $l_x$   |
+|---|---|---|---|
+| 0  | 1.0  | 0     | 1    |
+| 1  | 0.5  | 0     | 1    |
+| 2  | 0.5  | 0     | 0.5  |
+| 3  | 0.4  | 3.2   | 0.25 |
+| 4  | 0.0  | 1.111 | 0.1  |
+
+
+Work through the math, and consult the Case text for the worked example. I copy the calculated values below.  
+
+
+| age group ($x$)  | $V_x$ |
+|---|---|
+| 0  | 1.0000  | 
+| 1  | 0.9706  | 
+| 2  | 1.8842  | 
+| 3  | 3.3657  | 
+| 4  | 1.1111  | 
+
+
+
+### Reproductive value and optimal reproductive effort 
+
+
+Before, we considered the optimal clutch size and reproductive effort without considering age structure. Now we will take what we previously learned and explore how optimal reproductive effort ($\theta$) may vary as a function age and reproductive value $V_x$. To start, we'll define optimal reproductive effort as a vector of length $x$ ($\mathbf{\theta} = (\theta_0, \theta_1, ... \theta_x)$). The corresponding values of fecundity ($F_x$) and survival ($l_x$) are now also functions of optimal reproductive effort ($\theta_x$), but in a specific way. This is because reproductive value in previous generations may influence fecundity and survival in a given age class $x$. This creates a situation where fecundity (for instance) depends on reproductive values $\theta$ for age classes 0 to age class $x$. More concretely, fecundity for age class $x$=2 is a function of reproductive value in age classes 0, 1, and 2, but any future age classes. The same is true for survival $l_x$, except we do not consider the 'present' age class' reproductive value to influecne survival $l_x$, such that survival of age class 2 would only depend on reproductive effort in age classes 0 and 1.  
+
+We can divide the reproductive potential of any given age class by considering the contributions of ages before $x$ and ages $x$ and after, in an aim to determine $\mathbf{\theta}$ that maximizes the overall population growth rate $\lambda$. 
+
+\begin{equation}
+1 = \sum_{t=1}^{x-1} F_{t}l_{t}\lambda^{-t}  + \sum_{t=x}^{max} F_{t}l_{t}\lambda^{-t}
+\end{equation}
+
+
+Then we do some partial derivatives. We will not cover this (unless folks really want to), but will instead skip to the step where we incorporate reproductive value $V_x$ terms into the determination of optimal reproductive effort $\mathbf{\theta}$. This is done through substitution of the second term in the above equation for something which considers reproductive value $V_x$, and then differentiating with respect to $\theta_x$. Let's explore _why_ this matters a bit. We start by looking at the previous equation for reproductive value. 
+
+
+
+\begin{equation}
+V_x = b_x + V_{x+1}(\frac{s_x}{\lambda})
+\end{equation}
+
+
+Thinking about the structure of this creates an understanding of a tradeoff between birth rate at age $x$ and the potential for future reproduction in later age classes. We can re-write the above equation incorporating fecundity and population growth rate $\lambda$
+
+\begin{equation}
+V_x = \lambda^{-1} (F_x + s_x V_{x+1})
+\end{equation}
+
+realizing that this form still has the same tradeoff. The reproductive value of age class $x$ here depends on the population growth rate and fecuncdity of age class $x$, modified by the potential for reproduction in later ages ($s_x V_{x+1}$). Optimal reproductive effort needs to consider the reproductive value at age $x$ and the future potential reproductive value of individuals older than $x$. That is, we want to maximize $V_x(\theta_x)$. 
+
+
+\begin{equation}
+V_x(\theta_x) = \lambda^{-1} \left( F_x(\theta_x) + s_x(\theta_x)V_{x+1}(\theta_x) \right)
+\end{equation}
+
+
+with age-specific birth rate data, we could re-write this equation as 
+
+\begin{equation}
+V_x(\theta_x) = b_{x}(\theta_x) + \frac{s{x}(\theta_x)}{\lambda} V_{x+1}(\theta_{x}) 
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

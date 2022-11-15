@@ -1,7 +1,19 @@
 ---
 title: "Age structure"
+theme: "cosmo"
+highlight: "pygments"
+output:
+  html_document:
+    toc: true 
 ---
 
+<style type="text/css">
+.main-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 
 ### Age structured population dynamics
 
@@ -284,7 +296,6 @@ projMatrix <- matrix(
   )
   ,nrow=3,ncol=3,byrow=T
 )
-
 
 abund0 <- matrix(c(20,20,20), ncol=1)
 

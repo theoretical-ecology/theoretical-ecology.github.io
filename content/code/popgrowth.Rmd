@@ -1,6 +1,20 @@
 ---
 title: "Population growth"
+theme: "cosmo"
+highlight: "pygments"
+output:
+  html_document:
+    toc: true 
 ---
+
+<style type="text/css">
+.main-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
 
 
 

@@ -1,21 +1,17 @@
 ---
 title: "Predation"
+theme: "cosmo"
+highlight: "pygments"
+output:
+  html_document:
+    toc: true 
 ---
 
-
-
-### Reading
-
-- Chapter 
-
-
-
-
-
-### Notes
-
- 
-
-
-
+<style type="text/css">
+.main-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 

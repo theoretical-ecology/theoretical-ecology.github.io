@@ -365,7 +365,25 @@ pre code {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#age-structured-population-dynamics">Age structured population dynamics</a></li>
+<li><a href="#life-table">Life table</a></li>
+<li><a href="#population-growth-rate-in-age-structured-populations">Population growth rate in age structured populations</a></li>
+<li><a href="#matrix-modeling">Matrix modeling</a></li>
+<li><a href="#estimating-agestage-structured-vital-rates">Estimating age/stage structured vital rates</a></li>
+<li><a href="#age-versus-stage-structure">Age versus stage structure</a></li>
+<li><a href="#stable-age-distributions-and-some-eigenvalue-fun">Stable age distributions and some eigenvalue fun</a></li>
+</ul>
+</div>
 
+<style type="text/css">
+.main-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 <div id="age-structured-population-dynamics" class="section level3">
 <h3>Age structured population dynamics</h3>
 <p>When we introduced variation in demographic rates, we did so because we wanted to recognize that individuals may differ in their demographic rates as a function of time (<strong>temporal variation</strong> or <strong>environmental variation</strong>) or simply through <strong>demographic variability</strong>. But let’s consider a population of individuals that reproduce sexually. It takes time before newborn individuals are sexually mature, limiting reproduction rate by age class. Also, mortality varies as a function of individual age, or through grouping individuals into age classes (e.g., 1-5 year olds). Acknowledging that different age classes have fundamentally different contributions to mortality and reproduction is important, as the ability to accurately predict population dynamics may require this knowledge for many species. Think of game species management, for example. The ability to predict deer populations in the next year necessitates information not only on the current number of deer, but an approximation of their age structure, as the manager must assume something about mortality and population growth rates of the population. A miscalculation here could result in important changes to the ecosystem.</p>
@@ -485,7 +503,6 @@ n_{A, t+1} =  3 \\
   )
   ,nrow=3,ncol=3,byrow=T
 )
-
 
 abund0 &lt;- matrix(c(20,20,20), ncol=1)</code></pre>
 <p>Simulate one generation into the future.</p>
