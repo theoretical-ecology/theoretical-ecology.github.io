@@ -15,3 +15,185 @@ output:
 }
 </style>
 
+
+
+
+### Grazing sheep and functional responses 
+
+If I were placed in a room with 1 slice of pizza, I may eat a different amount of pizza than if you put me in a room with 5 pizzas. The example in the book is of grazing sheep, but I like pizza. They argue that to best maintain the grass resources and to know how many sheep can graze a given area, we have to know two things; the rate of consumption of the resource by the sheep as a function of the amount of resource (the functional response), and the rate at which the grass grows. In the case of the pizza, we can imagine that I would have no trouble finding pizza in a room filled with pizza, and my consumption rate would likely be high. If pizza were scarce and not clearly labeled, I woudld have to search for pizza, lowering my consumption rate (lower part of curves in Figure 10.1). However, there is an upper limit to the rate that pizza may be consumed, so if more pizza were added, I would still eat at the same rate. 
+
+
+### Dynamics of the resource population under exploitation 
+
+In the room of pizza example we don't necessarily expect a continuous stream of pizza coming into the room, but in many consumer systems, the resource will replace itself (e.g., grass growing in a field). We can model this growth like we did previously using something like the logistic model, where grass will grow up until it reaches a carrying capacity $K$ in the absence of consumption. 
+
+
+
+The consumer and the resource have inherently coupled dynamics, as the resource is consumed, and the consumer turns this resource into more consumers. This influences the equilibria of the system as a function of consumers((Go over Fig 10.4 and Fig 10.7 and Fig 10.9))
+
+
+
+
+### Maximizing yield of a managed resource
+
+Determining the equilibria of a consumer-resource system as a function of the number of consumers is not simply a task for sheep farmers wanting to make sure that grass is available, but is also of critical importance to other managed resources (e.g., fisheries). The goal in these cases is often to maximize the \textit{yield} in terms of biomass or production of some service (e.g., wool production in sheep). We can treat these services as proportional to something we can easily measure. In the text, Case argues that wool production in sheep is proportional to the amount of grass consumed, where we would want to maximize grass consumption as a function of number of sheep to find the optimal yield of wool (Figure 10.14). 
+
+What is important here is the role of unstable equilibria influencing the timing of sheep addition. Figure 10.15 clearly illustrates this, as the wool production rate (which we want to optimize) has different relationships when sheep are added to an ungrazed field sequentially compared to when sheep are added to an overgrazed field and then removed. This divergence caused by the presence of an unstable equilibrium drives what is called \textit{hysteresis}. Why is this important to managers of dynamic systems such as the sheep-grass consumer-resource system? 
+
+
+
+### Harvesting fisheries
+
+Fisheries are an interesting applied case of maximizing resource, because fish populations are driven by environmental cues, availability of spawning sites, and loads of other factors which may be less important in a system where we control the sole resource of the captive population. The goal in fisheries is often to obtain the \textit{maximum sustainable yield}, which is the maximum number of individuals that can be removed from the system while still maintaining a viable population (more on defining this later). There are many ways to go about modeling fisheries dynamics. The simplest is to use the logistic model with some harvesting term built in. 
+
+\[ N_{t+1} = rN_t \dfrac{K-N_t}{K} - L \]
+
+where $r$ is population growth rate, $K$ is carrying capacity, and $L$ is the total removal of fish per time $t$, where $t$ is in terms of the entire fishing season (which hopefully maps well onto the fish reproduction and generation times). 
+
+
+```{r}
+
+logisticGrowth <- function(N, r=1.25, K=100){
+  ret <- r*N * ((K-N)/K)
+  return(ret)
+}
+
+par(mar=c(4,4,0.5,0.5))
+plot(logisticGrowth(0:100), lwd=2, 
+  ylab=expression(N[t+1]), 
+  xlab=expression(N[t]), type='l', las=1)
+points(100,1, cex=2, pch='K', col='red')
+
+abline(h=5, col='dodgerblue')
+abline(h=10, col='dodgerblue')
+abline(h=25, col='dodgerblue')
+
+```
+
+The above is the 'fixed quota' example, where fish are removed at some constant limit $Q$. But when fish are scarce, they are harder to find, such that fishing is inherently linked to population size and effort. If we set quotas $Q$ based on effort rather than total fish, we can start to see different relationships. 
+
+\[ L = (fishing effort)(C)(N) \]
+
+where $C$ is the 'catchability' of fish, in units of number of fish per unit effort per fish (we will treat this as a constant). 
+
+
+```{r}
+
+par(mar=c(4,4,0.5,0.5))
+plot(logisticGrowth(0:100), lwd=2, 
+  ylab=expression(N[t+1]), 
+  xlab=expression(N[t]), type='l', las=1)
+points(100,1, cex=2, pch='K', col='red')
+
+abline(b=0.75, a=0, col='dodgerblue')
+abline(b=0.5, a=0, col='dodgerblue')
+abline(b=0.25, a=0, col='dodgerblue')
+
+```
+
+
+Regulation as a function of effort can produce an estimate of maximum sustainable yield, as where those effort lines hit the population curve are the number of fish caught given that effort. Placing 'effort' as the x-axis and number of fish caught as the y-axis, we may want to select the maximum fish caught per catch from that effort. What are some theoretical considerations to keep in mind here? How does this play out with the Peruvian anchovy example (Figure 10.17)? 
+
+
+One of the things we haven't considered is the variation in actual effort by people fishing the resource. The goal of the fishery is to maximize sustainable yield, a goal shared in the long-term by all people fishing the resource. However, the short-term economic interest is to exploit the fishery a bit more than others. This is called the \textit{tragedy of the commons}, in which individualistic short-term gains may lead to the collapse of a shared resource. 
+
+In the logistic model, we can calculate the MSY as $K/2$, as this is the peak of the hump in terms of population growth rate (maximal production). Plugging $K/2$ in for $dN/dt$ in the logistic model yields a MSY of $\dfrac{rK}{4}$ (see Figure 10.19). Why is this perhaps an untenable amount of effort? 
+
+> Figure 10.23 should get you excited about Chapter 12, as it starts to recognize that the prey population is growing as well, introducing the equilibrium as a line in phase space between predator and prey, as these two groups are intrinsically linked, such that the equilibrium of one is always dependent on the abundance of the other. Get excited for that. 
+
+
+One interesting idea is that if we have information on catchability, effort, and resource levels, we can estimate demographic parameters like $r$ and $K$ under harvesting scenarios (or _in terms_ of harvesting parameters). For instance, 
+
+\[ \dfrac{rK}{4} = (C)(effort)(K/2) \]
+
+allows us to solve for $r$ and $K$, where 
+
+\[ r = 2(C)(effort) \] 
+
+and 
+
+\[ K = \dfrac{4(MSY)}{2(C)(effort)} \]
+
+But all this assumes the logistic model describes demography well, and ignores \textit{a lot} of important bits. For instance, we talked about Allee effects briefly before. What happens if there is an Allee effect in the resouce population in a fixed harvesting scenario (Figure 10.27)?
+
+
+
+
+## The mechanics of predation 
+
+### The disk equation 
+
+We introduced predation by talking about me in a room of pizza or sheep grazing on grass. It was overly simplistic, as it ignores lots of neat bits about consumer-resource relationships. Let's dive into the muckiness of consumer-resource modeling. For instance, let's start by considering that the predator has to find the prey. So, 
+
+the number of prey encountered = detectability * area searched * prey per unit area 
+
+
+We can already start to imagine how these different parameter would affect the resulting number of prey consumed (or even encountered), as detectability could be a function of visual acuity or range. Area searched could vary strongly by consumer body size, and prey per unit area tends to assume a random distribution of prey, when random distributions are not typically all that commonly observed. Putting the observed notation in mathematical notation, we can consider the number of prey encountered $V_a$ as a function of prey encounter rate $a$, search duration $T_s$ and prey density $V$. 
+
+\[ V_a = a T_s V \]
+
+of prey encountered the predator may only be able to successfully eat some fraction $f$, such that prey consumed $V_c$ is equal to $fV_a$. $f$ is equal to one when any encountered prey is eaten. To dive into the mechanics of predation, we need to consider that there is a cost in terms of time spent foraging instead of reproducing, such that tracking time in all this is important. We've already introduced $T_s$ which is the time spent searching for food, but we also have to consider the time available for feeding $T_t$, time spent chasing prey $T_c$, and time spent eating the prey item $T_m$. Assuming that we can combine chase and eating times, we have a total prey handling time of $T_h = T_c + fT_m$, leading to a search time of $T_s = T_t - V_a T_h$. When we include the total time available in the day for feeding into the number of prey attacked, we get the \textit{Holling disk equation}
+
+\[ V_a = \dfrac{aVT_t}{1 + aT_hV} \]
+
+
+named because it is based on a 'moving disk' representing the predators sensory field. From this equation, we can calculate the predator functional response (number of prey captured per predator per unit time), as 
+
+
+\[ B(V) = \dfrac{V_a(V)}{T_t} = \dfrac{aV}{1+aT_hV} \]
+
+where $B(V)$ indicates that the functional response is a function of prey density $V$. The maximal consumption rate is $\frac{1}{T_h}$, which we can show by dividing both sides of the equation above by $aV$ and imaging the situation where $V$ goes to infinity (i.e., there is no resource limitation). This is shown graphically in Figure 11.3. Modifying the handling time $T_h$ can produce different functional response shapes. For instance, in the case where handling time is 0 ($T_h = 0$), we get a linear functional response (as the predator can instantly consume prey, so it is only limited by prey encounter). This looks like 
+
+\[ B(V) = \dfrac{1}{1/aV} = aV \]
+
+where the prey encounter rate $a$ is the slope of the linear functional response (Figure 11.5). The type 2 functional response includes handling time, and is the 'typical' case (Figure 11.3). We can also imagine a situation where encounter rate $a$ is a function of the prey density $V$. This would be the situation where at low prey densities, prey become harder to find (e.g., there are fixed number of prey 'hiding spots').
+
+\[ B(V) = \dfrac{V_a(V)}{T_t} = \dfrac{aVV}}{1+aVT_hV} = \dfrac{aV^{2}}{1+aT_hV^{2}}  \]
+
+These 3 functional responses are the most typical considered (Case goes into one other in the text, but we won't cover it here). This can be viewed in terms of prey consumption rates ($B(V)$) as well as the individual prey consumption risk ($B(V)/V$), showing the relative risk of predation as a function of $V$ (Figure 11.9). 
+
+
+
+### Multiple prey items 
+
+We couldn't just have it be simple, right? Consumers do not often only consume a single resource, but instead may contain any number of resources, which vary in their densities $V_1, V_2, V_3,...V_n$. We now define $\mathbf{V}$ as this vector of prey densities, using the same functional response equation as before with some minor tweaks. 
+
+\[ B_i(\mathbf{V}) = \dfrac{a_i(V_i)V_i}{1 + \sum a_j(V_j)V_jT_{hj}}  \]
+
+where the functional response for prey $i$ is a function of the availability of other prey items $j$. In the case of the functional responses we have covered, a higher prey encounter rate $a_i$ will lead to the predator disportionately consuming prey $i$, right? Such that the important bits about prey density are the relative abundance of the prey items $i$, not absolute densities. But this does not include prey preference. If I am in a room equally filled with pizza and carrots, I may encounter these two items at the same rate, but I am sure not eating them in equal proportion. We can visualize this by plotting the percent of a prey item in the environment against the percent of a prey item in the actual diet of the predator (Figure 11.13). The preferences of the predator, at least in terms of the percent of prey item $i$ in the predator diet, may change as a function of the availability of the prey item (Figure 11.14 and Figure 11.15). This happens only for the type 3 functional response. Why? 
+
+
+
+### The ideal free distribution 
+
+Imagine two connected habitat patches, each with different amounts of resources available. Consumers have the ability to move between habitat patches, and have perfect knowledge of the resources in all patches. It may make sense to move to the more resource-rich patch. However, at high consumer densities in the profitable patch, the consumption rate of prey will equal consumption in the less profitable patch, and consumers gain no benefit by moving patches. This is called the \textit{ideal free distribution}, where it is \textit{ideal} because predators have perfect knowledge of the resource conditions across patches, and \textit{free} because there is no cost of barrier to predator movement between patches. There are a bunch of caveats to this actually playing out in natural systems. What are some of these? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

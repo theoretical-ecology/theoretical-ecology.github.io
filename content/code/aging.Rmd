@@ -288,6 +288,13 @@ V_x(\theta_x) = b_{x}(\theta_x) + \frac{s{x}(\theta_x)}{\lambda} V_{x+1}(\theta_
 
 
 
+Let's work through some examples. 
+
+
+
+
+
+(advance to the evolution bits if time and student interest permits)
 
 
 

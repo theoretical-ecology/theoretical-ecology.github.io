@@ -16,3 +16,304 @@ output:
 </style>
 
 
+Chapter 15. 
+
+### Generalized Lotka-Volterra 
+
+The competition model we have introduced for two-species (not to be confused with the predation model) can be generalized to be $n$ species. We can start with the two-species case and build up to the $n$ species case. Recall for the two species case:
+
+\begin{equation}
+
+\[ \frac{dN_{1}}{dt} = r_{1}N_{1}\left(1-\frac{N_{1} + \alpha_{12}N_{2}}{K_{1}} \right) \]
+
+\[ \frac{dN_{2}}{dt} = r_{2}N_{2}\left(1-\frac{N_{2} + \alpha_{21}N_{1}}{K_{2}} \right) \]
+
+\end{equation}
+
+where $r_i$ are population growth rates, $\alpha_{ij}$ are competition coefficients, and $K_i$ are carrying capacities. To generalize to $n$ species, we will use vector and matrix notation, as we have introduced previously. 
+
+\begin{equation}
+\frac{dN_{i}}{dt} = r_i N_i + \sum_{j=1}^{n} \dfrac{-r_i \alpha_{ij} N_j}{K_i}
+\end{equation}
+
+> Note that the Case book writes this equation in 'per capita' form, with the left side of the equation including the $N_i$ term. 
+
+In simplified notation, this would look like 
+\begin{equation}
+\frac{dN}{Ndt} = \mathbf{k} + \mathbf{AN}
+\end{equation}
+
+where we have rearranged some of the coefficients and defined some new bits. For instance, 
+
+\begin{itemize}
+$\mathbf{k}$: vector of carrying capacities 
+$\mathbf{A}$: interaction matrix defined with entries of $\r_i \alpha_{ij} / K_i$
+$\mathbf{N}$: vector of population sizes
+\end{itemize}
+
+We can solve for the interior equlibrium of the system by setting the per capita growth rate of all species equal to 0, and solving. 
+
+\[ \mathbf{N}^* = -\mathbf{A}^{-1} \mathbf{k} \]
+
+
+This same generalized form of the Lotka-Volterra competition model for $n$ species can be applied to the Lotka-Volterra predator-prey model as well, allowing us to model trophic interactions with the same framework. Recall the Lotka-Volterra predator-prey model:
+
+\begin{equation}
+
+\[ \frac{dV}}{Vdt} = \frac{r}{K}(K-V)-aP \]
+
+\[ \frac{dP}{Pdt} = -d + kaV \]
+
+\end{equation}
+
+where a is the encounter rate with prey, d is per capita death of predator, and k is predator's conversion efficiency. 
+
+Consider this a two-dimensional system, where we want to model the state variables V,P as a vector (or 1x2 matrix if that helps conceptualize it better; Equation 15.4). Some rearranging of terms gives us the community matrix $\mathbf{A}$ of
+
+\[ \mathbf{A} = \begin{bmatrix} 
+\frac{-r}{K} & -a \\  
+ka & 0 
+\end{bmatrix}
+\]
+
+and $k$ becomes a vector of length 2 in the form of 
+
+\[ \mathbf{k} = \begin{bmatrix} 
+r \\  
+-d 
+\end{bmatrix}
+\]
+
+
+You may be thinking that trying to generalize different models into the same structure is just playing with numbers, with no new modeling abilities. But what if we wanted to model a system in which one predator consumes two prey species which compete with one another? See Equation 15.5 in the Case text for this scenario. 
+
+
+((use the board or the document camera to sketch out the different blocks of the $n$ species community model case))
+
+
+### Three trophic levels 
+
+Can we use this generalized model to scale to entire food webs (those with more than 2 interacting levels like consumer-resource, such that consumer is also a resource, if that makes sense?). Here we have a top predator ($P$), a consumer ($C$), and a resource ($R$).
+
+\[ \frac{dP}}{Pdt} = k_P bC - d_P \]
+\[ \frac{dC}}{Cdt} = k_C aR - d_c - bP\]
+\[ \frac{dR}}{Rdt} = \frac{r}{K}(K-R)-aC  \]
+
+
+((draw out graphical representation on the board; page 349 in Case))
+
+This can be represented in matrix form as well, which I do below but change the per capita change terms to $\hat{P}$, $\hat{C}$, and $\hat{R}$ for laziness. 
+
+\[ \begin{bmatrix} $\hat{R}$ \\ $\hat{C}$ \\ $\hat{P}$  \end{bmatrix} = 
+\begin{bmatrix} r \\-d_C \\ -d_P \end{bmatrix} + 
+\begin{bmatrix}  \frac{-r}{K} & -a & 0 \\ k_c a & 0 & -b \\ 0 k_p b & 0 \end{bmatrix} 
+\begin{bmatrix} R \\ C \\ P \end{bmatrix}
+\]
+
+
+See Figure 15.1 for the zero net growth isoclines for the system. 
+
+For the sake of this course, we will not address the stability analysis or the prey with different age classes (pages 351-354 in the Case text), as it gets us into partial differential equation land. 
+
+
+
+
+### Indirect effects in multi-species systems 
+
+The terms in the $\mathbf{A}$ matrix describe the effects of different groups on one another. Consider a predator that interacts with two prey species from earlier in the chapter. The predator interacts with each prey species \textbf{directly}. If we introduced another predator species, it might not have a direct competitive interaction with the other predator, but may interact with the other predator \textbf{indirectly} by changing the amount of prey resources. These indirect interactions are really important to the dynamics of a system. Using observational data to try to infer species interactions also hits a clear barrier here (among plenty of other places), as two prey species of a single predator might "appear" to interact through the effects of shared predation on resulting dynamics. This is termed \textit{apparent competition}, and is challenging to clearly demonstrate, but is a common confounder that must be considered when trying to estimate species interactions from empirical (or even experimental) data. More on direct and indirect effects in Figure 15.6. 
+
+Let's consider a simplified $A$ matrix where all we care about is the sign. 
+
+\[ \begin{bmatrix} - & 0 & - \\ 0 & - & - \\ + & + & 0 \end{bmatrix} \]
+
+where columns and rows correspond to $V_1$, $V_2$, and $P$. The indirect effect can be estimated by multiplying the different $A_{ij}$ signs representing a given indirect path. For instance, if we want to estimate the indirect effect of $V_1$ on $V_2$, we would multiply the effect of $V_1$ on $P$ by the effect of $P$ on $V_2$. This is useful for smaller models or when you want to identify specific indirect interactions, but ideally there would be a way to identify direct and indirect interactions more generally. 
+
+
+### The inverse of the community matrix 
+
+The underlying maths of how this works is a bit beyond what we will be covering here given the size of this chapter (but see pages 358-359 of Case if you are interested). Suffice it say that we can use the negative inverse of the community matrix as a means to identify direct and indirect interactions in systems of interacting species. Recall the previous signed matrix given above. Let's take the negative inverse of $A$ (i.e., $-A^{-1}$)
+
+
+```{r}
+A <- matrix(c(-1,0,1,0,-1,1,-1,-1,0), ncol=3)
+
+# take the negative of the inverse of A 
+-solve(A)
+
+```
+
+And we see that we recover the direct interactions (e.g., the predator interaction with both prey is positive), as well as identifiying indirect interactions (e.g., the prey interact negatively with one another). 
+
+
+
+### Press experiments 
+
+In natural systems, it's tough to test for species interactions directly. Sometimes, scientists will experimentally manipulate the densities of species in natural systems to explore the consequences, which could help identify species interactions and provide useful data for later modeling. There are two types of experimental manipulations which are common. The first that we'll discuss is the \textbf{press} experiment, in which a species density is continuously held at some value over the course of an experiment. This could be complete removal of the species, or simply holding them at some constant density to observe the dynamics of other potentially interacting species. The response of species $i$ to the removal or reduction in density of species $j$ then becomes. 
+
+
+\[ \dfrac{\delta N_i^*}{\delta N_j^*}  = \dfrac{\delta N_i^*}{N_j^*} = \dfrac{\alpha_{ij}^{-1}}{\alpha_{jj}^{-1}}  \]
+
+This allows us to solve for the new equilibrium density of species $i$, assuming that we had information on the $\alpha$ coefficients, and also assuming that no other species interactions are altered. 
+
+
+
+
+
+((go over the box 15.1 example of the press experiment))
+
+
+
+### Pulse experiments
+
+Pulse experiments are also experimental manipulations of the density of a single species to explore how the system responds, but the pulse occurs at a single point in time. These types of experiments are incredibly useful for exploring how perturbations influence the dynamics of a system. Since there are also some fun partial differential equations here, we will focus on the graphical interpretation of press/pulse experiments (Figures 15.12-15.15).
+
+
+((go over at least Figure 15.15))
+
+
+We can explore the effects of pulse experiments with an example of three protist species. If we increase the density of species 3 to 120 while keeping the other two species constant at 100, then we need to solve 
+
+\[ J_{i3} = \dfrac{\delta f_i}{\delta N_3} \rvert_{N_1^*, N_2^*, N_3^*} \]
+
+But, in ways we won't dive into, this reduces down to 
+
+\[ \dfrac{dN_{i,3} / dt}{n_3} \]
+
+This form contains some things we can estimate. For instance, we added 20 individuals per ml, increasing the density of species 3 from 100 to 120. This means $n_3$ 20 (120-100). Then we can estimate the change in densities of species 1 and 2 following this pulse. If we see a decrease of 2 individuals per hour, assuming that $f_i$ from above (growth rate of species $i$) is also in those time units (which it should be), then the rate of change of species 1 in response to the change (the numerator from the above equation) is -2.0, such that the entry of the Jacobian ($J_{i3}$) would be -2/20 = -0.1. 
+
+
+
+### Applications to niche theory 
+
+
+A cornerstone of much of the theory of population and community ecology is the idea that species have a set of abiotic tolerances. There are _too much_ ambiguity around the niche in ecology, owing in part to how it was initially defined ('a species place in a habitat'), through the repeated bastardizations of the niche (e.g., a species 'feeding niche'), and through poor mathematical definitions of the niche (e.g., let's assume species responses to niche gradients are just gaussian, even though we pretty much _never_ observe this to be the case). I like niche theory a fair amount, but have opinions about what we have done to niche theory to date. 
+
+Case here talks about activity level as a function of two niche axes (Figure 15.16), so he is not trying to define that persistence threshold that is the niche, but simply to explore how activity level of a species is modified by the same environmental gradients that shape the species niche. 
+
+
+> The central tenet of niche theory is that niche overlap between two species, i and
+j, can be quantified into a metric $o_{ij}$ such that the dynamic effects of competitors on
+one another, e.g. the $\alpha_{ij}$ terms, will be directly proportional to the degree of niche
+overlap between species pairs (i.e., $o_{ij}$ = $\alpha_{ij}$). 
+
+Meaning that niche overlap is a measure of competition. Let's not overthink it at this point, or else you'll go down the same rabbithole I'm stuck down. So let's work within the confounds of how Case defines a niche, mainly as it relates to resource utilization. So here, Case argues that if niche overlap is meant to be equal (or at least proportional) to competition ($\alpha_{ij}$), then what matters is the amount of resource sharing between species. First we'll define resource utilization overlap as 
+
+\[ P_{ij} = \dfrac{a_{ij}}{\sum_{q=1}^{n} a_{iq}} \]
+
+where $a_{ij}$ are the resource utilization rates of consumer species $i$ on all resource species $j$ (where $j$ is 1....$j$), divided by the total resource utilization of species $i$ (the sum across that row of the $P$ matrix). Under this formulation, we can then come up with a niche overlap measure, 
+
+
+\[ o_{ij} = \dfrac{\sum_{k=1}^{n} P_{ik}P_{jk}}{\sum_{k=1}^{n} P_{ik}^{2}}  \]
+
+Equation 15.35 in the Case book provides details on what each of these terms refer to. Importantly, this formulation nicely bounds resource utilization, in that $o_{ii}$ will be 1 (i.e., the niche overlap of species $i$ with itself is 1). By considering the proportion of resource use for a species, we can also explore \textit{niche width} of a single species, defined considering the relative amount that a species uses different resources, as 
+
+\[ NW_{i} =  \dfrac{1}{\sum_{k=1}^{n} P_{ik}^{2}}  \]
+
+So if species $i$ has two resource species, niche width of species $i$ ($NW_i$) will depend on the relative amount it uses both resources. For instance, using resource species equally 
+
+$P_{i1}$ = 0.5, $P_{i2}$ = 0.5
+
+results in $NW_i$ = 2
+
+```{r}
+resourceFrac <- seq(0,1,length.out=11)
+df <- data.frame(resourceFrac, rev(resourceFrac))
+
+nw <- 1 / rowSums(df**2)
+par(mar=c(4,4,0.5,0.5))
+plot(df[,1], nw, pch=16, xlab='Resource fraction', 
+  ylab='Niche width', type='b')
+
+```
+
+> What do we learn from this plot? 
+
+
+
+So let's revisit the concept of niche overlap, which Case argues is the product of niche width and the shared niche space between a pair of species. 
+
+
+\[ o_{ij} = NW_i \sum_{k=1}^{n} P_{ik}P_{jk} \]
+
+
+
+Importantly here, $o_{ij}$ is not equal to $o_{ji}$. 
+
+> Should it be? 
+
+
+Using some matrix notation, we can quickly calculate the entire $\mathbf{O}$ matrix. 
+
+
+\[ \mathbf{O} = \mathbf{D P P^{T}}  \]
+
+where $D$ is a matrix of 0 values except for the diagonal which corresponds to niche width values for each species $i$, and the $P$ matrix is what we defined above as the resource utilization matrix. $P^T$ refers to the transpose of $P$. 
+
+But this is a rather simplistic way of viewing overlap, as resources vary in their ability to reproduce, and use may not be a good measure of effect or functional overlap. MacArthur used the $\alpha_{ij}$ terms from the Lotka-Volterra model to try to estimate the overall effect of one species on another as something akin to the niche overlap equation, estimating species interactions $\alpha_{ij}$ as a function of resource growth rate $r_k$, the "resource amount" per unit of resource ($w_k$) and the consumption rates of species $i$ on resource $k$ ($a{ik$}). 
+
+> What are the benefits of this approach for defining interaction coefficients? 
+
+This same approach to estimating species interactions in consumer-resource systems could be transposed over how we're thinking about niche width. 
+
+
+\[ \hat{NW}_{ij} = \dfrac{1}{sum_{k=1}^n \frac{K_kw_k}{r_k}} a_{ik}^2  \]
+
+with the hat symbol in $\hat{NW}$ simply to distinguish it from our previous measure of niche width. 
+
+
+
+### Density compensation 
+
+Some of the above can be tested in island systems. The tough part is that species carrying capacities are difficult to estimate (Eric LoPresti argues that carrying capacities fundamentally don't exist, but he's just wrong). Also, in natural systems, we're assuming populations are at equiblibrium whenever we're thinking about defining carrying capacity. Let's consider the situation where this equilibrium assumption is alright, and consider species carrying capacities to be proportional to the overlap matrix ($O$) and species equilibirial population sizes $N^*$. We can solve this for $N^*$ (equation 15.42 gives an example focused on the two species comparison case of this), allowing us to explore situations in which we remove species and explore changes in relative abundance of the remaining community. These predictions can be compared to observational data. Yeaton did this in California on some bird species, finding that the loss of species led to a general net increase in the density of several other species. This is called \textit{density compensation}, and together with potential \textit{niche and/or habitat expansion}, forms the idea of \textit{competitive release}. That is, in the absence of certain competitors, a species might expand into new enviornments that it was previously excluded from through competition, and will also potentially increase in abundance following the removal of competitive pressure. 
+
+
+
+### Limiting similarity 
+
+> One common theme is that related species that are similar in morphology, especially body size, and thus have similar diets often occupy different habitats or occur in different geographic regions (i.e., in allopatry)t In contrast, closely related species that are sympatric and occur in the same habitat (i.e., syntopic) frequently have niches that segregate strongly in body size or other directions related to foraging mode. These observations spawned an analysis of how similar species niches can be, before they can no longer coexist.
+
+Let's explore this idea through the lens of Lotka-Volterra competition and invasion potential (ability to grow when rare). We can assume that this is a two-species model, where each species has a gaussian niche (Figure 15.17). We can solve for the equilibrium densities of both species in this system
+
+\[ N_1^*(I) = \dfrac{K}{1+\beta} \]
+
+where $(I)$ notation indicates the equilibrium of species 1 in the absence of the invader $I$, and the $\beta$ term is the niche overlap between the two resident species (not invader $I$). Based on Figure 15.17, the equilibrial densities of resident species (1 and 3 in Case text) need to be equal. Substituting species 1 and 3 equilibria back into the invasion criteria equation (15.43),we get 
+
+\[ K_I - \dfrac{2\alpha K}{1+\beta}  > 0 \]
+
+We can define niche overlap $\beta$ in continuous space based as the overlap between two species niches divided by the squared niche area of species 1 (15.46). Treating the niches as gaussian means that we know the probability density of the niche curves (15.47). All this business eventually gets simplified down to 
+
+\[ \beta = exp(\dfrac{-s^2}{(2\sigma)^{2}}) \]
+
+where $s$ is niche separation ($s = 2d$ for our case in Figure 15.17) and $\sigma$ is the variance term of the gaussian niches (also in Figure 15.17). Working through this a bit more, we can go back to our invasion potential of a species given the resident community 
+
+\[ K_I > \dfrac{2\alpha K}{1+\alpha^{4}} \]
+
+if the invader has the same carrying capacity $K$ as the residents, this simplifies to 
+
+\[ 1 > \dfrac{2\alpha }{1+\alpha^{4}} \]
+
+Solving for this produces 4 solutions, two of which are non-negative real numbers. 
+
++ $\alpha_c$ = 1 and $d / \sigma$ = 0 
++ $\alpha_c$ = 0.544 and $d / \sigma$ = 1.56 
+
+The second root is the most interesting. The invader will be successful if a, here defined as its niche overlap with the residents, is less than 0.544. Moreover, for this case of equal K's, if the invader can grow when rare, it will reach a positive equilibrium density with both residents present. The invader will not displace either resident. 
+
+
+
+
+
+
+
+
+
+
+### Limiting similarity and predation 
+
+How might a predator alter the limiting similarity of its prey? That is, if a predator shows no preference with respect to prey based on density, then the predator will have no impact on limiting similarity. However, density does often influence predation rates, leading to the persistence of rare prey species and the potential for species invasions relative unimpacted by predation. In the limit where the potential invader experiences no predation, the invasion criterion is 
+
+\[ K_I - 2\alpha N^*(I) > 0 \]
+
+where $N^*(I)$ is the equilibrium density of the residents in the absence of the invader (but in the presence of the predator now). This serves to impact $\alpha_C$, the critical limiting similarity. Predators feeding more on common prey items can promote coexistence in the competing prey community, and prey communities with lots of predators should (at least hypothetically) be more invadable by novel prey species.  
+
+> Another way that a predator can enhance the coexistence of competing prey types is by preferring to eat prey that happen to be competitively dominant, regardless of this prey's relative frequency.

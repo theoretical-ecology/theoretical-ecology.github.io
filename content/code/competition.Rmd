@@ -17,4 +17,308 @@ output:
 
 
 
+### Coupled growth equations for predator and prey 
+
+You may have heard about Lotka-Volterra equations, in terms of predation and/or competition. To introduce coupled predator-prey dynamics, we will use an abstraction of something like Lotka-Volterra, which we will discuss. In terms of continuous time (which we will see why this is preferred for these types of systems), we have the rate of change in resources ($\dot{R}$) and consumers ($\dot{C}$) over time. 
+
+\[ \dot{R} = f_1(R,C) \ \ \ \ \ \dot{C} = f_2(R,C) \]
+
+
+Here, the functions $f_1$ and $f_2$ describe the population dynamics of resources and consumers, respectively. We can re-write these equations to clearly show how they are coupled, starting with the consumers ($C$)
+
+\[ \dot{C} = f_2(R,C) = C[b(R)-d(R)] \]
+
+where birth ($B$) and death ($D$) are functions of the amount of resource $R$. What are the equilibria of this model as written? 
+
+
+<!-- C=0 and b(R) = d(R) -->
+
+This formulation can help us to create and understand the state space (which I normally refer to as phase space), describing the consumer and resource dynamics on the same plot. In Figure 12.2, we see that the resource level sets a lower bound for consumer population growth. Below this resource level, the consumer will decline to extinction. This amount of resource necessary for consumer persistence is often called $R^*$ ("R star") and was initially developed to explore community dynamics of a shared resource, as the species with the lowest R* value (lowest resource necessary to maintain positive growth rate) would be preferred. This model as applied to communities has a sort of trivial dynamic in the long-term, as it would be expected that the species with the lowest R* value would eventually dominate (at least under a whole bunch of parameterizations). What are the situations allowing for multi-species coexistence in this R* framework (hint: Figure 12.4)? 
+
+
+We can now explore the regions of parameter space which allow for coexistence of consumer and resource. First, we plot out the region of space in the phase space where the resource growth is positive ($\dot{R} > 0 $; Figure 12.6). Mapping the $R^*$ for the consumer onto this, we can identify the intersection of the regions as the equilibrium ($C^*, R^*$). It is important to note that this phase space is in terms of the rates of change in population change of resources and consumers, such that we can identify any point on this phase space and envision the dynamics of the system. This is a useful exercise, as it allows us to explore the dynamics of a two-dimensional system in a (hopefully) intuitive way (Figure 12.8). The lines in this phase space which denote the areas of zero growth in consumer or resource are called \textit{zero net growth isoclines}. These are essentially attractors of the dynamic system, such that system will tend towards them. We can visualize this using arrows in the phase space (as indicated in Figures 12.8 and 12.9). This system will never _really_ reach equilibrium, but instead will tend to cycle around the equilibrium, creating a 'limit cycle'. In the phase space, it is important where the intersection of the two zero net growth isoclines intersect, dictated in part by the consumers functional response. If the intersection occcurs before the hump in the consumer zero net growth isocline, that equilibrium point is unstable (any perturbations will send the system to another equilibrium), while intersections after the consumer zero net growth isocline hump correspond to stable equilibria. The closer the intersection is to the peak of the consumer isocline, the smaller the the limit cycles around this point will tend to be. 
+
+Let's spend some time exploring this using [this web application](https://ecoevoapps.shinyapps.io/predator_prey_dynamics/). Note that the model formulation is slightly different, so we can't use this to explore the effects of changing handling time or carrying capacity. 
+
+
+> https://ecoevoapps.shinyapps.io/predator_prey_dynamics/
+
+
+Case spends some time exploring how different predator functional responses shift the zero net growth isoclines in the phase space. Definitely worth a read to understand it, but we will not go into in class unless folks are confused and if time permits. 
+
+### Empirical explorations of this theory 
+
+The Case text goes over two examples of consumer-resource dynamics in laboratory systems. Maly (1969) used a protist-rotifer system to explore predator-prey cycling, finding that predators tended to consume all prey and then go extinct (this has been shown in other systems as well). Predators seem to be bad at self-regulation sometimes. Hutchinson's mite experiment is a good example of a predator-prey system in which the role of dispersal among patches and prey refugia became very important to start to observe cyclic behavior, and even so, most of those trials ended with predator over-exploitation. Luckinbill (1973) lowered swimming speeds of consumer and resource to try to reduce the encounter rate (with some success) and also changed the carrying capacity of the resource by reducing the bacterial resources consumed by the resource species. 
+
+
+
+### Multiple predators on a single prey 
+
+What happens if we add another predator to a single prey species in terms of predator-prey dynamics we observed above? A simple assumption would be that one predator is able to exploit the resource more effectively, and drive the other predator to extinction (or prey switching). Case provides the example of two parasitoid wasps preying on a bean weevil host. Granted that host-parasite systems offer their own complexities in terms of considering them predation (which we may go over in later lectures if we have time), Utida (1957) was able to observe two parasitoids coexisting for around 70 generations when sharing the weevil host resource. One potential reason for the lack of competitive exclusion in this system is that the two wasps had different functional responses to host density. That is, one wasp had higher reproductive output when host densities were below 200, and the other did better at higher weevil densities (Figure 12.28). What were the key differences between the theoretical expectation of predator-prey dynamics and this experiment? 
+
+<!-- predators were cycling out of phase, which there's no clear reason for other than a hand-wavey 'response to env' argument -->
+
+
+### Predator interference, allee effects, and other fun
+
+The predator-prey models we have introduced thus far allow for predator interactions through a shared resource. But predators may also interact directly, both between species (interspecific) and within the same species (intraspecific). For instance, what if predators attack one another over territory or resource? We can explore this by modifying the consumer equation, specifically for the case here of intraspecific interference competition.  
+
+\[ \dot{C} = kB(R) - d - fC \]
+
+where $fC$ is now a modification of growth as a function of $f$, a density-dependent term meant to incorporate intraspecific interference. The dynamics of this model are interesting, and we'll start with the phase space. Recall from Figure 12.15 where we set up the consumer-resource phase space. The consumer's zero net growth isocline was a shaded region indicated by a vertical line threshold (i.e., the consumer needs some threshold level of prey resource, where the line indicates that minimum resource for zero net consumer population growth). But with the role of intraspecific interference, this vertical line changes. To explore why, let's solve for the equilibrium consumer density based on the equation above. 
+
+\[ C = \dfrac{kB(R) - d}{f} \]
+
+Recall that $B(R)$ is the birth rate of the consumer as a function of resource availability (i.e., the consumer functional response). If we input a type 2 functional response here, we get 
+
+
+\[ C = \dfrac{1}{f} \left( \dfrac{kaR}{1_aT_hR} - d \right) \]
+
+
+The effects of this tend to be stabilizing, as consumer birth rate will decline to a greater extent with increasing consumer density (e.g., too many consumers leads to territoriality and fighting, so fewer prey are actually consumed). This effect can be seen in the phase space of Figures 12.33 and 12.34. 
+
+What happens if we incorporate an Allee effect? We went over Allee effects awhile back. In short, population growth rate may be less than 0 at low densities (in terms of single species population dynamics). In consumer-resource systems, we can model an Allee effect in the resource population, at which very low densities of resource lead to 0 or negative resource growth rates. 
+
+> How can this happen? 
+
+This is displayed graphically in Figure 12.35, and the resulting effects on the dynamics are that the limit cycles are removed (Figure 12.36). What happens to these cycles? It really depends on where the consumer and resource isoclines intersect, similarly as it did before, where intersections to the right of the hump peak of the resource isocline lead to a stable equilibrium. But now, an intersection to the left of the hump means that consumers will drive the resource population down to a level where the Allee effect will kick in, meaning that even if all consumers died (or stopped eating), the resource will still go to extinction. Before, this was an unstable equilibrium point, but now the start of any cycle around this attractor will stray into territory where resource goes extinct. 
+
+But there are also regions to the right of the hump where dynamics will lead to different outcomes. That is, different consumer and resource initial densities influence the resulting dynamics. To explore this, look at Figure 12.37, where grey lines are initial conditions that tend towards extinction. By simulating the dynamics across many different initial conditions, we can draw the \textbf{separatrix}, or regions of phase space which push the dynamics towards different basins of attraction (in this case, exinction of both consumer or resource, or oscillations around a stable equilibrium; Figure 12.38). These two figures (Figures 12.37 and 12.38) are for the situation in which the resource has an Allee effect and the predator has a type 1 functional response (red vertical line in phase space is a graphical indication of this). If we incorporate a type 2 functional response in the consumer, we see slightly different dynamics (Figure 12.39). 
+
+### Mutualistic relationships
+
+Mutualistic relationships differ fundamentally in their dynamics from predator-prey, as both interactors receive benefit (not just the consumer). However, they still have similar requirements in the phase space (e.g., some number of each interactor is required, a plant with no pollinators will not do well). The predicted dynamics are expected (in this specific case) to be quite stabilizing, with most of the dynamics tending towards a stable equilibrium with no oscillations (Figure 12.40), except when initial conditions are of insufficient abundance to promote coexistence, in which case both interactors go extinct. 
+
+
+### The curious case of the hare and lynx
+
+A classic example of consumer-resource systems come from long-term data obtained from hunting of lynx and hare populations (we have introduced these data already). But the actual system dynamics deviate from what we would expect given our consumer-resource models, right? 
+
+> What are some potential reasons for this? 
+
+
+
+
+## Chapter 14
+
+### Interspecific competition 
+
+Competition above was treated only as intraspecific competition. But species also compete with one another for shared resources. There are two flavors of competition we will consider; \textit{exploitative} and \textit{interference}. We introduced the idea of interference competition above within the same species (intraspecific). This form of competition is due to density-dependent interactions between consumers that reduce population growth rate (e.g., fighting amongst consumers could reduce resource acquistion or consumer survival). Exploitative competition is due to the fact that consumers are sharing a limited resource. By reducing the resource population, one consumer is influencing the dynamics of another consumer while potentially never directly interacting with the other consumer. 
+
+
+
+### Laboratory competition experiments 
+
+There are some great laboratory competition experiments. Case goes over a couple good ones (e.g., protists, flour beetles, etc.) showing the influence of environmental conditions, initial abundances, and more on the resulting competitive dynamics. Read these and think about the different forces influencing competitive dynamics in natural systems. In the absence of environmental-dependence, what are other forces which can influence the outcome of competition? 
+
+
+
+
+
+### Lotka-Volterra competition 
+
+We previously introduced Lotka-Volterra for exploring consumer-resource dynamics above. But we can use a similar model to explore competition, while ignoring the _actual resource_. That is, if we simplify the system down to only consider the _direct_ effects of competitors on one another, we can explore the potential dynamics of two competing species. 
+
+> Note: I break from Case's notation here for a bit. The model is the same, but some notation may differ. 
+
+
+Recall the logistic model 
+
+\[ \frac{dN}{dt} = rN\left(1-\frac{N}{K} \right) \]
+
+We will build on this model by allowing the densities of each competing species to contribute to overall carrying capacity of a species, allowing demography of species 1 to be tied to the abundance and competitive effect ($\alpha_{12}$ term) of species 2. 
+
+\[ \frac{dN_{1}}{dt} = r_{1}N_{1}\left(1-\frac{N_{1} + \alpha_{12}N_{2}}{K_{1}} \right) \]
+
+\[ \frac{dN_{2}}{dt} = r_{2}N_{2}\left(1-\frac{N_{2} + \alpha_{21}N_{1}}{K_{2}} \right) \]
+
+where we have populations of two species ($N_{1}$ and $N_{2}$), which grow at rates $r_{i}$ and compete through interspecific effects on the other species through $\alpha$ terms. 
+
+We can set each equation above to 0 and solve for the zero net growth isocline of each species. For instance, for species 1,  
+
+\[ 0 = r_{1}N_{1}\left(1-\frac{N_{1} + \alpha_{12}N_{2}}{K_{1}} \right)  \]
+\[ N_2 = \dfrac{K_{1} - N_{1}}{\alpha_{12}} \]
+
+placing $N_2$ on the left-hand side of the equation for ease of translating it into the phase space plot, where we consider $N_2$ to be the y-axis (we'll see this in a bit). Rearranging this equation, we can get 
+
+\[ N_2 = \frac{K_1}{\alpha_{12}} - \frac{1}{\alpha_{12}}N_1 \]
+
+which is a line with slope $-\frac{1}{\alpha_{12}}$ and intercept $\frac{K_1}{\alpha_{12}}$ (Figure 14.14). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Let's look at the long-run outcomes of Lotka-Volterra competition, of which there are only 4. We'll do this by generating what is referred to as a "state-space", in which the abundance of species 1 is plotted on the x-axis and the abundance of species 2 is plotted on the y-axis. Each point within the state-space represents a combination of abundances of the two species. For each species within this space, there is a straight line which defines the equilibrium density of the species depending on starting conditions (i.e., the abundance of both species). Each species has a line, and these lines are called \textit{zero net growth isoclines}. 
+
+
+
+
+
+
+
+
+
+[See here for another explanation and an associated web app to play around with the parameters](https://ecoevoapps.gitlab.io/docs/articles/lotka-volterra-competition.html)
+
+
+```{r}
+## Add trajectory line and starting point
+plotTraj <- function(mod,N1,N2){
+	lines(mod, N1, N2, col="green", lwd=2)
+	points(N1, N2, pch=16, col="green")
+}
+devtools::install_github('jarioksa/ecostudy')
+library(ecostudy)
+
+```
+
+
+
+```{r}
+
+mod1 <- lotkacomp(0.75, 0.5, 50, 20)
+plot(mod1)
+legend('topright', c("species 1", "species 2"), 
+	col=c('dodgerblue', 'firebrick'), lwd=2, bty='n')
+plotTraj(mod1, 10,10)
+plotTraj(mod1, 10,40)
+plotTraj(mod1, 10,70)
+plotTraj(mod1, 40,60)
+title('Species 1 wins!')
+
+mod2 <- lotkacomp(0.5, 0.75, 20, 50)
+plot(mod2)
+legend('topright', c("species 1", "species 2"), 
+	col=c('dodgerblue', 'firebrick'), lwd=2, bty='n')
+plotTraj(mod2, 10,10)
+plotTraj(mod2, 10,40)
+plotTraj(mod2, 40,40)
+plotTraj(mod2, 40,20)
+title('Species 2 wins!')
+
+```
+
+
+
+
+```{r}
+
+mod3 <- lotkacomp(alpha=0.5, beta=3, K1=40, K2=100)
+plot(mod3)
+legend('topright', c("species 1", "species 2"), 
+	col=c('dodgerblue', 'firebrick'), lwd=2, bty='n')
+
+plotTraj(mod3, 20,40)
+plotTraj(mod3, 21,40)
+plotTraj(mod3, 19,40)
+
+plotTraj(mod3, 10,10)
+plotTraj(mod3, 10,30)
+plotTraj(mod3, 10,40)
+
+plotTraj(mod3, 10,65)
+plotTraj(mod3, 40,50)
+plotTraj(mod3, 40,20)
+title('Unstable coexistence!')
+
+```
+
+
+
+```{r}
+
+mod4 <- lotkacomp(0.5, 0.5, 20, 20)
+plot(mod4)
+legend('topright', c("species 1", "species 2"), 
+	col=c('dodgerblue', 'firebrick'), lwd=2, bty='n')
+
+plotTraj(mod4, 10,30)
+plotTraj(mod4, 10,5)
+plotTraj(mod4, 30,20)
+plotTraj(mod4, 25,5)
+title('Stable coexistence!')
+
+```
+
+
+
+
+> The Lotka-Volterra model predicts that stable coexistence of two species is possible only when intraspecific competition has a greater effect than interspecific competition. Why would this be the case? 
+
+
+### More than 2 competing species 
+
+The classic two-species competition system is mainly for tractability in terms of visualization and teaching. There is little keeping competition models from being $n$-species, except the ability to actually parameterize the matrix of competitition coefficients ($\alpha$). Case explores this by adding another species to the graphical approach, showing a 3-dimensional space representing the \textit{isospace} as a plane (recall the zero net growth isocline for any species was depicted as a line in two-dimensional space; see Figure 14.31 for the 3d planar version). 
+
+What are some issues with $n$-species models? They completely ignore higher-order interactions (in this simple case). This means that all effects of competition are assumed to be additive. So competition coefficients are estimated between two species, and the effect of species $a$ on species $b$ is always the same, such that the presence of species $c$ does not affect it (species $c$ interacts with species $a$ and species $b$ in it's own way). Think of the underlying ways that the presence of another species could alter the competitive process between two species. Thoughts?
+
+One that Case brings up is a class of effects called \textit{trait-mediated indirect effects}. These are things that change the behavior of a species in a way that influences competition. Imagine that the presence of species $c$ is enough to scare species $b$, but not $a$, allowing species $b$ better access to resources. This would modify the effect of species $a$ on species $b$. There are ways we could imagine we could model this system without necessarily changing $\alpha$ coefficients, but then we would have to think about how resource consumption is a function of the density of species $c$ and that would feed into population growth rates $r_i$, and it becomes a different model, basically. 
+
+We may think that finding equilibrial conditions would be more difficult for $n$-dimensional systems, but there are some neat math tricks we can use. We can estimate the interior equilibrium point (point in $n$-dimensional space corresponding to a vector of $N$ values), as 
+
+\[ \mathbf{N^*} = \mathbf{\alpha^{-1}} \mathbf{K} \]
+
+In the Case text (Figure 14.32), there is a 4 species example that we'll use for this section. 
+
+```{r}
+
+alphaMat <- matrix(c(1,0.3,0.5,0.25,1.75,
+	1.0,0.85,0.6,-2.0,
+	0.5,1,-0.5,
+	-0.65,0.6,0.5,1), nrow=4)
+
+K <- c(671,366,230,194)
+
+Nstar <- solve(alphaMat)%*%K
+
+```
+
+
+Much like the application of eigenvalue decomposition to obtain the stable age distribution in age/stage-structured population models, we can take the dominant eigenvalue of the Jacobian matrix of this system to determine if this equilibrium is stable or unstable. The Jacobian here is defined as the product of an $n$ by $n$ matrix with diagonal elements $-r_i N_i^* / K_i$ and the competition matrix $\mathbf{\alpha}$ ($\mathbf{J = D \alpha}$) 
+
+We don't have $r_i$ values for the previous example, so let's make some up. 
+
+```{r}
+
+r <- runif(4, 1, 2)
+D <- matrix(0, ncol=4, nrow=4)
+diag(D) <- (-r*Nstar) / K
+
+J <- D %*% alphaMat 
+eigen(J)
+
+```
+
+> In order to be stable, all the real eigenvalues must be negative. Do we have a stable or unstable equilibrium above? 
+
+This same approach can be used to identify those species that will grow when rare (sometimes called an \textit{invasion criteria}), but this is perhaps a bit onorous to demonstrate here. A final point about the stability criteria is that an unstable equilibrium can still produce coexistence. We'll use the example from the book to explore this (Code block 14.24 in Case). 
+
+```{r}
+
+alphaMat2 <- matrix(c(1,0.3333,0.3333,2,1,0.333,4,2,1), ncol=3)
+K2 <- c(19,9,4)
+r2 <- c(19,1.5,12)
+Nstar2 <- solve(alphaMat2)%*%K2
+
+D2 <- matrix(0, ncol=3, nrow=3)
+diag(D2) <- (-r2*Nstar2) / K2
+
+J2 <- D2 %*% alphaMat2
+eigen(J2)
+
+```
+
+> Is this a stable or unstable equilibrium? 
+
+Simulating the dynamics of the system is a bit much here, but Case does it for us in Figure 14.34, where we see sustained oscillations. Use the code above to do the exercise problem at the end of the chapter. 
+
 

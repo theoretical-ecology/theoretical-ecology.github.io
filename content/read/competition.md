@@ -1,12 +1,12 @@
 ---
-title: "Competition"
+title: "Competition and predation"
 ---
 
 
 
 ### Reading
 
-- Chapter 15. Illustrated Guide to Theoretical Ecology. 
+- Chapter 12 and 14. Illustrated Guide to Theoretical Ecology. 
 
 
 

@@ -26,7 +26,7 @@ lessons:
     topics: "Constrained population growth"
     reading: "read/constrainedgrowth"
     code: "code/constrainedgrowth"
-    homework: "https://classroom.github.com/" 
+    homework: "homework/module1" 
 
 
 
@@ -63,7 +63,7 @@ lessons:
     topics: "Density-dependent selection"
     reading: "read/selection"
     code: "code/selection"
-    homework: "https://classroom.github.com/" 
+    homework: "homework/module2" 
 
 
 
@@ -104,7 +104,7 @@ lessons:
   - module: "<i class='fa fa-lg fa-line-chart'></i>"
     date: "Week 11"
     topics: "Multi-species communities"
-    reading: "read/communities"
+    reading: "homework/module3"
 
 
 
@@ -140,7 +140,7 @@ lessons:
     date: "Week 15"
     topics: "Wrap up"
     reading: ""
-    homework: "https://classroom.github.com/a/xIzNwgWw" 
+    homework: "homework/module4" 
 
 
 

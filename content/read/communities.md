@@ -1,12 +1,12 @@
 ---
-title: "Communities"
+title: "Multi-species communities"
 ---
 
 
 
 ### Reading
 
-- Chapters 12 & 14. Illustrated Guide to Theoretical Ecology. 
+- Chapter 15. Illustrated Guide to Theoretical Ecology. 
 
 
 
