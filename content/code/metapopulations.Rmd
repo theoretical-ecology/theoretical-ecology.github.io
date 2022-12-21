@@ -15,3 +15,308 @@ output:
 }
 </style>
 
+
+
+## Space, Islands, and Metapopulations 
+
+Until this point, we have largely considered the interactions and dynamics of species in a single location, making the tacit assumption that all individuals have the potential to interact, and, even further, all individuals interact with one another with the same _effect_ (i.e., $\alpha_{ij}$ is a constant). In this chapter, we will at least extend things out into space to consider how population size (or density) changes across different spatial dimensions. For instance, we can consider 
+
++ $P(x)$: number of individuals at single point in one dimensional space  
++ $P(x,y)$: number of individuals at single point in two dimensional space  
++ $P_i$: number of individuals within some confined area $i$
+
+For many applications, we don't even necessarily care about density, but simply if the species is present in a given location. These binary data are incredibly useful for estimating things like _occupancy_, which is the fraction of cells or patches that are occupied by a species across the landscape. 
+
+Spatial population dynamics are typically considered in one of two ways. First, habitat patches of different areas are connected via dispersal pathways, such that there is some habitat which is not occupied, and species move between habitat patches that can be occupied. Second, we divide the landscape into a lattice (a grid of equal area cells) and estimate density in each cell. There are some important assumptions about both methods. 
+
+> What are they? 
+
+
+
+### A two-patch model of competition 
+
+Theoretical ecology in this space loves two-patch systems. So much of metapopulation theory was developed considering just two habitat patches, connected by varying levels of dispersal. Case sets up the two patch problem as an interspecific competition problem. Species A is in one patch, species B is in the other. Both species have Lotka-Volterra type dynamics. Patches are functionally distinct in that there is no dispersal to begin with, then we slowly add dispersal connections. What happens (Figure 16.3)? Before, we had one value for each species for an interior equilibrium, but the connections between patches mean that we now have an interior equilibrium of 4 points (one for each speices-patch combination). This influences the zero net growth isoclines of species across space (now considering the phase space as defined by the density of the same species, but at the two different patches; Figure 16.4-16.6). That is, we now have to consider dispersal $\mu$ in estimates of equilibrium population density. 
+
+Another important conclusion of the two-patch system is that two species that cannot coexist in a single patch are able to coexist in a two-patch system with limited dispersal. If dispersal becomes too high, the two patches operate more like a single patch, and that coexistence is lost. 
+
+
+
+
+### A two-patch predator-prey model 
+
+We can also consider a predator and a prey in a spatial two-patch landscape. 
+
+> How might space influence predator-prey dynamics?
+
+Let's start with the Lotka-Volterra model of predator ($P$) and prey ($V$) dynamics. 
+
+\[ \frac{dV}{dt} = V(b-aP) \]
+\[ \frac{dP}{dt} = P(-d + kaV) \]
+
+
+Recall what the phase space looks like for this model, and the dynamics of this system in a single patch system (Figure 16.8). 
+
+> In the absence of the predator, the prey population,$V$, grows exponentially with an intrinsic growth rate, b. The prey death rate increases linearly with the number of predators. Predators have a type 1 functional response, $kaV$, with an encounter rate parameter, $a$. The zero-isocline is depicted in Figure 16.8. Trajectories spiral around the equilibrium point, but the cycle is neutrally stable and determined by the initial conditions. Now imagine two patches that are adjacent to one another. The predator and prey occur in each patch, and individuals of both species can potentially move between the two patches.
+
+So now we have 4 differential equations, just as in the two-patch competition model above (see Equation 16.2). Let's consider that first equation describing prey populations in patch A and see if we can find the equilibrium point. 
+
+\[ \frac{dV_A}{dt} = V_A(b_A-a_AP_A) - \mu_{V,A}V_A + \mu_{V,B}V_B \]
+
+where $\mu$ terms describe the movement of prey between patches. Solving for $\frac{dV_A}{dt}$ leads to 
+
+\[ 0 = b_A - a_AP_{A}^{*} - \mu_{V,A} + \mu_{V,B}\frac{V_B^*}{V_A^*} \]
+
+So we have not managed to isolate $V_A$ (which is fine), but we also can see that this expression will be non-linear, as changes to $P_A$ fundamentally change the ratio $\frac{V_B^*}{V_A^*}$. So an already coupled system of predator prey is now also influenced by dispersal. 
+
+But this equation also shows us something else interesting. Assume for a moment that the two patches are identical and movement between patches is the same ($\mu_{V,A} = \mu_{V,B}$). This equation then reduces down to 
+
+\[ 0 = b-aP_A^* \]
+
+which _does not contain the influence of dispersal_. This equilibrium value is the same as for a single patch system. That is, if movement is equal and patches are equal in their 'quality' (i.e., there's no difference in species demographic parameters between patches), then predator prey dynamics in both patches will be the same as in the single patch situation. It is only when we add differential movement or differences in demographic rates across the two patches that we reveal different dynamics. 
+
+We can see what happens when we make patch B slightly 'better' for predators (slightly lower death rate) and prey (slightly higher birth rate) (Figure 16.9 with no movement), and how this changes when we consider predator and prey to move with different rates (Figure 16.10). 
+
+
+> Vandermeer et al. (1980) performed an experiment to test these ideas. The "patches" were piles of compost. In the experimental piles, one-quarter of each compost pile was split off and the portions were transferred to each of the other piles twice a week. The control group was identical but no transfers took place. The result was that, while the average species number per patch was similar in both groups, the overall number of species in the entire collection of patches was about 50% less in the experimental group with enhanced dispersal. Thus species composition differed more from pile to pile in the control group than in the experimental "mixed-up" group of populations. Piles were not experimentally isolated, so it is unknown whether the diversity reduction that resulted from one-quarter transfers could be duplicated by experimentally enforcing less colonization than existed in the controls.
+
+
+### Larger spatial arenas
+
+Two-patch systems are incredibly useful, but we often have more than two patches, or (worse yet) we have a continuous landscape. In this case, we can imagine dividing the two patches in half to create a four patch system, and dividing them further and further until we approximate a continuous system in which we consider species dynamics at a single point in two dimensional space. The result is the arrival at the reaction-diffusion equation described at the top of page 390. 
+
+
+> These bizarre dynamics are not simply theoretical constructs without bearing on the real world. Maron and Harrison(1997) described stable patches of tussock moth caterpillars feeding on their host plant, bush lupine, which is continuously distributed. Moth eggs and larvae that are experimentally introduced outside these patches do fine, so it seemed a mystery why the patches of caterpillars did not expand over time. The tussock moth females are wingless, so dispersal is limited. They are also predated and parasitized by several other species with greater mobility. Reaction-diffusion models of this interaction predict stable patches. This occurs because predators(or parasites) spill over the edges of prey patches, creating zones on the boundary where predator to prey ratios are elevated. Farther away from existing tussock moth patches, these ratios are lower and the prey population can increase (Brodmann et al. 1997). This suggests that new stable patches could be created if large enough experimental introductions are made.
+
+
+
+
+### Colonization and extinction dynamics of a single patch 
+
+We are going to pivot away from thinking about estimating density across space here to focusing a bit more on presence-absence of species across space. This will set up the underlying theory of _metapopulations_ as they were originally described. Consider a large habitat patch with variable habitat, some favorable and some less so. We may want to simply describe the occupancy dynamics in this single patch. But we can't simply look at a single point in time and act as if the system is not dynamic. So we must model the colonization and extinction dynamics in each part of the large patch. Here, we care about the fraction of occupied patches $J$. 
+
+\[ \frac{dJ}{dt}  = gains through colonization - losses due to extinction \]
+
+We consider losses due to extinction to be dependent on the fraction of patches currently occupied $J$, such that extinction is modeled as $eJ$. Colonization is a bit trickier, as there are at least two ways to define colonization in this simple model. 
+
+
+
+### Levins model 
+
+We'll start with how colonization is defined in a foundational metapopulation model; the Levins' model. Levins created a simple model focused solely on patch occupancy (i.e., is the species present or absent) as a way to mathematically assess the proportion of occupied patches by a species given minimal demographic information. In this case, local habitat patches are either occupied or unoccupied, and both patch number and the spatial orientation of patches are undescribed. Dispersal among habitat patches can rescue patches from extinction, or allow for the recolonization of extinct patches. All patches are treated as equal, so that any patch is suitable for a species, and (as a simplifying assumption) all habitat patches can be reached from all other patches. This simplified representation treats space as implicit, and patch quality and size as constant; rather than an explicit population size, patch occupancy is just a 0 or 1 state.
+
+
+\begin{equation}
+\frac{dJ}{dt} = cJ(1-J) - eJ
+\end{equation}
+
+where the change in the number of occupied sites ($J$) by a species is a function of colonization rate $c$ and extinction rate $e$. 
+
+The equilibrium fraction of patches that should be occupied via colonization and extinction rates is 
+
+\begin{equation}
+J^* = 1 - \frac{e}{c}
+\end{equation}
+
+Further, this model can be used to generate a threshold condition for metapopulation persistence, which relates to the balance between colonization and extinction rates, and is analagous to population growth rate in the logistic model. That is, a metapoulation will persist if 
+
+
+\begin{equation}
+  \frac{e}{c} < 1 
+\end{equation}
+
+
+That is, when extinction rate becomes larger than colonization, the metapopulation will not persist. This shows that even a metapopulation in equilibrium is still in a constant state of patch-level flux. In real applications, this implies that just because a patch of habitat is empty, that may not imply it is uninhabitable; and similarly, just because a population goes extinct, it may not be indicative of broader declines or instability.
+
+
+
+### Mainland-island systems 
+
+Colonization comes from a single source, and isn't dependent on the fraction of occupied patches. This basically assumes the idea of "propagule rain", that a constant supply of immigrants are provided and patches become colonized from this mainland source.
+
+\begin{equation}
+\frac{dJ}{dt} = c(1-J) - eJ
+\end{equation}
+
+
+This changes our equilibrium fraction of occupied patches though. Making this assumption shifts the metapopulation $J^*$ to 
+
+\begin{equation}
+J^* = \frac{c}{c+e} = \frac{1}{1 + \frac{e}{c}}
+\end{equation}
+
+
+Note here the effects of the propagule rain. Across a large range of extinction rates ($e$), $K$ still may be relative unaffected. That is, colonization processes become far more important here, as the fraction of occupied patches at equilibrium is now basically the fraction of colonization relative to extinction. This also brings up the existence of _sources_ and _sinks_. The mainland is assumed to be a _source_ here, defined as those patches with positive growth rates even in the presence of emigration (these patches are creating a bunch of individuals and then those individuals are dispersing). _Sink_ populations are those that persist, but have a negative population growth rate, such that they are only maintained via immigration of individuals from other patches. 
+
+
+
+### The effects of island area and isolation 
+
+The approach above is _spatially agnostic_, as we only cared about the fraction of occupied patches, not really paying attention to the distribution of patches across the landscape. We'll remedy this now, by explicitly considering colonization to be a function of distance between patches. 
+
+\[ c(d) = \omega exp(\dfrac{-d}{d_0}) \]
+
+where $\omega$ and $d_0$ are species-specific parameters related to their dispersal kernel. We can explore how these change the shape of the kernel (Figure 16.11) 
+
+```{r}
+
+distance <- seq(0,20, length.out=1000)
+d00 <- 5
+d01 <- 10
+omega0 <- 1
+omega1 <- 2
+
+layout(matrix(c(1,2),ncol=2))
+par(mar=c(4,4,0.5,0.5))
+plot(distance, omega0*exp(-distance/d00), 
+  type='l', xlab='Distance', las=1, 
+  ylab='Colonization rate (c(d))', 
+  main='Changes to d0')
+lines(distance, omega0*exp(-distance/d01), col='dodgerblue')
+legend('topright', pch=16, col=c(1, 'dodgerblue'), bty='n',
+  c('d0 = 5', 'd0 = 10'))
+
+par(mar=c(4,4,0.5,0.5))
+plot(distance, omega0*exp(-distance/d00), 
+  type='l', xlab='Distance', las=1, 
+  ylab='Colonization rate (c(d))', 
+  main='Changes to omega')
+lines(distance, omega1*exp(-distance/d00), col='dodgerblue')
+legend('topright', pch=16, col=c(1, 'dodgerblue'), bty='n',
+  c(expression(omega~"="~1), expression(omega~"="~2)))
+
+```
+
+
+
+Extinction will likely not vary as a function of distance between patches (though we will revisit a related idea), but island area may influence population size and availability of habitat, such that extinction is likely related to patch area. 
+
+\[ e(A) = \dfrac{\epsilon}{A} \]
+
+where $\epsilon$ is some constant estimated from the species data. We can now substitute these functions for $c(d)$ and $e(A)$ into our estimate of $J^*$. 
+
+\[ J^{*} = \dfrac{1}{1+ \frac{\epsilon}{A\omega exp(-d/d_0)}} \]
+
+
+
+we can see how new formulation influences the equilibrium fraction of occupied patches ($J^*$) in Figures 16.12 and 16.13. 
+
+
+### The number of species on islands
+
+The balance between extinctions and colonizations of single species influence metapopulation dynamics. This same idea can be applied to communities to predict the equilibrium number of species on islands. This is the heart of the _theory of biogeography_ (Figure 16.14)
+
+
+
+
+### Potential effects of competition on extinction rates 
+
+Extinction may increase not only as a function of area, but also based on the number of competing species. That is, 
+
+\[ e(A,S) = \dfrac{\epsilon S^{x}}{A} \]
+
+where extinction $e$ is a function of area ($A$) and species richness ($S$), where $x$ and $\epsilon$ are species-specific parameters estimated from data. Generalizing to all species in the community, we can estimate the extinction function for all species as 
+
+\[ E'(S) = \dfrac{\epsilon S^{x+1}}{A} \]
+
+Interspecific competition could also effect the shape of the colonization curve. Case (1990) simulated colonists arriving in model Lotka-Volterra competition communities of different species numbers. The result was that the success of these invaders, evaluated as their ability to increase when rare in the presence of the residents (see Chapter 15), declined, on average, with increases in species number (Figure 16.19).
+
+
+
+### Differences among species 
+
+Species will differ in their colonization and extinction probabilities, which could be modeled by making $c$, $\omega$, and $d_0$ species-specific estimates. 
+
+\[ c_i(d) = \omega_i exp(\dfrac{-d}{d_0i}) \]
+and 
+
+\[ e_i(A) = \dfrac{\epsilon_i}{A} \]
+
+The distributions for these three specific biogeographic rate parameters, $\omega$, $d_0$, and $e$, are usually not known. However, the mere fact that they differ from species to species
+allows for some partial conclusions based on the following logic. Some species will be good colonists; they will tend to be the first to arrive on islands and the most likely to be present when $S$ is low. Other species will be poor colonists and will tend to arrive late; they will thus usually be restricted to islands with high $S$. These factors will qualitatively affect the curves $C'(S)$ and $E'(S)$, as shown in Figure 16.20.
+
+> How does the equilibrium theory of island biogeography account for differences among species in colonization and extinction rates?
+
+
+
+
+
+
+### Rescue effects 
+
+
+Above, we treated the probability of extinction as independent from the fraction of occupied patches. However, what if local patch-level extinction probability ($e$) was a function of the fraction of occupied patches($N$)? Dispersal individuals from occupied sites serve not only to (re)colonize habitat patches, but also to provide individuals to other already established populations. Thus, a population that may have gone extinct due to small population sizes or demographic/environmental stochasticity now will not go extinct due to this extra boost from nearby populations. This boost is the _rescue effect_, and was incorporated into the Levins model by Hanski in 1982. 
+
+
+
+Let's consider the probability of extinction to depend inversely on the fraction of occupied patches (i.e., more patches occupied means fewer extinctions are going to occur). We now consider $e$ to be similar to the colonization rate, which depends on the fraction of occupied patches and the availability of unoccupied patches. 
+
+
+This changes the classic Levins model
+
+\begin{equation}
+\frac{dN}{dt} = cN(1-N) - eN
+\end{equation}
+
+by making $e$ a function of $N$, and results in the following
+
+\begin{equation}
+\frac{dN}{dt} = cN(1-N) - eN(1-N)
+\end{equation}
+
+which doesn't change the persistence conditions for the metapopulation as described above or the fraction of occupied patches at equilibrium. 
+
+\[ \dfrac{c_1 - e_1}{c_1}  \]
+
+
+
+
+### Multi-species extensions
+
+As we saw in the two-patch simple model earlier, species which could not coexist in the same patch can coexist in a metapopulation/metacommunity. Community composition in a single patch varies, as species differ in their ability to colonize patches. Species may be really good colonizers but terrible competitors (this is often found in natural systems, and is commonly called a \textit{competition-colonization tradeoff}). Case refers to \textit{fugitive species} as those with high colonization but poor competitive ability. 
+
+We can go back to modeling two-species coexistence in the framework of the Levins model, where we care about the equilibrium fraction of occupied patches $J^*$. We can consider the dominant competitor to have 'normal' dynamics (unaffected by the inferior competitor).
+
+\[ \frac{dJ_1}{dt} = c_1(1-J_1)J_1  - e_1J_1 \]
+
+and the inferior competitor having dynamics like (Equation 16.19)
+
+\[ \frac{dJ_2}{dt} = c_2(1-J_2-J_1)J_2  - e_2J_2 - c_1J_2J_1 \]
+
+Solving this system of equations, we arrive at the equilibrium fraction of occupied patches for species 2 $J^*_2$ as
+
+\[ J^*_{2} = \left( 1 - \frac{e_2}{c_2} \right) - J^*_1 \left( 1 + \frac{c_1}{c_2} \right) \]
+
+because recall that $J_1^* = \frac{c_1 - e_1}{c_1}$
+
+This can be reduced to a threshold criteria for species 2 persistence as 
+
+\[ c_2 > \dfrac{c_1(c_1 + e_2 - e_1)}{e_1} \]
+
+which can be further simplified if we assume that extinction rates for both species are the same ($e_1 = e_2$) to 
+
+\[ \frac{c_2}{c_1} > \frac{c_1}{e}\]
+
+Essentially, the inferior competitor species 2 must have a greater colonization rate than species 1, and species 1 should have an extinction rate less than or equal to it's colonization rate (which isn't too big of an ask). 
+
+Another useful generalization is to consider the criterion for coexistence in terms of the amount of open space left in the metapopulation with just the superior competitor present:
+
+\[ S_1 = 1 - J_1^* = 1 - \dfrac{c_1 - e_1}{c_1} \]
+
+Assuming equal extinction rates, we can explore the persistence of this same inferior competitor, which occurs when 
+
+\[ S_1 > \frac{c_1}{c_2} \]
+
+The greater the amount of open space and the greater the colonization rate of species 2 relative to species 1, the easier it will be for species 2 to invade.
+
+
+### Adding neighborhood dispersal 
+
+The dispersal between any pair of patches is assumed to be an exponentially declining function of their distance apart. Also since bigger patches hold more individuals and thus throw out dispersers at a greater rate, emigration from bigger patches should be higher than for smaller patches. This influences colonization of patch $j$ in the following way. 
+
+\[ c_j = k \sum_{i=1} A_i e^{-d_{ij}/d_0} \]
+
+where $d_{ij}$ is the distance between patch $i$ and $j$, $A_i$ is the area of patch $i$, and $d_0$ and $k$ are constants. This also allows us to calculate the extinction probability of a given patch $j$ as 
+
+\[ e_j = \dfrac{1}{A_j} \]
+
+How important is each patch to the persistence of the entire metapopulation? An answer can be obtained by comparing the persistence time of the metapopulation with and without each patch. There has been some development on this front, but we will not go over it, as I am not entirely sure we'll make it this far in two lectures. 

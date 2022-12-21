@@ -148,7 +148,7 @@ where $B(V)$ indicates that the functional response is a function of prey densit
 
 where the prey encounter rate $a$ is the slope of the linear functional response (Figure 11.5). The type 2 functional response includes handling time, and is the 'typical' case (Figure 11.3). We can also imagine a situation where encounter rate $a$ is a function of the prey density $V$. This would be the situation where at low prey densities, prey become harder to find (e.g., there are fixed number of prey 'hiding spots').
 
-\[ B(V) = \dfrac{V_a(V)}{T_t} = \dfrac{aVV}}{1+aVT_hV} = \dfrac{aV^{2}}{1+aT_hV^{2}}  \]
+\[ B(V) = \dfrac{V_a(V)}{T_t} = \dfrac{aVV}{1+aVT_hV} = \dfrac{aV^{2}}{1+aT_hV^{2}}  \]
 
 These 3 functional responses are the most typical considered (Case goes into one other in the text, but we won't cover it here). This can be viewed in terms of prey consumption rates ($B(V)$) as well as the individual prey consumption risk ($B(V)/V$), showing the relative risk of predation as a function of $V$ (Figure 11.9). 
 

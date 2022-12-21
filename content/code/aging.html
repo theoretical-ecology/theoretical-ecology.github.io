@@ -298,8 +298,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -307,16 +307,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -591,6 +584,8 @@ V_x(\theta_x) = \lambda^{-1} \left( F_x(\theta_x) + s_x(\theta_x)V_{x+1}(\theta_
 <p><span class="math display">\[\begin{equation}
 V_x(\theta_x) = b_{x}(\theta_x) + \frac{s{x}(\theta_x)}{\lambda} V_{x+1}(\theta_{x}) 
 \end{equation}\]</span></p>
+<p>Let’s work through some examples.</p>
+<p>(advance to the evolution bits if time and student interest permits)</p>
 </div>
 
 

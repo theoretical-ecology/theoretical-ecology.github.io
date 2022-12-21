@@ -22,13 +22,11 @@ Chapter 15.
 
 The competition model we have introduced for two-species (not to be confused with the predation model) can be generalized to be $n$ species. We can start with the two-species case and build up to the $n$ species case. Recall for the two species case:
 
-\begin{equation}
-
 \[ \frac{dN_{1}}{dt} = r_{1}N_{1}\left(1-\frac{N_{1} + \alpha_{12}N_{2}}{K_{1}} \right) \]
 
 \[ \frac{dN_{2}}{dt} = r_{2}N_{2}\left(1-\frac{N_{2} + \alpha_{21}N_{1}}{K_{2}} \right) \]
 
-\end{equation}
+
 
 where $r_i$ are population growth rates, $\alpha_{ij}$ are competition coefficients, and $K_i$ are carrying capacities. To generalize to $n$ species, we will use vector and matrix notation, as we have introduced previously. 
 
@@ -46,9 +44,9 @@ In simplified notation, this would look like
 where we have rearranged some of the coefficients and defined some new bits. For instance, 
 
 \begin{itemize}
-$\mathbf{k}$: vector of carrying capacities 
-$\mathbf{A}$: interaction matrix defined with entries of $\r_i \alpha_{ij} / K_i$
-$\mathbf{N}$: vector of population sizes
+  \item $\mathbf{k}$: vector of carrying capacities 
+  \item $\mathbf{A}$: interaction matrix defined with entries of $r_i \alpha_{ij} / K_i$
+  \item $\mathbf{N}$: vector of population sizes
 \end{itemize}
 
 We can solve for the interior equlibrium of the system by setting the per capita growth rate of all species equal to 0, and solving. 
@@ -58,13 +56,9 @@ We can solve for the interior equlibrium of the system by setting the per capita
 
 This same generalized form of the Lotka-Volterra competition model for $n$ species can be applied to the Lotka-Volterra predator-prey model as well, allowing us to model trophic interactions with the same framework. Recall the Lotka-Volterra predator-prey model:
 
-\begin{equation}
-
-\[ \frac{dV}}{Vdt} = \frac{r}{K}(K-V)-aP \]
+\[ \frac{dV}{Vdt} = \frac{r}{K}(K-V)-aP \]
 
 \[ \frac{dP}{Pdt} = -d + kaV \]
-
-\end{equation}
 
 where a is the encounter rate with prey, d is per capita death of predator, and k is predator's conversion efficiency. 
 
@@ -95,16 +89,16 @@ You may be thinking that trying to generalize different models into the same str
 
 Can we use this generalized model to scale to entire food webs (those with more than 2 interacting levels like consumer-resource, such that consumer is also a resource, if that makes sense?). Here we have a top predator ($P$), a consumer ($C$), and a resource ($R$).
 
-\[ \frac{dP}}{Pdt} = k_P bC - d_P \]
-\[ \frac{dC}}{Cdt} = k_C aR - d_c - bP\]
-\[ \frac{dR}}{Rdt} = \frac{r}{K}(K-R)-aC  \]
+\[ \frac{dP}{Pdt} = k_P bC - d_P \]
+\[ \frac{dC}{Cdt} = k_C aR - d_c - bP\]
+\[ \frac{dR}{Rdt} = \frac{r}{K}(K-R)-aC  \]
 
 
 ((draw out graphical representation on the board; page 349 in Case))
 
 This can be represented in matrix form as well, which I do below but change the per capita change terms to $\hat{P}$, $\hat{C}$, and $\hat{R}$ for laziness. 
 
-\[ \begin{bmatrix} $\hat{R}$ \\ $\hat{C}$ \\ $\hat{P}$  \end{bmatrix} = 
+\[ \begin{bmatrix} \hat{R} \\ \hat{C} \\ \hat{P}  \end{bmatrix} = 
 \begin{bmatrix} r \\-d_C \\ -d_P \end{bmatrix} + 
 \begin{bmatrix}  \frac{-r}{K} & -a & 0 \\ k_c a & 0 & -b \\ 0 k_p b & 0 \end{bmatrix} 
 \begin{bmatrix} R \\ C \\ P \end{bmatrix}
@@ -249,14 +243,14 @@ Using some matrix notation, we can quickly calculate the entire $\mathbf{O}$ mat
 
 where $D$ is a matrix of 0 values except for the diagonal which corresponds to niche width values for each species $i$, and the $P$ matrix is what we defined above as the resource utilization matrix. $P^T$ refers to the transpose of $P$. 
 
-But this is a rather simplistic way of viewing overlap, as resources vary in their ability to reproduce, and use may not be a good measure of effect or functional overlap. MacArthur used the $\alpha_{ij}$ terms from the Lotka-Volterra model to try to estimate the overall effect of one species on another as something akin to the niche overlap equation, estimating species interactions $\alpha_{ij}$ as a function of resource growth rate $r_k$, the "resource amount" per unit of resource ($w_k$) and the consumption rates of species $i$ on resource $k$ ($a{ik$}). 
+But this is a rather simplistic way of viewing overlap, as resources vary in their ability to reproduce, and use may not be a good measure of effect or functional overlap. MacArthur used the $\alpha_{ij}$ terms from the Lotka-Volterra model to try to estimate the overall effect of one species on another as something akin to the niche overlap equation, estimating species interactions $\alpha_{ij}$ as a function of resource growth rate $r_k$, the "resource amount" per unit of resource ($w_k$) and the consumption rates of species $i$ on resource $k$ ($a_{ik}$). 
 
 > What are the benefits of this approach for defining interaction coefficients? 
 
 This same approach to estimating species interactions in consumer-resource systems could be transposed over how we're thinking about niche width. 
 
 
-\[ \hat{NW}_{ij} = \dfrac{1}{sum_{k=1}^n \frac{K_kw_k}{r_k}} a_{ik}^2  \]
+\[ \hat{NW}_{ij} = \dfrac{1}{\sum_{k=1}^n \frac{K_kw_k}{r_k}} a_{ik}^2  \]
 
 with the hat symbol in $\hat{NW}$ simply to distinguish it from our previous measure of niche width. 
 

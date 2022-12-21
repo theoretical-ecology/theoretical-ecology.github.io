@@ -108,9 +108,9 @@ Just as in the population models introduced earlier on, the frequency of allele 
 
 where $\hat{p}$ corresponds to the equilibrial value of $p$. This expression can be re-arranged to 
 
-\[ \hat{p} = \draf{w_{Aa} - w_{aa}}{(w_{Aa} - w_{aa}) + (w_{Aa} - 1)}  \]
+\[ \hat{p} = \dfrac{w_{Aa} - w_{aa}}{(w_{Aa} - w_{aa}) + (w_{Aa} - 1)}  \]
 
-when $\hat{p}$ is maintained at some level not 0 or 1 (i.e., there is an internal equilibrium), we say that a \textit{polymorphism} exists at this locus. So we have an equation for the internal equilibrium for $p$ (i.e., $\hat{p}). We may want to know if this equilibrium is stable or unstable, as we explored in the population models. But recall that $p$ is simply the allele frequency of $A$, meaning that the actual genotype may be $AA$ or $Aa$. The fitness differences between these genotypes is the driving force of the stability of $\hat{p}$, which Case explores graphically in Figure 9.3. Here, the top panel corresponds to situations where $p$ goes to 0 or 1, respectively, while the bottom panel shows situations when the heterozygote ($Aa$) has the highest growth rate (stable) or when the homozygote ($AA$) has the highest growth rate (unstable). Explore these equilibria values with a focus on how the initial values of $p$ affect the dynamics, and how population size is related to $p$ (Figure 9.4). 
+when $\hat{p}$ is maintained at some level not 0 or 1 (i.e., there is an internal equilibrium), we say that a \textit{polymorphism} exists at this locus. So we have an equation for the internal equilibrium for $p$ (i.e., $\hat{p}$). We may want to know if this equilibrium is stable or unstable, as we explored in the population models. But recall that $p$ is simply the allele frequency of $A$, meaning that the actual genotype may be $AA$ or $Aa$. The fitness differences between these genotypes is the driving force of the stability of $\hat{p}$, which Case explores graphically in Figure 9.3. Here, the top panel corresponds to situations where $p$ goes to 0 or 1, respectively, while the bottom panel shows situations when the heterozygote ($Aa$) has the highest growth rate (stable) or when the homozygote ($AA$) has the highest growth rate (unstable). Explore these equilibria values with a focus on how the initial values of $p$ affect the dynamics, and how population size is related to $p$ (Figure 9.4). 
 
 
 
