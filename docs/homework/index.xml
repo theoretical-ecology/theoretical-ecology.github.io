@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homeworks on Theoretical Ecology</title>
+    <link>/biol765/homework/</link>
+    <description>Recent content in Homeworks on Theoretical Ecology</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/biol765/homework/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Module 1 homework</title>
+      <link>/biol765/homework/module1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/biol765/homework/module1/</guid>
+      <description>Homework problems    Chapter Problems     1 1,4   2 2,5,7   3 See problems below   5 5,7,9   6 3     Insert problems for Ch 3 here
+ </description>
+    </item>
+    
+    <item>
+      <title>Module 2 homework</title>
+      <link>/biol765/homework/module2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/biol765/homework/module2/</guid>
+      <description>Homework problems    Chapter Problems     7 2,4,9   8 4   9 3,4    </description>
+    </item>
+    
+    <item>
+      <title>Module 3 homework</title>
+      <link>/biol765/homework/module3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/biol765/homework/module3/</guid>
+      <description>Homework problems    Chapter Problems     10 2,3   11 5   12 3,5   14 2,6   15 3,4    </description>
+    </item>
+    
+    <item>
+      <title>Module 4 homework</title>
+      <link>/biol765/homework/module4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/biol765/homework/module4/</guid>
+      <description>Homework problems Need to make up my own questions for this one.
+metapopulations and disease problems.</description>
+    </item>
+    
+  </channel>
+</rss>

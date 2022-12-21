@@ -298,8 +298,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -307,16 +307,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -365,7 +358,20 @@ pre code {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#reproduction-and-aging">Reproduction and Aging</a></li>
+<li><a href="#reproductive-value-and-optimal-reproductive-effort">Reproductive value and optimal reproductive effort</a></li>
+</ul>
+</div>
 
+<style type="text/css">
+.main-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 <p>As we saw previously, considering age-structure in population dynamic models is important to understanding how populations will fluctuate. In the last chapter, we explored how age may tradeoff with survival to influence reproduction and life history. In this chapter, we’ll be exploring the evolutionary theory of aging.</p>
 <div id="reproduction-and-aging" class="section level3">
 <h3>Reproduction and Aging</h3>
@@ -458,17 +464,17 @@ legend(&#39;topleft&#39;, pch=16, col=colz[1:4],
 <p>Early reproduction should be rewarded, as survivorship needs to be considered in the reproductive value of an individual. Fisher came up with a formulation of reproductive value which considers the influence of survivorship. The argument underlying it is that the future reproductive potential of individuals age <span class="math inline">\(x\)</span> is equivalent to the number of female offspring produced by mothers that are age <span class="math inline">\(x\)</span>  divided by the number of mothers that are age <span class="math inline">\(x\)</span> this year, assuming the population is at the stable age structure distribution. We’ll explore what this means mathematically now, separating the numerator from the denominator.</p>
 <p>: the number of female offspring produced this year by mothers age x or older</p>
 <p><span class="math display">\[\begin{equation}
-\sum_{t=x}b_{t}c_{t} N(T)
+\sum_{t=x} b_{t} c_{t} N(T)
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(c_{t}\)</span> is the proportion of individuals in class <span class="math inline">\(t\)</span> (age <span class="math inline">\(t\)</span>) compared to other age classes. This can be simplified (or rather expanded) to treat <span class="math inline">\(c_{t}\)</span> as the number of individuals in age class <span class="math inline">\(t\)</span> divided by the total of all ages (<span class="math inline">\(M\)</span>).</p>
 <p><span class="math display">\[\begin{equation}
-\sum_{t=x}b_{t}\left( \frac{l_{t}\lambda_{t}}{M} \right) N(T)
+\sum_{t=x} b_{t} \left( \frac{l_{t} \lambda_{t}}{M} \right) N(T)
 \end{equation}\]</span></p>
 <p>: the number of mothers of age <span class="math inline">\(x\)</span> this year.</p>
 <p>Earlier, we learned that the <span class="math inline">\(c_{t}\)</span> is a function of the overall population growth rate scaled by survival, taking the formulation</p>
 <p><span class="math display">\[ c_{t} = \lambda^{-t}l_{t} \]</span></p>
 <p>Given the stable age distribution, this means that the number of mothers that are age <span class="math inline">\(t\)</span> this year is</p>
-<p>[  N(T) ]</p>
+<p><span class="math display">\[ \frac{l_{t}\lambda_{t}}{M} N(T) \]</span></p>
 <p>Combining these two components to get at <span class="math inline">\(V_x\)</span>, we get</p>
 <p><span class="math display">\[\begin{equation}
 V_x = \frac{\lambda_x}{l_x} \sum_t=x \lambda^{-t}l_{t} b_{t}
@@ -478,13 +484,9 @@ V_x = \frac{\lambda_x}{l_x} \sum_t=x \lambda^{-t}l_{t} b_{t}
 <p>So now we have a way to estimate reproductive value <span class="math inline">\(V_x\)</span>, which considers the total reproductive potential of mothers in age class <span class="math inline">\(x\)</span> to future offspring. That is, <span class="math inline">\(V_x\)</span> is fundamentally composed of </p>
 <p>Such that <span class="math inline">\(V_x\)</span>, the reproductive value, for age class <span class="math inline">\(x\)</span> is</p>
 <p><span class="math display">\[\begin{equation}
-
 V_x = b_x + V_{x+1}(\frac{s_x}{\lambda})
-
 \end{equation}\]</span></p>
-<blockquote>
-<p>Consdier the example life table below. Calculate <span class="math inline">\(V_x\)</span> for all age groups.</p>
-</blockquote>
+<p>Consider the example life table below. Calculate <span class="math inline">\(V_x\)</span> for all age groups.</p>
 <table>
 <thead>
 <tr class="header">
@@ -568,15 +570,11 @@ V_x = b_x + V_{x+1}(\frac{s_x}{\lambda})
 \end{equation}\]</span></p>
 <p>Then we do some partial derivatives. We will not cover this (unless folks really want to), but will instead skip to the step where we incorporate reproductive value <span class="math inline">\(V_x\)</span> terms into the determination of optimal reproductive effort <span class="math inline">\(\mathbf{\theta}\)</span>. This is done through substitution of the second term in the above equation for something which considers reproductive value <span class="math inline">\(V_x\)</span>, and then differentiating with respect to <span class="math inline">\(\theta_x\)</span>. Let’s explore <em>why</em> this matters a bit. We start by looking at the previous equation for reproductive value.</p>
 <p><span class="math display">\[\begin{equation}
-
 V_x = b_x + V_{x+1}(\frac{s_x}{\lambda})
-
 \end{equation}\]</span></p>
 <p>Thinking about the structure of this creates an understanding of a tradeoff between birth rate at age <span class="math inline">\(x\)</span> and the potential for future reproduction in later age classes. We can re-write the above equation incorporating fecundity and population growth rate <span class="math inline">\(\lambda\)</span></p>
 <p><span class="math display">\[\begin{equation}
-
 V_x = \lambda^{-1} (F_x + s_x V_{x+1})
-
 \end{equation}\]</span></p>
 <p>realizing that this form still has the same tradeoff. The reproductive value of age class <span class="math inline">\(x\)</span> here depends on the population growth rate and fecuncdity of age class <span class="math inline">\(x\)</span>, modified by the potential for reproduction in later ages (<span class="math inline">\(s_x V_{x+1}\)</span>). Optimal reproductive effort needs to consider the reproductive value at age <span class="math inline">\(x\)</span> and the future potential reproductive value of individuals older than <span class="math inline">\(x\)</span>. That is, we want to maximize <span class="math inline">\(V_x(\theta_x)\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
@@ -584,8 +582,10 @@ V_x(\theta_x) = \lambda^{-1} \left( F_x(\theta_x) + s_x(\theta_x)V_{x+1}(\theta_
 \end{equation}\]</span></p>
 <p>with age-specific birth rate data, we could re-write this equation as</p>
 <p><span class="math display">\[\begin{equation}
-V_x(\theta_x) = \b_x(\theta_x) +  \frac{s_x(\theta_x)}{\lambda} V_{x+1}(\theta_x) 
+V_x(\theta_x) = b_{x}(\theta_x) + \frac{s{x}(\theta_x)}{\lambda} V_{x+1}(\theta_{x}) 
 \end{equation}\]</span></p>
+<p>Let’s work through some examples.</p>
+<p>(advance to the evolution bits if time and student interest permits)</p>
 </div>
 
 

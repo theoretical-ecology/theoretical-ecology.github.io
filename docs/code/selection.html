@@ -298,8 +298,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -307,16 +307,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -365,15 +358,131 @@ pre code {
 
 </div>
 
-
-<div id="reading" class="section level3">
-<h3>Reading</h3>
+<div id="TOC">
 <ul>
-<li>Chapter</li>
+<li><a href="#evolutionary-ecology">Evolutionary ecology</a>
+<ul>
+<li><a href="#the-case-of-no-frequency-or-density-dependence">The case of no frequency or density dependence</a></li>
+<li><a href="#how-does-natural-selection-affect-the-genetic-composition-of-the-natural-population">How does natural selection affect the genetic composition of the natural population?</a></li>
+<li><a href="#density-dependent-natural-selection">Density-dependent natural selection</a></li>
+<li><a href="#is-an-r-k-trade-off-biological-reasonable">Is an R-K trade-off biological reasonable?</a></li>
+<li><a href="#density-and-frequency-dependent-competition">Density and frequency dependent competition</a></li>
+<li><a href="#natural-selection-adaptedness-and-population-density">Natural selection, adaptedness, and population density</a></li>
+</ul></li>
 </ul>
 </div>
-<div id="notes" class="section level3">
-<h3>Notes</h3>
+
+<style type="text/css">
+.main-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div id="evolutionary-ecology" class="section level2">
+<h2>Evolutionary ecology</h2>
+<p>Up until this point, we have not consider the role of evolution. That is, we have optimized reproductive output given fixed reproductive value of different classes and fixed parameters of birth rate, fecundity, and survival. In this chapter, we’ll allow demographic rates to evolve in accordance to selective pressures. By incorporating evolution, we will introduce different terminology and, in some sense, different goals. The goal of population ecology is largely to model changes in population size over time. The goal of evolutionary ecology does not necessarily care about population size, but about allele frequencies. These two goals can be merged by considering selective forces on population growth rates. Where population ecology deals with</p>
+<p><span class="math display">\[ N_{t+1} = f(p_t, N_t) \]</span></p>
+<p>where <span class="math inline">\(p_t\)</span> is gene frequency at time <span class="math inline">\(t\)</span>, evolutionary ecology deals more with how changes in <span class="math inline">\(p_t\)</span> are a function of population size</p>
+<p>[ p_{t+1} = g(p_t, N_t)]</p>
+<p>If we were able to model <span class="math inline">\(f()\)</span> and <span class="math inline">\(g()\)</span>, we would be able not only to predict population dynamics, but also changes in allele frequencies over time, and how both vary as a function of population density.</p>
+<p> is the underlying ‘currency’ of natural selection, in that natural selection will favor certain genotypes (not individuals) and this selection will have an underlying basis in the contribution of those genotypes to future generations (linking population dynamics to genotypes and selective pressures). We might even not include the role of genotypic variation directly into our population dynamic models as we have covered so far. That is, genotypes may vary in birth rate or survival (something that we would track in our population models), but also could vary in something like access to mates, which may tied to birth rate or reproduction probability (i.e., we haven’t modeled this explicitly, but some of this variation may be subsumed in other demographic model paramters).</p>
+<p>What is perhaps interesting (or frustrating) about fitness is that we do not care about absolute fitness, but only  fitness. That is, a certain genotype may be favorable in one population, but that same genotype may no be favored in another population. To put this into tangible terms, let us consider a simple case of two alleles (a and A) in a diploid outbreeding sexual species. This creates the possibilities of offspring to be aa, Aa, or AA. Each one of these potential genotypes has a fitness value <span class="math inline">\(\lambda_g\)</span>, where g can take forms of aa, Aa, or AA. This absolute fitness <span class="math inline">\(\lambda_g\)</span> can take a variety of different forms, dependent on the allele frequency <span class="math inline">\(g\)</span> and population size <span class="math inline">\(N\)</span>.</p>
+<p>((go over Figure 9.1 in terms of how absolute fitness of a genotype may vary as a function of population density and gene frequency))</p>
+<div id="the-case-of-no-frequency-or-density-dependence" class="section level3">
+<h3>The case of no frequency or density dependence</h3>
+<p>This corresponds to the situation in Figure 9.1a. We will start by setting up this simple model, building on it to develop more complex scenarios. That is, we haven’t tracked allele frequencies to this point, but now we have to. Let’s consider a semelparous life hisotry with discrete nonoverlapping generations. The species has a sexual diploid life cycle, and adults die after they reproduce. Selection can broken into many different components: mating success, birth rates, gamete survival, and so on. The point of the underlying model is to reflect reality without being overly paramterized or failing to capture the system. One thing that we <em>need</em> to incoporate that should be immediately clear is that we need to consider variation in survival or birth rate as a function of genotype. Doing this creates the variation in genotype growth rate <span class="math inline">\(\lambda_g\)</span> that is the basis for selection. For instance, we can consider the growth rate of the AA genotype as</p>
+<p><span class="math display">\[ \lambda_{AA} = s_{AA}b_{AA} \]</span></p>
+<p>where genotype <span class="math inline">\(AA\)</span> has some genotype-specific survival rate (<span class="math inline">\(s_{AA}\)</span>) and birth rate (<span class="math inline">\(b_{AA}\)</span>). What we care about is the frequency of genotypes in the population, so we will track these in our simple example in the following way, where we consider the frequency of gene A to be <span class="math inline">\(p\)</span> and the frequency of a to be 1-<span class="math inline">\(p\)</span>, which we will call <span class="math inline">\(q\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Genotype</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AA</td>
+<td><span class="math inline">\(p^{2}\)</span></td>
+</tr>
+<tr class="even">
+<td>Aa</td>
+<td><span class="math inline">\(pq\)</span></td>
+</tr>
+<tr class="odd">
+<td>aA</td>
+<td><span class="math inline">\(qp\)</span></td>
+</tr>
+<tr class="even">
+<td>aa</td>
+<td><span class="math inline">\(q^{2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>It is important to note that the above assumes completely random mating (i.e., the genotype of an individual does not lead to assortative mating, so individuals can’t pick mates based on genotypes). This also requires the population to be infinitely large. The above table corresponds to what is normally referred to as a the . It makes some assumptions, some of which we’ll address below and some of which we’ll cover before we leave this section.</p>
+<p>We can downscale the number of individuals that we might expect to be of differnt genotypes by simply multiplying the allele frequencies by <span class="math inline">\(N_t\)</span>, so at time <span class="math inline">\(t\)</span>, the frequency of genotypes would be AA (<span class="math inline">\(p_{t}^{2}N_t\)</span>), Aa (<span class="math inline">\(2p_{t}q_{t}N_t\)</span>), and aa (<span class="math inline">\(q_{t}^{2}N_t\)</span>). How do we know the frequency at time <span class="math inline">\(t+1\)</span>? We might be tempted to simply multiply the population of each genotype by the genotype-specific growth rate (e.g., <span class="math inline">\(\lambda_{AA}\)</span>). Why is this wrong?</p>
+<p>We need to consider the individual alleles separately, as <span class="math inline">\(A\)</span> can form <span class="math inline">\(Aa\)</span> or <span class="math inline">\(AA\)</span>. So let us consider the situation where we simply want to model the presence of allele <span class="math inline">\(A\)</span>. Then the frequency of <span class="math inline">\(A\)</span> alleles is the number of <span class="math inline">\(A\)</span> alleles after selection divided by the number of all alleles after selection. In mathematical terms, this would correspond to</p>
+<p><span class="math display">\[ p_{t,s} = \dfrac{2p_{t}^{2} N_{t} \lambda_{AA} + 2p_{t}q_{t}N_{t}\lambda_{Aa}}{2p_{t}^{2}N_{t}\lambda_{AA} + 4p_{t}q_{t}N_{t}\lambda_{Aa} + 2q_{t}^{2}N_{t}\lambda_{aa}}\]</span></p>
+<p>or the simplied form</p>
+<p><span class="math display">\[ p_{t,s} = \dfrac{p_{t}^{2}  \lambda_{AA} + p_{t}q_{t}\lambda_{Aa}}{p_{t}^{2}\lambda_{AA} + 2p_{t}q_{t}\lambda_{Aa} + q_{t}^{2}\lambda_{aa}}\]</span></p>
+<p>This simplification has removed <span class="math inline">\(N_t\)</span> from the equation. Also note that the denominator of this equation is the average absolute fitness across all the genotypes, which we can refer to simply as <span class="math inline">\(\bar{\lambda_{t}}\)</span>, where the overline indicates the mean value and the subscript <span class="math inline">\(t\)</span> makes it clear that this value will change as allele frequencies change. We can use the above equations to estimate allele frequency of a particular allele. For instance, if we wanted to know the frequency of <span class="math inline">\(A\)</span> at time <span class="math inline">\(t+1\)</span>, it would be</p>
+<p><span class="math display">\[\begin{equation}
+p_{t+1} =  p_{t,s} = \dfrac{p_{t}^{2}  \lambda_{AA} + p_{t}q_{t}\lambda_{Aa}}{\bar{\lambda_{t}}} 
+\label{eq:pt}
+\end{equation}\]</span></p>
+<p>under the assumption of random mating, making the absolute number of <span class="math inline">\(AA\)</span> individuals in the population at time <span class="math inline">\(t\)</span>,</p>
+<p>[ N_{AA, t+1} = p_{t,s}^{2} N_{t}]</p>
+<p>This is of note because our earlier guess made without considering the absolute abundance of alleles was <span class="math inline">\(p_{t}^{2} N_{t}\lambda_{AA}\)</span> (pay attention to how we defined <span class="math inline">\(p_{t,s}\)</span> relative to <span class="math inline">\(p_{t}\)</span>). To revisit the Hardy-Weinberg principle, the above assumptions made above include an infinitely large population size, random mating, and no selective advantage to having a certain genotype. If we violate this, what happens?</p>
+</div>
+<div id="how-does-natural-selection-affect-the-genetic-composition-of-the-natural-population" class="section level3">
+<h3>How does natural selection affect the genetic composition of the natural population?</h3>
+<p>The above section has allowed us to track population size change and allele frequency change over time, but has assumed that there is no selective advantage of indivduals having one genotype (e.g., <span class="math inline">\(AA\)</span>) over another (e.g., <span class="math inline">\(aa\)</span>). Also, in the last section, we defined the overall fitness of a genotype as a constant (e.g., <span class="math inline">\(\lambda_{AA}\)</span>). Most of the time though, we may want this value to change as a function of population size, or at a minimum, be compared in terms of . For instance, we could use the <span class="math inline">\(AA\)</span> genotype as the basis for comparison.</p>
+<p><span class="math display">\[ w_{AA} = \frac{\lambda_{AA}}{\lambda_{AA}} = 1 \]</span> <span class="math display">\[ w_{Aa} = \frac{\lambda_{Aa}}{\lambda_{AA}}  \]</span> <span class="math display">\[ w_{aa} = \frac{\lambda_{aa}}{\lambda_{AA}} \]</span></p>
+<p>These relative fitness terms must be greater than 0, and can be substituted into the equation for <span class="math inline">\(p_{t,s}\)</span> (equation ), replacing <span class="math inline">\(\lambda_g\)</span> terms with relative fitness terms (e.g., <span class="math inline">\(w_{AA}\lambda_{AA}\)</span>).</p>
+<p><span class="math display">\[\begin{equation}
+p_{t+1} = \dfrac{p_t (p_t + q_t w_{Aa})}{p_{t}^{2} + 2p_t q_t w_{Aa} + q_{t}^{2} w_{aa}}
+\label{eq:ptw}
+\end{equation}\]</span></p>
+<p>Just as in the population models introduced earlier on, the frequency of allele <span class="math inline">\(p\)</span> has equilibrium values. These equilibrium values would occur at points where <span class="math inline">\(p_t\)</span> = <span class="math inline">\(p_{t+1}\)</span>. There are at least two trivial instances of equilibria given the above equation. That is, when <span class="math inline">\(p_t\)</span> = 0, and when <span class="math inline">\(p_t\)</span> = 1, corresponding to instances where the dominant allele is lost or becomes fixed, respectively. But there also may be an  where <span class="math inline">\(p_t\)</span> is still bound between 0 and 1, but is some value other than 0 or 1. We can solve for this value by dividing both sides of equation , assuming that <span class="math inline">\(\frac{p_{t+1}}{p_t} = 1\)</span>.</p>
+<p><span class="math display">\[  1 = \dfrac{\hat{p} + \hat{q}w_{Aa}}{\hat{p^{2}} + 2\hat{p}\hat{q}w_{Aa} + \hat{q^{2}}w_{aa}} \]</span></p>
+<p>where <span class="math inline">\(\hat{p}\)</span> corresponds to the equilibrial value of <span class="math inline">\(p\)</span>. This expression can be re-arranged to</p>
+<p><span class="math display">\[ \hat{p} = \dfrac{w_{Aa} - w_{aa}}{(w_{Aa} - w_{aa}) + (w_{Aa} - 1)}  \]</span></p>
+<p>when <span class="math inline">\(\hat{p}\)</span> is maintained at some level not 0 or 1 (i.e., there is an internal equilibrium), we say that a  exists at this locus. So we have an equation for the internal equilibrium for <span class="math inline">\(p\)</span> (i.e., <span class="math inline">\(\hat{p}\)</span>). We may want to know if this equilibrium is stable or unstable, as we explored in the population models. But recall that <span class="math inline">\(p\)</span> is simply the allele frequency of <span class="math inline">\(A\)</span>, meaning that the actual genotype may be <span class="math inline">\(AA\)</span> or <span class="math inline">\(Aa\)</span>. The fitness differences between these genotypes is the driving force of the stability of <span class="math inline">\(\hat{p}\)</span>, which Case explores graphically in Figure 9.3. Here, the top panel corresponds to situations where <span class="math inline">\(p\)</span> goes to 0 or 1, respectively, while the bottom panel shows situations when the heterozygote (<span class="math inline">\(Aa\)</span>) has the highest growth rate (stable) or when the homozygote (<span class="math inline">\(AA\)</span>) has the highest growth rate (unstable). Explore these equilibria values with a focus on how the initial values of <span class="math inline">\(p\)</span> affect the dynamics, and how population size is related to <span class="math inline">\(p\)</span> (Figure 9.4).</p>
+</div>
+<div id="density-dependent-natural-selection" class="section level3">
+<h3>Density-dependent natural selection</h3>
+<p>Population size <span class="math inline">\(N_t\)</span> may complicate the dynamics of changes in allele frequencies if selection (or the relative fitness values <span class="math inline">\(w_{AA}\)</span>) are a function of population size (density-dependent natural selection). Let’s explore how this works, using the logistic model as the population dynamic framework. We previously defined a <span class="math inline">\(\lambda_g\)</span> value – <span class="math inline">\(g\)</span> corresponds to <span class="math inline">\(AA\)</span>, <span class="math inline">\(Aa\)</span>, and <span class="math inline">\(aa\)</span> – where all genotypes had constant growth rates, meaning that</p>
+<p><span class="math display">\[ N_{t+1} = N_t \lambda_g \]</span></p>
+<p>To incorporate this into the logistic model, we take the classic logistic model</p>
+<p><span class="math display">\[ N_{t+1} = N_{t} + (rN_{t}(1 - \frac{N_t}{K})) \]</span></p>
+<p>and make it specific for each genotype (<span class="math inline">\(g\)</span>), and make</p>
+<p><span class="math display">\[ \lambda_g (N_{t+1}) = 1 + R_g (1 - \frac{N_t}{K_g}) \]</span></p>
+<p>Given that <span class="math inline">\(N_t\)</span> is changing at each timestep, the above equation would also suggest that <span class="math inline">\(\lambda_g\)</span> changes as well. Simulating this model, we can start to explore graphically how density-dependent selection would work. For instance, consider the situation where all <span class="math inline">\(R_g\)</span> values are equal, but the carrying capacity values <span class="math inline">\(K_g\)</span> change (Figure 9.5). Looking at a more complicated example, where we assume that <span class="math inline">\(R_g\)</span> and <span class="math inline">\(K_g\)</span> are inversely related (Figure 9.6), we see how changes in population size change the landscape of <span class="math inline">\(p\)</span>. This creates a situation where harvesting can change the allele frequencies even if harvesting is random. That is, if we reduce population size randomly, we may enter regions of that parameter space in Figure 9.5 where one genotype is favored over the other.</p>
+<p>Harvesting in the case above is a general case of imposing some mortality cost to shift the allele frequencies. The more complicated example is if harvesting depends on the density of the species (e.g., the number removed depends on the number present). What if we were to explore a simpler example, where individuals are removed from the population as a cost of density-independent mortality (e.g., every generation 10% of the population dies).</p>
+<p>We’ll start by considering two clones (to not get confused with the genotype bits from above); clone <span class="math inline">\(1\)</span> and clone <span class="math inline">\(2\)</span>. We will assume that both clones respond to density in the same way, so we only need to consider overall density (<span class="math inline">\(N_t\)</span>). Solving for the logistic model equilibrium for clone 1, we have</p>
+<p><span class="math display">\[ R_1 \left( 1 - \dfrac{N_t}{K_1} \right) - f_1(t) = 0 \]</span></p>
+<p>where <span class="math inline">\(f_1\)</span> is the density-independent mortality term, which only depends on time <span class="math inline">\(t\)</span>. Solving this equation for <span class="math inline">\(N_t\)</span> leads to</p>
+<p><span class="math display">\[  N_t = K_1 \left(  1- \dfrac{f_1(t)}{R_1} \right) \]</span></p>
+<p>Since we set up clone 2 with the same population dynamics (except for clone 2 specific growth rate, carrying capcacity, and density-independent mortality terms), the above equation is the same for clone 2 with some subscripts changed from 1 to 2.</p>
+<p><span class="math inline">\(f_x(t)\)</span> (where <span class="math inline">\(x\)</span> is either clone 1 or clone 2) varies over time. If we were take the average of the function, we could argue that the clone with the highest growth rate will dominate. In the case where <span class="math inline">\(f(t)\)</span> is 0, the clone with the largest carrying capacity is predicted to dominate. As <span class="math inline">\(f(t)\)</span> becomes larger, the clone-specific growth rate becomes much more important to determining the resulting competitive structure. Extending this to a diploid sexual-reproducing species, we can simulate the model given different <span class="math inline">\(R_x\)</span> and <span class="math inline">\(K_x\)</span> values for each genotype (<span class="math inline">\(AA\)</span>, <span class="math inline">\(Aa\)</span>, and <span class="math inline">\(aa\)</span>). This corresponds to Figure 9.9. Note from these simulations that heterozygote (<span class="math inline">\(Aa\)</span>) is present in all situations, and is predicted to have highest fitness at intermediate levels of density-independent mortality (<span class="math inline">\(f(t)\)</span>).</p>
+<p>From these simulations, a conceptual view of the balance between R and K starts to emerge as a function of environmental-induced (density-independent) mortality. That is, in more stable environments, where <span class="math inline">\(f(t)\)</span> is low, K will determine the dominant species/clone/etc., while in more disturbed environments with high <span class="math inline">\(f(t)\)</span>, a higher <span class="math inline">\(R\)</span> is favored (corresponds to Grime’s conceptualization in Figure 9.10).</p>
+</div>
+<div id="is-an-r-k-trade-off-biological-reasonable" class="section level3">
+<h3>Is an R-K trade-off biological reasonable?</h3>
+<p>Do R and K necessarily need to trade off, or can species be good at both? Through model simulations (Figure 9.11) and experimental evidence in protozoan communities subjected to selection and then raised at different densities (Luckinbill 1979), we see little evidence for an R-K inverse relationship (and indeed find positive covariance in simulations). Much of the current focus now has been on age-specific mortality and fecundity being the driver of life history evolution, as we touched on (without evolution) when going over age-structured population dynamics.</p>
+</div>
+<div id="density-and-frequency-dependent-competition" class="section level3">
+<h3>Density and frequency dependent competition</h3>
+<p>Above we have considered the effect of the overall <span class="math inline">\(N_t\)</span> on the growth rate of each clone, assuming that clones have interchangable effects on one another. This is not really always the case, as competition within a species ( competition) tends to be stronger than competition between species ( competition). This balance tends to be stabilizing (but Google “Chesson coexistence” if you are ready to go down a large rabbit hole on this). We can model the influence of density-dependent competition by weighting each genotype by some value <span class="math inline">\(\omega_g\)</span>, where the sum of all <span class="math inline">\(\omega_g\)</span> values is 1. This would allow us to create situations where the relative effects of one species on the dynamics of the other are dependent on the densities of competing species (or genotypes, as is this case).</p>
+<p><span class="math display">\[ \lambda_{AA}(N_t, p_t) = 1 + R_{AA} \left(1- \dfrac{Nt (\omega_{AA}p_{t}^{2} + \omega_{Aa}2p_t q_t + \omega_{aa}q_{t}^{2})}{K_{AA}} \right) \]</span></p>
+<p>We see how these dynamics can play out in Figure 9.12, where intraspecific limitation results in a stable polymorphic equilibrium. But this may be rare, especially if we consider the variety of shapes that density-dependent effects can take. That is, even if the <span class="math inline">\(\omega_g\)</span> values stay constant, the growth rate of the genotype <span class="math inline">\(\lambda_g\)</span> is a function of population size and allele frequency. The math of this is a bit beyond the scope of what we can cover now, but a graphical representation of this fitness landscape and the role of density-dependence is in Figure 9.13. This also serves to highlight how the order of species arrival, or how the loss of a species, can result in subsequent community re-structuring.</p>
+</div>
+<div id="natural-selection-adaptedness-and-population-density" class="section level3">
+<h3>Natural selection, adaptedness, and population density</h3>
+<p>Evolution is slippery. Just as differences in relative allele frequencies or density-dependent competition/selection can change population dynamics and evoltion, so can the  of species/strains/clones, where  is the ability of a genotype to survive and reproduce in a given environment. That is, <span class="math inline">\(R\)</span> and <span class="math inline">\(K\)</span> may be dependent on the environment. We will go into this in more detail in future chapters, but an example is given in the book of flour beetles (). This species is cannibalistic on developing eggs, larvae, and pupae. If this cannabilistic tendency has a genetic basis, the increase in the cannibalistic genotype could lead to a decrease in overall population density, providing an instance where selection does not necessarily increase population sizes (sometimes fitness does not translate into high population density).</p>
+<!-- write up some code examples if students seem to get it (or if you have time in lecture) -->
+</div>
 </div>
 
 
