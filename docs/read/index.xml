@@ -2,52 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reads on Theoretical Ecology</title>
-    <link>/biol765/read/</link>
+    <link>/read/</link>
     <description>Recent content in Reads on Theoretical Ecology</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/biol765/read/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    
+	<atom:link href="/read/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Age structure</title>
-      <link>/biol765/read/agestructure/</link>
+      <link>/read/agestructure/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/agestructure/</guid>
+      <guid>/read/agestructure/</guid>
       <description>Reading  Chapter 3. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     
     <item>
       <title>Aging</title>
-      <link>/biol765/read/aging/</link>
+      <link>/read/aging/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/aging/</guid>
+      <guid>/read/aging/</guid>
       <description>Reading  Chapter 8. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     
     <item>
       <title>Competition and predation</title>
-      <link>/biol765/read/competition/</link>
+      <link>/read/competition/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/competition/</guid>
+      <guid>/read/competition/</guid>
       <description>Reading  Chapter 12 and 14. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     
     <item>
       <title>Constrained growth</title>
-      <link>/biol765/read/constrainedgrowth/</link>
+      <link>/read/constrainedgrowth/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/constrainedgrowth/</guid>
+      <guid>/read/constrainedgrowth/</guid>
       <description>Reading  Chapters 5 &amp;amp; 6. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     
     <item>
       <title>Disease</title>
-      <link>/biol765/read/disease/</link>
+      <link>/read/disease/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/disease/</guid>
+      <guid>/read/disease/</guid>
       <description>Reading   Anderson, R. M. and May, R. M., Population biology of infectious diseases I Nature 280 (5721), 361 (1979). pdf available here
   Kilpatrick, A. M. &amp;amp; Altizer, S. (2010) Disease Ecology. Nature Education Knowledge 3(10):55
 link to paper
@@ -56,10 +60,10 @@ link to paper
     
     <item>
       <title>Introduction</title>
-      <link>/biol765/read/setup/</link>
+      <link>/read/setup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/setup/</guid>
+      <guid>/read/setup/</guid>
       <description>Introductions Go around and introduce yourselves, what year you are, and what made you decide to take the course (could take many forms, including what you want to learn, what you&amp;rsquo;re interested in, etc. etc.)
 Syllabus Go over syllabus
 What are we doing in this class? Theory provides us a lens to generalize.
@@ -70,19 +74,19 @@ What this course is not A programming course.</description>
     
     <item>
       <title>Life history</title>
-      <link>/biol765/read/lifehistory/</link>
+      <link>/read/lifehistory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/lifehistory/</guid>
+      <guid>/read/lifehistory/</guid>
       <description>Reading  Chapter 7. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     
     <item>
       <title>Macroecology</title>
-      <link>/biol765/read/macroecology/</link>
+      <link>/read/macroecology/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/macroecology/</guid>
+      <guid>/read/macroecology/</guid>
       <description>Reading   Brian J McGill. 2018. The what, how and why of doing macroecology. Global Ecology and Biogeography. pdf available here
   Brian McGill and Cathy Collins. 2003. A unified theory for macroecology based on spatial patterns of abundance. Evolutionary Ecology Research. pdf available here
   </description>
@@ -90,46 +94,46 @@ What this course is not A programming course.</description>
     
     <item>
       <title>metapopulations</title>
-      <link>/biol765/read/metapopulations/</link>
+      <link>/read/metapopulations/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/metapopulations/</guid>
+      <guid>/read/metapopulations/</guid>
       <description>Reading  Chapter 16. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     
     <item>
       <title>Multi-species communities</title>
-      <link>/biol765/read/communities/</link>
+      <link>/read/communities/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/communities/</guid>
+      <guid>/read/communities/</guid>
       <description>Reading  Chapter 15. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     
     <item>
       <title>Population growth</title>
-      <link>/biol765/read/popgrowth/</link>
+      <link>/read/popgrowth/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/popgrowth/</guid>
+      <guid>/read/popgrowth/</guid>
       <description>Reading  Chapters 1 &amp;amp; 2. Illustrated Guide to Theoretical Ecology.  From chapter 2, we will focus on individual variation and temporal variation instead of the spatial bits. Still worth reading the first part of chapter 2 on spatial variation, but for simplicity (and to not introduce space yet) we will go into more detail on pages 30 - 43 of chapter 2.</description>
     </item>
     
     <item>
       <title>Predation</title>
-      <link>/biol765/read/predation/</link>
+      <link>/read/predation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/predation/</guid>
+      <guid>/read/predation/</guid>
       <description>Reading  Chapters 10 &amp;amp; 11. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     
     <item>
       <title>Selection</title>
-      <link>/biol765/read/selection/</link>
+      <link>/read/selection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/biol765/read/selection/</guid>
+      <guid>/read/selection/</guid>
       <description>Reading  Chapter 9. Illustrated Guide to Theoretical Ecology.  </description>
     </item>
     

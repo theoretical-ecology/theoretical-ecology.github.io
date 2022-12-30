@@ -1,58 +1,110 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
-    <loc>/biol765/about/</loc>
+    <loc>/about/</loc>
     <priority>0</priority>
-  </url><url>
-    <loc>/biol765/policies/</loc>
-  </url><url>
-    <loc>/biol765/syllabus/</loc>
-  </url><url>
-    <loc>/biol765/read/agestructure/</loc>
-  </url><url>
-    <loc>/biol765/read/aging/</loc>
-  </url><url>
-    <loc>/biol765/archives/</loc>
-  </url><url>
-    <loc>/biol765/categories/</loc>
-  </url><url>
-    <loc>/biol765/read/competition/</loc>
-  </url><url>
-    <loc>/biol765/read/constrainedgrowth/</loc>
-  </url><url>
-    <loc>/biol765/read/disease/</loc>
-  </url><url>
-    <loc>/biol765/homework/</loc>
-  </url><url>
-    <loc>/biol765/read/setup/</loc>
-  </url><url>
-    <loc>/biol765/read/lifehistory/</loc>
-  </url><url>
-    <loc>/biol765/read/macroecology/</loc>
-  </url><url>
-    <loc>/biol765/read/metapopulations/</loc>
-  </url><url>
-    <loc>/biol765/homework/module1/</loc>
-  </url><url>
-    <loc>/biol765/homework/module2/</loc>
-  </url><url>
-    <loc>/biol765/homework/module3/</loc>
-  </url><url>
-    <loc>/biol765/homework/module4/</loc>
-  </url><url>
-    <loc>/biol765/read/communities/</loc>
-  </url><url>
-    <loc>/biol765/read/popgrowth/</loc>
-  </url><url>
-    <loc>/biol765/read/predation/</loc>
-  </url><url>
-    <loc>/biol765/read/</loc>
-  </url><url>
-    <loc>/biol765/read/selection/</loc>
-  </url><url>
-    <loc>/biol765/tags/</loc>
-  </url><url>
-    <loc>/biol765/</loc>
   </url>
+  
+  <url>
+    <loc>/policies/</loc>
+  </url>
+  
+  <url>
+    <loc>/syllabus/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/agestructure/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/aging/</loc>
+  </url>
+  
+  <url>
+    <loc>/archives/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/competition/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/constrainedgrowth/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/disease/</loc>
+  </url>
+  
+  <url>
+    <loc>/homework/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/lifehistory/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/macroecology/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/metapopulations/</loc>
+  </url>
+  
+  <url>
+    <loc>/homework/module1/</loc>
+  </url>
+  
+  <url>
+    <loc>/homework/module2/</loc>
+  </url>
+  
+  <url>
+    <loc>/homework/module3/</loc>
+  </url>
+  
+  <url>
+    <loc>/homework/module4/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/communities/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/popgrowth/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/predation/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/</loc>
+  </url>
+  
+  <url>
+    <loc>/read/selection/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+  </url>
+  
 </urlset>
