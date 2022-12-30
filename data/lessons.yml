@@ -99,13 +99,14 @@ lessons:
     topics: "Competition"
     reading: "read/competition"
     code: "code/competition"
-    homework: "https://classroom.github.com/" 
+
 
   - module: "<i class='fa fa-lg fa-line-chart'></i>"
     date: "Week 11"
     topics: "Multi-species communities"
-    reading: "homework/module3"
-
+    code: "code/communities"
+    reading: "read/communities"
+    homework: "homework/module3" 
 
 
 
