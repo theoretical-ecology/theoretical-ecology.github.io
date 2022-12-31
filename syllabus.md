@@ -3,6 +3,7 @@ geometry: margin=1in
 header-includes:
     - \usepackage{setspace}
     - \usepackage{hyperref}
+    - \usepackage{xcolor}
     - \hypersetup{colorlinks=true, urlcolor=cyan , 
       linkcolor=cyan, citecolor=cyan, pdfborder=blue,
       urlbordercolor=red, linkbordercolor=red,
@@ -19,15 +20,15 @@ header-includes:
 
 \setstretch{1}
 
-**Location**: 
+**Location**: Jones 214
 
-**Time**: T and TH 
+**Time**: T and TH 2:50-4:05pm
 
 **Instructor**: Dr. Tad Dallas (tdallas@mailbox.sc.edu)
 
 **Office**: 601 EWS (Coker is the main building, and EWS is the other side of the elevators)
 
-**Drop-in hours**: Th from 2:30 - 4:20pm 
+**Drop-in hours**: Th from 1:00 - 2:40pm 
 
 
 \bigskip
@@ -80,7 +81,7 @@ Changes to the syllabus may be made during the semester. The most up-to-date and
 
 ## Grading
 
-There will be a total of 500 points, consisting of 5 assignments, some attendance/participation points, and a final project. 
+There will be a total of 500 points, consisting of 4 assignments, a paper summary, some attendance/participation points, and a final project. 
 
 
 
@@ -88,9 +89,10 @@ There will be a total of 500 points, consisting of 5 assignments, some attendanc
 
 | Item | Points | Total |
 | -- |  ---  | :---: |
-| Assignments | 5 x 50 | 250 |
-| Attendance/Participation | 75 | 75 |
-| Final exam | 50 | 50 |
+| Assignments | 4 x 75 | 300 |
+| Attendance/Participation | 50 | 50 |
+| Paper summary | 50 | 50 |
+| Final exam | 100 | 100 |
 
 
 
@@ -98,8 +100,9 @@ There will be a total of 500 points, consisting of 5 assignments, some attendanc
 
 | Item | Points | Total |
 | -- |  ---  | :---: |
-| Assignments | 5 x 30 | 150 |
-| Attendance/Participation | 75 | 75 |
+| Assignments | 4 x 50 | 200 |
+| Attendance/Participation | 50 | 50 |
+| Paper summary | 2 x 50 | 100 |
 | Project | 100 | 100 |
 | Final exam | 50 | 50 |
 
@@ -129,11 +132,14 @@ All assignments are expected to be electronically submitted by the due date. I w
 
 **Attendance**: 
 
-Much of the material presented will not be available if you aren't in class to hear it. You should come to class. If you do not, you may struggle. Part of the class will be discussing relevant papers. If you do not participate in paper discussions, clearly demonstrating that you have read and understand the nuances of the work, this will affect your grade. Attendance and participation will be worth 75 points. 
+Much of the material presented will not be available if you aren't in class to hear it. You should come to class. If you do not, you may struggle. Part of the class will be discussing relevant papers. If you do not participate in paper discussions, clearly demonstrating that you have read and understand the nuances of the work, this will affect your grade. Attendance and participation will be worth 50 points. 
 
 
 
 
+**Paper summaries**:
+
+The goal of the paper summary is to get you reading and understanding theory-heavy research published in peer-reviewed journals. I expect that these papers will dive deeper into some aspect of theoretical ecology that we covered in class, and could be tailored to your own personal interests. If you need help finding papers, do not hesitate to reach out. I really like the journal _Theoretical Ecology_, but you can find theory-heavy papers in many journals, including _Proceedings of the Royal Society B_, _American Naturalist_, and _PNAS_. These papers must include a model and be theory-heavy, meaning that it is not simply using a fancy statistical approach to a scientific question, but actually derive some of their results from an underlying theoretical model (we will cover the difference between statistical and phenomenological modeling in the first week, but feel free to send me a message for clarification). Undergraduates will do one of these paper summaries (about a page long, clearly presenting the question, methods, and results, paying attention to tying it into what we've learned in class). Graduate researchers will do two of these (1-2 pages, more detailed in terms of model insight and structure - read the supplemental material of the article, as I want you to know the article back to front).
 
 
 **Project**: 
@@ -154,7 +160,7 @@ _The project is worth 100 points_
 
 The final exam will be worth 50 points, consisting of a mixture of coding and high-level conceptual questions.
 
-
+The final exam will be **Tuesday, May 2 - 4:00 pm**.
 
 
 
@@ -176,7 +182,11 @@ The university is committed to a campus environment that is inclusive, safe, and
 
 ## Accessibility, disability, and triggers 
 
-I am committed to ensuring course accessibility for all students. If you have a documented disability and expect reasonable accommodation to complete course requirements, please notify me at least one week before accommodation is needed. Please also provide SDRC (https://sc.edu/about/offices_and_divisions/student_disability_resource_center/) documentation to me before requesting accommodation. Likewise, if you are aware of cognitive or emotional triggers that could disrupt your intellectual or mental health, please let me know so that I can be aware in terms of course content. 
+I am committed to ensuring course accessibility for all students. If you have a documented disability and expect reasonable accommodation to complete course requirements, please notify me at least one week before accommodation is needed. Please also provide SDRC 
+
+https://sc.edu/about/offices_and_divisions/student_disability_resource_center/
+
+documentation to me before requesting accommodation. Likewise, if you are aware of cognitive or emotional triggers that could disrupt your intellectual or mental health, please let me know so that I can be aware in terms of course content. 
 Diversity, Ethics, and the Carolinian Creed [credit to Dr. David Moscowitz]
 This course works to foster a climate free of harassment and discrimination, and it values the contributions of all forms of diversity. The decision to enter university and pursue advanced study is a choice that entails commitment to personal ethics expressed in the Carolinian Creed (www.sa.sc.edu/creed): "I will discourage bigotry, while striving to learn from differences in people, ideas and opinions." Likewise, the Student Code of Conduct (STAF 6.26 (http://www.sc.edu/policies/ppm/staf626.pdf) stresses, "The University of South Carolina strives to maintain an educational community that fosters the development of students who are ethical, civil and responsible persons." 
 
@@ -217,7 +227,9 @@ Interpersonal violence - including sexual harassment, relationship violence, sex
 
 ## Technical support
 
-If you have problems with your computer, technology, IT-related questions, support, including Blackboard, please contact the Division of Information Technology (DoIT) Service Desk at (803) 777-1800 or submit an online request through the Self-Service Portal (https://scprod.service-now.com/sp) or visit the Carolina Tech Zone (https://sc.edu/about/offices_and_divisions/division_of_information_technology/end_user_services/available_technology_resources/carolina_tech_zone/). The Service Desk is open Monday – Friday from 8:00 AM – 6:00 PM (Eastern Time). If you are located in the Columbia, SC area, the Thomas Cooper Library at UofSC has computers for you to use in case you encounter computer issues/problems. If you are not located in the Columbia, SC area, most regional campuses and public libraries have computers for public use.
+If you have problems with your computer, technology, IT-related questions, support, including Blackboard, please contact the Division of Information Technology (DoIT) Service Desk at (803) 777-1800 or submit an online request through the Self-Service Portal (https://scprod.service-now.com/sp) or visit the Carolina Tech Zone. 
+
+The Service Desk is open Monday - Friday from 8:00 AM - 6:00 PM (Eastern Time). If you are located in the Columbia, SC area, the Thomas Cooper Library at UofSC has computers for you to use in case you encounter computer issues/problems. If you are not located in the Columbia, SC area, most regional campuses and public libraries have computers for public use.
 
 
 
@@ -245,9 +257,9 @@ If you have problems with your computer, technology, IT-related questions, suppo
 | 12 | Metapopulations    | 16  |
 | 13 | Disease     | --  |
 | 14 | Macroecological scaling      | --  |
-| 15 | Grad project presentations   |   |
-| 16 | Grad project presentations?   |   |
-|    |  _Final exam_: |   |
+| 15 | Wrap up and flex time   | -- |
+| 16 | Grad project presentations   |   |
+|    |  _Final exam_: Tuesday, May 2 - 4:00 pm |   |
 
 
 
