@@ -94,7 +94,7 @@ Two-patch systems are incredibly useful, but we often have more than two patches
 
 We are going to pivot away from thinking about estimating density across space here to focusing a bit more on presence-absence of species across space. This will set up the underlying theory of _metapopulations_ as they were originally described. Consider a large habitat patch with variable habitat, some favorable and some less so. We may want to simply describe the occupancy dynamics in this single patch. But we can't simply look at a single point in time and act as if the system is not dynamic. So we must model the colonization and extinction dynamics in each part of the large patch. Here, we care about the fraction of occupied patches $J$. 
 
-\[ \frac{dJ}{dt}  = gains through colonization - losses due to extinction \]
+$\frac{dJ}{dt}$  = gains through colonization - losses due to extinction 
 
 We consider losses due to extinction to be dependent on the fraction of patches currently occupied $J$, such that extinction is modeled as $eJ$. Colonization is a bit trickier, as there are at least two ways to define colonization in this simple model. 
 
