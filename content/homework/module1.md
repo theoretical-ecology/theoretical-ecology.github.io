@@ -11,10 +11,10 @@ title: "Module 1 homework"
 | -- | -- | 
 | 1   | 1,4   |
 | 2   | 2,5,7   |
-| 3   | See problems below
+| 3   | 5 |
 | 5   | 5,7,9   |
 | 6   | 3   |
 
 
 
-> Insert problems for Ch 3 here
+

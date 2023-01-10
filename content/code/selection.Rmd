@@ -24,7 +24,7 @@ Up until this point, we have not consider the role of evolution. That is, we hav
 
 where $p_t$ is gene frequency at time $t$, evolutionary ecology deals more with how changes in $p_t$ are a function of population size 
 
-\[ p_{t+1} = g(p_t, N_t)]
+\[ p_{t+1} = g(p_t, N_t) \]
 
 
 If we were able to model $f()$ and $g()$, we would be able not only to predict population dynamics, but also changes in allele frequencies over time, and how both vary as a function of population density. 
@@ -80,7 +80,7 @@ p_{t+1} =  p_{t,s} = \dfrac{p_{t}^{2}  \lambda_{AA} + p_{t}q_{t}\lambda_{Aa}}{\b
 
 under the assumption of random mating, making the absolute number of $AA$ individuals in the population at time $t$, 
 
-\[ N_{AA, t+1} = p_{t,s}^{2} N_{t}]
+\[ N_{AA, t+1} = p_{t,s}^{2} N_{t} \]
 
 This is of note because our earlier guess made without considering the absolute abundance of alleles was $p_{t}^{2} N_{t}\lambda_{AA}$ (pay attention to how we defined $p_{t,s}$ relative to $p_{t}$). To revisit the Hardy-Weinberg principle, the above assumptions made above include an infinitely large population size, random mating, and no selective advantage to having a certain genotype. If we violate this, what happens? 
 

@@ -3,6 +3,7 @@ lessons:
     topics: "Course design, goals, introduction, and setup"
     date: "Week 1"
     reading: "read/setup"
+    code: "code/setup"
 
 
   - module: ""

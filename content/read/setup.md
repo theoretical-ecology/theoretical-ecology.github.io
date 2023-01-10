@@ -34,9 +34,9 @@ A programming course. We will use examples in R, but the importance is on the mo
 
 
 
+### Discussion paper for Thursday 
 
-
-### 
+https://doi.org/10.1098/rsfs.2012.0008
 
 
 

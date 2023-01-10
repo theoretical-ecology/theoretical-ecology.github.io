@@ -136,8 +136,7 @@ What this course is not A programming course.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/homework/module1/</guid>
-      <description>Homework problems    Chapter Problems     1 1,4   2 2,5,7   3 See problems below   5 5,7,9   6 3     Insert problems for Ch 3 here
- </description>
+      <description>Homework problems    Chapter Problems     1 1,4   2 2,5,7   3 5   5 5,7,9   6 3    </description>
     </item>
     
     <item>
@@ -164,8 +163,8 @@ What this course is not A programming course.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/homework/module4/</guid>
-      <description>Homework problems Need to make up my own questions for this one.
-metapopulations and disease problems.</description>
+      <description>Metapopulation questions 1 What is the equilibrium fraction of occupied patches for the mainland-island model with a colonization rate of 0.5, and an extinction rate of 0.3? How does this change compared to the standard Levin&amp;rsquo;s model? What explains this change?
+2 Incorporate a rescue effect into the above model and calculate the equilibrium fraction of occupied patches. What is this new value, and how does it compare to the mainland-island and Levin&amp;rsquo;s equilibrium values?</description>
     </item>
     
     <item>
