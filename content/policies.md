@@ -51,6 +51,20 @@ Over the course, it is expected that students gain
 
 
 
+### List of due dates:
+
++ February 9: first homework due
++ February 16: final project proposal due
++ March 2: first paper summary due
++ March 2: second homework due
++ March 30: third homework due
++ April 20: second paper summary due
++ April 27: fourth homework due
++ May 2: final project turned in and presented
++ May 2: final exam (4pm)
+
+
+
 
 ### Grading
 
