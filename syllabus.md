@@ -50,9 +50,10 @@ This course will familiarize students with the central concepts of theoretical e
 **Course Goals**:
 
 Over the course, it is expected that students gain
-* an understanding of theoretical concepts and their relationship to natural systems
-* a confidence around applying analytical and simulation based approaches to ecological data
-* an ability to read and understand primary literature 
+
++ an understanding of theoretical concepts and their relationship to natural systems
++ a confidence around applying analytical and simulation based approaches to ecological data
++ an ability to read and understand primary literature 
 
 
 \bigskip
