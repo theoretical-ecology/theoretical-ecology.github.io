@@ -112,7 +112,7 @@ There will be a total of 500 points, consisting of 4 assignments, a paper summar
 
 
 
-**Assignments**: 
+## Assignments: 
 
 All assignments are due by immediately before the start of class on the day indicated. Assignments should be submitted as instructed. Assignments are not collaborative, and I expect that each student will complete the assignment independently. 
 
@@ -124,42 +124,67 @@ All assignments are expected to be electronically submitted by the due date. I w
 
 
 
-
-
-
-
-
-
-
-**Attendance**: 
+## Attendance: 
 
 Much of the material presented will not be available if you aren't in class to hear it. You should come to class. If you do not, you may struggle. Part of the class will be discussing relevant papers. If you do not participate in paper discussions, clearly demonstrating that you have read and understand the nuances of the work, this will affect your grade. Attendance and participation will be worth 50 points. 
 
 
 
 
-**Paper summaries**:
+## Paper summaries:
 
 The goal of the paper summary is to get you reading and understanding theory-heavy research published in peer-reviewed journals. I expect that these papers will dive deeper into some aspect of theoretical ecology that we covered in class, and could be tailored to your own personal interests. If you need help finding papers, do not hesitate to reach out. I really like the journal _Theoretical Ecology_, but you can find theory-heavy papers in many journals, including _Proceedings of the Royal Society B_, _American Naturalist_, and _PNAS_. These papers must include a model and be theory-heavy, meaning that it is not simply using a fancy statistical approach to a scientific question, but actually derive some of their results from an underlying theoretical model (we will cover the difference between statistical and phenomenological modeling in the first week, but feel free to send me a message for clarification). Undergraduates will do one of these paper summaries (about a page long, clearly presenting the question, methods, and results, paying attention to tying it into what we've learned in class). Graduate researchers will do two of these (1-2 pages, more detailed in terms of model insight and structure - read the supplemental material of the article, as I want you to know the article back to front).
 
+The first paper summary is due before March 2, the second before April 20.
 
-**Project**: 
+
+## Project: 
 
 Graduate researchers in the course will do a course-long project. The project will be a demonstration of your learning and allow you to use the new tools and concepts you have acquired in the course. This could take many forms, including the analysis of a commonly used model in ecology, a review of some application of theory and empirical data (e.g., the theory of species-area relationships), and many others. 
 
-More information on the final project and its components are provided at the bottom of this document. The three core parts are 1) the proposal, 2) the implementation, and 3) the presentation
+More information on the final project and its components are provided below. The three core parts are 1) the proposal, 2) the implementation, and 3) the presentation
 
 _The project is worth 100 points_
 
 
+### Final project proposal
+
+Please prepare a short proposal on your final project idea by February 16. The proposal should include:
+
+- Title 
+- Description of the project (at least half of a page)
+- Potential roadblocks, data issues, etc. 
+
+
+
+### Project Guidelines (100 points total)
+
+#### proposal
+- 10pts Proposal, turned in on time, with clear background and outline of questions
+
+#### implementation
+- 70 pts Project Substance: Objectives, Code, Visualization.
+  - 20pt: project is correct scope, addresses the question, and has tangible output 
+  - 20pt: project is engaging and well researched
+  - 10pt: project is free from clear errors in analysis or interpretation
+  - 10pt: visualizations and tables (if present) compliment the overall findings
+  - 10pt: references are included and appropriate.
+ 
+#### presentation
+- 20pts Final presentation
+   - 10pt: presentation is engaging, structured well, and highlights project findings 
+   - 10pt: style, handling questions, etc.
 
 
 
 
 
-**Final exam**:
 
-The final exam will be worth 50 points, consisting of a mixture of coding and high-level conceptual questions.
+
+
+## Final exam:
+
+The final exam will be worth 50 points (100 points for undergraduates), consisting of a mixture of coding and high-level conceptual questions. 
 
 The final exam will be **Tuesday, May 2 - 4:00 pm**.
 
@@ -262,48 +287,6 @@ The Service Desk is open Monday - Friday from 8:00 AM - 6:00 PM (Eastern Time). 
 | 16 | Grad project presentations   |   |
 |    |  _Final exam_: Tuesday, May 2 - 4:00 pm |   |
 
-
-
-\clearpage
-
-
-
-
-
-
-
----
-
-# Final project
-
-
-## Final project proposal
-
-Please prepare a short proposal on your final project idea by February 17. The proposal should include:
-
-- Title 
-- Description of the project (at least half of a page)
-- Potential roadblocks, data issues, etc. 
-
-## Project Guidelines (100 points total)
-
-### proposal
-- 10pts Proposal, turned in on time, with clear background and outline of questions
-
-
-### implementation
-- 70 pts Project Substance: Objectives, Code, Visualization.
-  - 20pt: project is correct scope, addresses the question, and has tangible output 
-  - 20pt: project is engaging and well researched
-  - 10pt: project is free from clear errors in analysis or interpretation
-  - 10pt: visualizations and tables (if present) compliment the overall findings
-  - 10pt: references are included and appropriate.
-  
-  
-### presentation
-- 20pts Final presentation
-   - 10pt: presentation is engaging, structured well, and highlights project findings 
-   - 10pt: style, handling questions, etc.
 
 
 
