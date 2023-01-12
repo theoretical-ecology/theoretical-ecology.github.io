@@ -72,8 +72,11 @@ Go through the course website and make sure everyone has easy access and is clea
 ### Models
 
 **Statistical model**: A model exploring the statistical relationships between a response and some set of predictor variables. 
+
 + can be completely independent of theory
+
 + can be focused on prediction or variable importance
+
 + requires data
 
 e.g., linear regression 
@@ -100,8 +103,11 @@ abline(mod)
 
 
 **Phenomenological model**: A model describing some phenomenon, often independent of any data. 
+
 + an idea of _how_ a system behaves given assumptions
+
 + incorporates theoretical expectations
+
 + incredibly useful when fit or compared to empirical data (where's the disconnect?)
 
 e.g., exponential growth
@@ -286,7 +292,9 @@ https://www.journals.uchicago.edu/doi/pdfplus/10.1086/717206
 
 
 **Note**: 
+
 + This is an introduction to a special issue organized around 'Mathematical and theoretical ecology', so it spends some time trying to tie the papers into a cohesive picture. This is useful for this course, as it gives you an idea of types of theoretical articles. 
+
 + [Additional article some folks might find interesting](http://faculty.washington.edu/cet6/pub/Temp/CFR521e/Lawton_1996.pdf): Lawton discussing 'patterns' back in 1996, muddying some waters while also having some pretty fair points in other places. 
 
 ---
