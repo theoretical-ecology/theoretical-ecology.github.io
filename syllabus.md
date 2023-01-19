@@ -71,20 +71,23 @@ Changes to the syllabus may be made during the semester. The most up-to-date and
 
 
 **list of due dates**:
+
 + February 9: first homework due
+
 + February 16: final project proposal due
+
 + March 2: first paper summary due
+
 + March 2: second homework due
+
 + March 30: third homework due
+
 + April 20: second paper summary due
+
 + April 27: fourth homework due
+
 + May 2: final project turned in and presented
 
-
-
-
-
-\clearpage
 
 
 ## Grading

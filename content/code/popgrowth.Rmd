@@ -309,6 +309,42 @@ And we see about what we'd expect, right?
 
 
 
+### The difference between arithmetic and geometric means 
+
+Population growth is a geometric process, leading two populations with the same arithmetic mean in temporal $\lambda$ values to have markedly different dynamics. Let's explore the example of a constant environment, corresponding to a constant $\lambda$ to a time-varying $\lambda_t$. 
+
+
+```{r results=FALSE}
+
+n0 <- 20
+t <- 50
+
+lambdas <- rnorm(t, 1, 0.25)
+lambdaStatic <- rep(mean(lambdas), length(lambdas))
+
+
+plot(1:(t+1), expoDynamics(n0, lambdas, steps=t),
+  type='l', las=1, 
+  xlab='Time', 
+  ylab='Population size', lwd=5,
+  col=adjustcolor('dodgerblue', 0.5),
+  ylim=c(0,50))
+
+lines(1:(t+1), expoDynamics(n0, lambdaStatic, steps=t),
+  col=adjustcolor(1,0.5), lwd=5)
+
+# arithmetic mean
+mean(lambdas)
+mean(lambdaStatic)
+
+
+# geometric mean
+prod(lambdas)**(1/length(lambdas))
+prod(lambdaStatic)**(1/length(lambdaStatic))
+
+
+
+```
 
 
 
@@ -437,12 +473,11 @@ sapply(1:100, function(x){
 })
 
 
-
-
 ```
 
 
 The above plots may look similar, but consider the relative change in population sizes. In the left panel, we have upper values of around 50 individuals, more than double than the starting population size. In the right panel, it appears to be a lot of change, but it is around 10% change in either direction. 
+
 
 
 
@@ -455,4 +490,346 @@ We will not cover the last section of this chapter, which goes into the combinat
 
 
 
-((fill out chapter 6 notes here if we can get this far. One hw question comes from chapter 6, but it can be answered with knowledge not in chapter 6))
+
+
+### Movement
+
+Depending on what we cover on Tuesday, fill this in to cover the material at the beginning of Chapter 2 on movement/diffusion/random walks, excluding some of the partial diff eq bits. 
+
+
+```{r}
+
+walkTime <- function(p, lower, upper) {
+  vals <- c(0)
+  current <- 0
+  while (current > lower & current < upper) {
+    current <- current + ifelse(runif(1) < p, 1, -1)
+    vals <- c(vals, current)
+  }
+  return(vals)
+}
+
+walkSpace <- function(seed=1, size=100, times=100, maxStepSize=1){
+  set.seed(seed)
+  landscape <- matrix(0,nrow=size, ncol=size)
+  landscape[round(size/2,0), round(size/2,0)] <- 1
+  for(i in 1:times){
+    vert <- sample(-maxStepSize:maxStepSize, 1)
+    horiz <- sample(-maxStepSize:maxStepSize, 1)
+    loc <- which(landscape==i, arr.ind=TRUE)
+    landscape[loc[1]+horiz, loc[2]+vert] <- i+1
+  }
+  return(landscape)
+}
+
+
+image(walkSpace(times=1))
+image(walkSpace(times=100))
+image(walkSpace(times=1000))
+
+sims <- lapply(1:500, walkSpace, size=100, times=100)
+sims2 <- Reduce('+', lapply(sims, function(x){x>0}))
+
+plot(sims2[,50], type='b', pch=16, ylab='Population size', xlab='Space')
+plot(sims2[50,], type='b', pch=16, ylab='Population size', xlab='Space')
+
+```
+
+
+
+
+
+
+
+### Movement plus geometric growth 
+
+Above, we only consider spatial movement without reproduction. But what if we treat each cell as a potential 'population'. That is, birth/death processes may occur at each timestep prior to dispersal, dependent on the presence of individuals in that cell. 
+
+> What assumptions does this approach make? 
+
+```{r}
+# 1 dimensional landscapes 
+getSpatial <- function(nVec, lambdaVec, times=100, p=0.2){
+  ret <- matrix(0, ncol=length(nVec), nrow=times+1)
+  ret[1,] <- nVec
+  
+  move <- function(vals){
+    ret <- rep(0, length(vals))
+    disp <- t(sapply(vals, function(x){
+      movers <- sample(-1:1, x, prob=c(p/2, 1-p, p/2), replace=TRUE)
+      return(c(sum(movers==-1), sum(movers==0), sum(movers==1)))
+    }))
+    
+    vals <- disp[,2]
+    # move left
+    vals[1:(length(vals)-1)] <- vals[1:(length(vals)-1)] + disp[2:length(vals),1]
+    # move right 
+    vals[2:(length(vals))] <- vals[2:(length(vals))] + disp[1:(length(vals)-1),3]
+    return(vals)
+  }
+
+  for(i in 1:times){
+    ret[i+1,] <- ret[i,] * lambdaVec 
+    ret[i+1,] <- move(ret[i+1, ])
+  }
+  return(ret)
+}
+
+
+n <- c(0,0,0,10,0,0,0)
+lambdas <- rep(1, length(n))
+
+test <- getSpatial(n, lambdas)
+
+colz <- terrain.colors(20)
+plot(test[1,], 
+  pch=16, type='b', 
+  ylab='pop size', xlab='spatial position')
+
+for(i in 1:20){
+  lines(test[i,], col=colz[i])
+}
+
+```
+
+
+
+
+
+
+
+This results in the center of the species range having larger and larger population sizes, and the population will spread out in space in a predictable manner. That is, the spread will occur with _constant velocity_, under the assumption that $\lambda$ is the same for each cell in the spatial landscape. This also means that the radius of populations occupied area will grow linearly with time. That is, there is a scaling between the time it takes to grow $n$ times as large as it starts with (e.g., for area to 4 times as large as it currently is, it needs twice as long, if it needs to grow 9 times as large, it needs 3 times as long). 
+
+
+This is influenced by a number of things, with one of the most obvious things that species rarely move a single cell away. 
+
+> What happens when we increase the distance that any individual may travel? 
+
+> What happens if growth rate is larger? 
+
+
+
+Both of these things influence the radius of the population spread. 
+
+\[ Radius^{2}(t) = 4D_t ln(N(t)) \]
+
+But $ln(N(t))$ is a function of geometric growth. That is, 
+
+\[ ln(N(t)) = rt + ln(N_0) \]
+
+where $r$ is the growth rate, and $N_0$ is the initial population size. $ln(N_0)$ will be a very small number relative to $rt$, so previous authors have argued that it can simply be ignored for simplicity at getting at spatial spread. 
+
+\[ radius^{2}(t) = 4Dt * rt\]
+
+
+Simplifying this and putting in terms of units of distance/time leads to $2rD^{0.5}$, removing time from the equation (i.e., the rate of spread of the population is independent of time, only depending on displacement ($D$) and population growth rate ($r$)). The rate also does not depend on the initial population size, but note that this is the asymptotic rate of spread. We can go back to the case where there is no population growth, and this makes the initial population size matter a bit more. 
+
+
+\[ Radius^{2}(t) = 4D_t ln(N(0)) \]
+
+This suggests that area occupied should increase linearly with time, as the radius of the spread increases as a function of the square root of time. Specifically, the radius increases at rate 
+
+\[ \dfrac{2\sqrt{Dln(N_0)}}{\sqrt{t}}\]
+
+This suggests that initial population size does influence spread, and that the rate of spread (in terms of the rate of change in the radius) depends strongly on time, suggesting that the rate of change declines over time. 
+
+
+
+
+
+
+
+
+
+### Spatial variation 
+
+Population growth rates may vary in space, such that some cells are just _better_ for the population in terms of population growth rate $\lambda$. How do we incorporate this, and what are the implications?
+
+
+
+
+
+```{r}
+
+## let's explore a bigger landscape (where edge effects are not pronounced)
+n <- rep(0, 500)
+n[250] <- 100
+lambdas <- rep(1, length(n))
+
+test <- getSpatial(n, lambdas)
+
+colz <- terrain.colors(20)
+plot(test[1,], 
+  pch=16, type='b', 
+  ylab='pop size', xlab='spatial position')
+
+seqz <- round(seq(1, nrow(test), length.out=20),0)
+for(i in 1:20){
+  lines(test[seqz[i],], col=colz[i])
+}
+
+```
+
+
+
+
+
+## let's allow them to spread for longer
+```{r}
+n <- rep(0, 500)
+n[250] <- 100
+lambdas <- rep(1, length(n))
+
+test <- getSpatial(n, lambdas, times=1000)
+
+colz <- terrain.colors(20)
+plot(test[1,], 
+  pch=16, type='b', 
+  ylab='pop size', xlab='spatial position')
+
+seqz <- round(seq(1, nrow(test), length.out=20),0)
+for(i in 1:20){
+  lines(test[seqz[i],], col=colz[i])
+}
+
+```
+
+
+
+```{r}
+## let's incorporate variation in lambda across space 
+n <- rep(0, 25)
+n[round(length(n)/2,0)] <- 50
+lambdas <- rep(1, length(n))
+lambdas[12:17] <- 1.25
+
+test <- getSpatial(n, lambdas, times=20)
+
+colz <- terrain.colors(20)
+plot(test[1,], 
+  pch=16, type='l', ylim=c(0, 600), col=colz[1],
+  ylab='pop size', xlab='spatial position')
+
+seqz <- round(seq(1, nrow(test), length.out=20),0)
+for(i in 1:20){
+  lines(test[seqz[i],], col=colz[i])
+}
+
+```
+
+> What's going on here? 
+
+
+
+
+What happens if lambda is only greater than 1 in a very small window? 
+```{r}
+
+n <- rep(0, 30)
+n[round(length(n)/2,0)] <- 50
+lambdas <- rep(0, length(n))
+lambdas[15] <- 1.25
+
+test <- getSpatial(n, lambdas, times=20)
+
+colz <- terrain.colors(20)
+plot(test[1,], 
+  pch=16, type='l', ylim=c(0, 600), col=colz[1],
+  ylab='pop size', xlab='spatial position')
+
+seqz <- round(seq(1, nrow(test), length.out=20),0)
+for(i in 1:20){
+  lines(test[seqz[i],], col=colz[i])
+}
+
+```
+
+> What's going on here? 
+
+
+
+What happens if we increase growth rate to be _really_ high?
+
+```{r}
+
+n <- rep(0, 30)
+n[round(length(n)/2,0)] <- 50
+lambdas <- rep(0, length(n))
+lambdas[15] <- 2
+
+test <- getSpatial(n, lambdas, times=20)
+
+colz <- terrain.colors(20)
+plot((test[1,]+1), ylim=c(3,400000),
+  pch=16, type='l', log='y', col=colz[1],
+  ylab='pop size', xlab='spatial position')
+
+seqz <- round(seq(1, nrow(test), length.out=20),0)
+for(i in 1:20){
+  lines((test[seqz[i],]+1), col=colz[i])
+}
+
+```
+
+
+> what's going on here? 
+
+
+
+
+How much variation is there in spatial spread? 
+
+```{r}
+
+n <- rep(0, 30)
+n[round(length(n)/2,0)] <- 50
+lambdas <- rep(0, length(n))
+lambdas[10:20] <- 1.05
+
+test <- list()
+
+for(i in 1:100){
+  test[[i]] <- getSpatial(n, lambdas, times=100)
+  print(i)
+}
+
+
+layout(matrix(c(1:3), ncol=3))
+# at 10 time steps
+plot((test[[1]][10,]), ylim=c(1,50),
+  pch=16, type='l', col=colz[1],
+  ylab='pop size', xlab='spatial position')
+for(i in 1:length(test)){
+  lines(test[[i]][10,], col=colz[i])
+}
+title('10 time steps', line=-1)
+
+# at 50 time steps
+plot((test[[1]][50,]), ylim=c(1,50),
+  pch=16, type='l', col=colz[1],
+  ylab='pop size', xlab='spatial position')
+for(i in 1:length(test)){
+  lines(test[[i]][50,], col=colz[i])
+}
+title('50 time steps', line=-1)
+
+
+# at 100 time steps
+plot((test[[1]][100,]), ylim=c(1,50),
+  pch=16, type='l', col=colz[1],
+  ylab='pop size', xlab='spatial position')
+for(i in 1:length(test)){
+  lines(test[[i]][100,], col=colz[i])
+}
+title('100 time steps', line=-1)
+
+```
+
+
+
+```{r}
+
+
+
+
+```
