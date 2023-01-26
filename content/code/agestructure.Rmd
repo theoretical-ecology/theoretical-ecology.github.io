@@ -22,10 +22,9 @@ When we introduced variation in demographic rates, we did so because we wanted t
 
  
 
-### Life table
+### Defining some terms
 
-Originally designed for insurance companies, this is a way to track demographic rates through time, partitioning things by the age of the organism. 
-
+Originally designed for insurance companies, life tables are a way to track demographic rates through time, partitioning things by the age of the organism. 
 
 \begin{table}[h!]
 \centering
@@ -33,22 +32,22 @@ Originally designed for insurance companies, this is a way to track demographic 
 \vspace{0.5cm}
 \begin{tabular}{cccccc}
 \hline
-age (x) & $S(x)$ & $l(x)$ & $b(x)$ & $l(x)b(x)$ & $l(x)b(x)x$ \\
+age (x) & $s_x$ & $l_x$ & $b_x$ \\
 \hline
-0 & 500 & 1   & 0  & 0 & 0   \\
-1 & 400 & 0.8 & 0.5  & 0.4 & 0.4 \\
-2 & 200 & 0.4 & 0.25 & 0.3 & 0.6 \\
-3 & 50  & 0.2 & 1  & 0.2  &  0.6 \\
-4 & 10  & 0.1 & 2 & 0.2  &  0.8 \\
+0 & 1    & 1    & 0   \\
+1 & 0.5  & 0.5  & 0.5  \\
+2 & 0.25 & 0.4  & 0.25  \\
+3 & 0.8  & 0.1  & 1   \\
+4 & 0.2  & 0.08 & 2  \\
 \hline
 \end{tabular}
 \end{table}
 
 
-The term $s(x)$ refers to the number of individuals from a particular cohort that are still alive at age $x$. We can define $s(x)$ for each age class $x$ by considering the value to be $1-d(x)$, where $d(x)$ is the death rate of age class $x$. 
+The term $s_x$ refers to the survival rate of each individual age class. That is, $s_2$ would be the probability of an individual surviving to reach age 3. We can define $s(x)$ for each age class $x$ by considering the value to be $1-d(x)$, where $d(x)$ is the death rate of age class $x$. 
 
 
-The term $l(x)$ represents the probability of surviving from age $x$ to age $x+1$. This is called survival rate or **survivorship**. To understand how survivorship of a single age class corresponds to the ability of a newborn to survive through multiple age classes, we have to consider the product of these survival rates. That is, think of survivorship as a probability of surviving that age class. To combine probabilities, we multiply them. For instance, the probability of a newborn (age class 0 in the table above) surviving is 1, meaning all newborns survive. However, if we wanted to calculate the probability of an individual surviving until they were 3 years old in the above life table, we would have to consider each probability separately.
+The term $l(x)$ represents the probability of surviving from age 0 to age $x+1$. To understand how survivorship of a single age class corresponds to the ability of a newborn to survive through multiple age classes, we have to consider the product of our survival rates ($s_0$, $s_1$, ...$s_x$). That is, think of survivorship as a probability of surviving to that age class $x$. To combine probabilities, we multiply them. For instance, the probability of a newborn (age class 0 in the table above) surviving is 1, meaning all newborns survive. However, if we wanted to calculate the probability of an individual surviving until they were 3 years old in the above life table, we would have to consider each probability separately.
 
 \[ l_x = s_0 * s_1 * s_2 ... * s_{x-1} \] 
 
@@ -58,8 +57,7 @@ or
 
 So for the above example of an individual surviving until 3 years old, we would multiply $1 * 0.8 * 0.4$, for a survivorship probability of $l_3$ = 0.32. 
 
-
-The term $b(x)$ represents the per-capita birth rate for females of age $x$. This is the number of offspring generated from one individual of age $x$.
+The term $b(x)$ represents the per-capita birth rate for females of age $x$. This is the number of offspring generated from one individual of age $x$. All offspring are newborns, so that all contributions of $b_x$ go into the newborn age class $n_0$, which Case goes into how we don't commonly model this age group, because we rarely care about newborns, treating them as being some collective sum of reproduction from other age classes multiplied by some constant mortality term $s_0$. 
 
 
 This gives us a good idea of how age or life stage can influence reproductive output and survival. 
@@ -72,76 +70,25 @@ This gives us a good idea of how age or life stage can influence reproductive ou
 
 
 
+
+
+
 ### Population growth rate in age structured populations 
-
-$R_0$ is the net reproductive rate, which corresponds to the average number of offspring that would be born to each member of a population going from birth to death following to life table. 
-
-\[ R_{0} = 0 + 0.4 + 0.3 + 0.2 + 0.2 = 1.1 \] 
-
-$G$ is the generation time, which is quantified as the average age of parents of all offspring produced in a single cohort. It can be calculated as 
-
-
-\[ G = \frac{\Sigma_{x=0}^{k} l(x)b(x)x}{\Sigma_{x=0}^{k} l(x)b(x)}  \]
-
-\[ G = (0.4+0.6+0.6+0.8) / (0.4+0.3+0.2+0.2)  =  2.182 \]
-
-From $R_0$ and $G$, we can compute $r$ and $\lambda$
-
-
-\[ r = \frac{ln(R_0)}{G} = \frac{ln(1.1)}{2.182} = 0.0437 \]
-\[ \lambda = e^{r} = e^{0.0.0437} = 1.045 \]
-
-
-
-What is the relationship between $R_{0}$ and $\lambda$?
-
-
-
-
-So how do we model these structured populations? We could break the populations down into stages, and use the models described above for each life stage. Here is an example for a stage-structured population consisting of juveniles ($J$), teenagers ($T$), and adults ($A$). Here, we can track the dynamics of each stage independently, as below. What's wrong with this? It doesn't explicitly consider the inherent connections between the different stages. So it tracks population growth, but not the transitions between classes. \\
-
-
-\[ J_{t+1} = \lambda_{J} * J_t \]
-
-\[T_{t+1} = \lambda_{T} * T_t \]
-
-\[A_{t+1} = \lambda_{A} * A_t \]
-
-
-
-Then, \[ N_{t} = J_{t} + T_{t} + A_{t} \]
-
-
-
-We can account for population flow explictly by having some survival term which tracks the transition of juveniles to teenagers, and teenagers to adults, but what else does this fail to account for? The contribution of different stage classes is not to it's own class, but to the first stage class, right? How do we incorporate this? We could set up a system of equations, or we could use \textit{matrix modeling}, which essentially sets up a system of equations, but in a nice way.
-
-
-
-
-
-
-\clearpage
-
-
-
-
-
-### Matrix modeling
 
 Elements of the square matrix correspond to the production of (row) by (column). These are transitions between lifestages. This matrix is called a _Leslie matrix_.
 
 
 \begin{table}
 \centering
-\caption{A Leslie matrix -- also called a \textit{population projection matrix} describing the survival and fecundity relationships between life stages ($J$, $T$, and $A$)}
+\caption{A Leslie matrix -- also called a \textit{population projection matrix} describing the survival and fecundity relationships between age classes 1,2, and 3.}
 \label{tab:transition}
 \vspace{0.5cm}
 \begin{tabular}{cccc}
-  & J & T & A \\
+  & 1 & 2 & 3 \\
   \hline
-J & $F_{J}$  &  $F_{T}$  & $F_{A}$ \\
-T & $S_{J}$  & -         & -      \\
-A & -        & $S_{T}$   & $S_{A}$  \\
+1 & $F_{1}$  & $F_{2}$  & $F_{3}$ \\
+2 & $S_{1}$  & 0         & 0      \\
+3 & 0        & $S_{2}$   & 0  \\
 \hline
 \end{tabular}
 \end{table}
@@ -150,12 +97,12 @@ Here, we have fecundity $F_{i}$, and stage transition rates ($S_{i}$). It is imp
 
 
 
-So we can use the transition matrix to simulate stage-structured population dynamics. How we do this is by using matrix multiplication, as follows. We have a 1 column matrix containing the initial population sizes for all life stages. 
+So we can use the transition matrix to simulate age or stage-structured population dynamics. How we do this is by using matrix multiplication, as follows. We have a 1 column matrix containing the initial population sizes for all life stages. 
 
 \begin{equation*}
 \mathbf{n}^{0}=%
 \begin{bmatrix}
-n_{J} & n_{T} & n_{A} \\
+n_{1} & n_{2} & n_{3} \\
 \end{bmatrix}
 \end{equation*}
 
@@ -165,28 +112,28 @@ We can simply multiply this one column matrix by the transition matrix,
 
 \begin{equation*}
 \begin{bmatrix}
-n_{J, t+1} \\ 
-n_{T, t+1} \\ 
-n_{A, t+1} \\
+n_{1, t+1} \\ 
+n_{2, t+1} \\ 
+n_{3, t+1} \\
 \end{bmatrix}
-= \mathbf{N} * \mathbf{M} = \begin{bmatrix}
-n_{J, t} & n_{T, t} & n_{A, t} \\
+= \mathbf{N} * \mathbf{L} = \begin{bmatrix}
+n_{1, t} & n_{2, t} & n_{3, t} \\
 \end{bmatrix} * \begin{bmatrix}
-F_{J}  & F_{T}  & F_{A}  \\
-S_{J}  & 0      & 0      \\
-0       & S_{T}  & S_{A}  \\
+F_{1}  & F_{2}  & F_{3}  \\
+S_{1}  & 0      & 0      \\
+0      & S_{2}  & 0  \\
 \end{bmatrix}
 \end{equation*}
 
 
-where $\mathbf{N}$ is the population size matrix and $\mathbf{M}$ is the transition matrix in Table \ref{tab:transition}, to yield the resulting population size at time $t+1$. 
+where $\mathbf{N}$ is the population size matrix and $\mathbf{L}$ is the transition matrix in Table \ref{tab:transition}, to yield the resulting population size at time $t+1$. 
 
 
 \begin{equation}
 \begin{bmatrix}
-n_{J}* F_{J} \ \  + \ \ n_{T} * F_{T}   \ \  + \ \  n_{A} * F_{A} \\
-n_{J}* S_{J} \ \ + \ \  n_{T} * 0      \ \   + \ \  n_{A} * 0    \\
-n_{J}* 0     \ \ + \ \  n_{T} * S_{T}  \ \   +  \ \ n_{A} * S_{A}    \\
+n_{1}* F_{1} \ \  + \ \ n_{2} * F_{2}   \ \  + \ \  n_{3} * F_{3} \\
+n_{1}* S_{1} \ \ + \ \  n_{2} * 0      \ \   + \ \  n_{3} * 0    \\
+n_{1}* 0     \ \ + \ \  n_{2} * S_{2}  \ \   +  \ \ n_{3} * S_{3}    \\
 \end{bmatrix}
 \end{equation}
 
@@ -232,7 +179,7 @@ n_{J, t} = 20  & n_{T, t} = 10 & n_{A, t} = 0  \\
 
 
 \begin{equation}
-\mathbf{N}_{t} * \mathbf{M} = \begin{bmatrix}
+\mathbf{N}_{t} * \mathbf{L} = \begin{bmatrix}
 (20 * 0.3) \ + \ (10 * 0.5) \ + \ (0 * 2)     \\
 (20 * 0.2) \ + \ (10 * 0 ) \ + \ (0 * 0)    \\
 (20 * 0 ) \ + \ (10 * 0.3) \ + \ (0 * 0)   \\
@@ -244,11 +191,10 @@ n_{A, t+1} =  3 \\
 \end{equation}
 
 
-
-
-
-
 It is important to consider the $t$ in the equations above (and introduced previously). We will largely treat time as discrete, so we can consider population growth at some biologically realistic timescale (e.g., a year). Case spends some time discussing the importance of considering species biology, birth pulses, etc. when modeling age or stage structured populations. 
+
+
+
 
 ### Estimating age/stage structured vital rates
 
@@ -257,7 +203,7 @@ All of the models above assume that we have knowledge of structured demographic 
 
 ### Age versus stage structure
 
-Up to this point, we've treated age and stage structure as sort of the same thing, while mainly providing examples of age structured populations (but see the JTA example above). The underlying idea here is that stage structure can provide a way to simplify the model, especially if we can assume that groups of individuals of different ages can still have the same demographic rates (e.g., individuals past a certain age will contribute very little to fecundity). I will continue to use these two together. You may hear folks discussing size-structured populations, where age or stage is assumed to vary with individual body size, or at a minimum we assume that individual size drives resulting demographic rates (e.g., large individuals have more offspring). This is \textit{generally} a bad idea, as we assume that size can be a proxy for age or stage, which is perhaps an untenable assumption. 
+Up to this point, we've treated age and stage structure as sort of the same thing, while mainly providing examples of age structured populations. The underlying idea here is that stage structure can provide a way to simplify the model, especially if we can assume that groups of individuals of different ages can still have the same demographic rates (e.g., individuals past a certain age will contribute very little to fecundity). I will continue to use these two together. You may hear folks discussing size-structured populations, where age or stage is assumed to vary with individual body size, or at a minimum we assume that individual size drives resulting demographic rates (e.g., large individuals have more offspring). This is \textit{generally} a bad idea, as we assume that size can be a proxy for age or stage, which is perhaps an untenable assumption. 
 
 
 
@@ -291,8 +237,8 @@ Note that on the left, we have the Leslie matrix, and on the right we have $\lam
 projMatrix <- matrix(
   c(
     0.2,     1,    0.5,
-    0.6,     0,    0,
-    0,       0.3,  0.6
+    0.8,     0,    0,
+    0,       0.5,  0
   )
   ,nrow=3,ncol=3,byrow=T
 )
@@ -363,7 +309,26 @@ legend('topleft', pch=16, col=colz[1:3],
 
 
 
-What is the age-structured populations ultimate geometric growth rate $\lambda$?
+
+
+
+
+
+### What is the age-structured populations ultimate geometric growth rate $\lambda$?
+
+In the Case text, there is detail provided on how to calculate eigenvalues. We will not be calculating them by hand, as it gets a bit much once we go past 2x2 matrices, but the underlying idea is important. That is, that 
+
+\[ N_{T} = N_0 \lambda^{T} \]
+
+where we want to know $\lambda$. All of the information contained in $L$ is what is needed to determine $\lambda$, so let's just place $L$ directly in place of $\lambda$. 
+
+\[ N_{T} = N_0 L^{T} \]
+
+But then we notice that we are exponentiating a matrix $L$ by some value, which will still lead to a matrix of values of the same size as $L$. What we want is to find some scalar ($n$ x 1) set of values that contains all of the information contained in the matrix $L$, such that 
+
+\[ x \lambda = x L \]
+
+The way we can approximate $\lambda$ and the stable age distribution is by taking the eigenvalue of the matrix $L$ (the underlying reasons for this are a bit beyond the class, but check out Case page 64). Here, $\lambda$ is equal to the dominant eigenvalue of the Leslie matrix $L$, where dominant eigenvalue means the largest real numbered eigenvalue. Each eigenvalue (of which there are the same as the number of rows or columns in the input matrix $L$) corresponds to an eigenvector, each of which has the same as the number of rows or columns in $L$. So in our case, we have a 3x3 Leslie matrix, so we will obtain 3 eigenvalues, and each of these eigenvalues will have corresponding eigenvectors of length 3. 
 
 ```{r}
 
@@ -417,7 +382,6 @@ legend('topleft', pch=16, col=colz[1:3],
 ```
 
 
-
 I honestly thought that would look a bit better, but perhaps it would look better if we looked at the actual age distribution? 
 
 ```{r}
@@ -434,3 +398,108 @@ legend('topleft', pch=16, col=colz[1:3],
 ```
 
 So we see here that the relative distribution of individuals across age classes stabilizes very quickly when we start it at the stable age distribution. The system will naturally go towards the stable age distribution, which is why we observed similar dynamics when initiating the system with 20 individuals in each age/stage class. 
+
+
+
+So we have calculated $\lambda$ for the population and determined the stable age structure. In the case we knew $\lambda$ beforehand, we could estimate the stable age distribution given information on birth and survivorship. 
+
+\[ c(x) = b l_x exp(-rx) \]
+
+To use this approach, we need to know the gross birth rate ($b$), survivorship $l_x$ of each stage, and the instanteous rate of increse ($r$), where $r = log(\lambda)$. This starts to become a bit of a side point, as so much of the focus of estimating the Leslie matrix $L$ is to get at $\lambda$. 
+
+
+
+
+
+
+
+### Sensitivity of each age class 
+
+Recall how we determined stability of equilibria in the geometric growth model. There was a single equilibrium value $N^{*} = 0$. We determined the stability of this equilibrium value by perturbing it away from that point (by adding some number of individuals) and exploring where the system went (either back to $N=0$ or away to $N=$infinity). We can do similar things with age-structured models, by characterizing the Leslie matrix. There are at least two things we could care about with respect to the importance of individual life stages/ages. 
+
+**Sensitivity**: what effect does an absolute change in a vital rate have on $\lambda$?
+**Elasticity**:  what effect does a proportional change in a vital rate have on $\lambda$? 
+
+Sensitivity is defined as the partial derivative of $\lambda$ with respect to $L_{ij}$, and elasticity is defined as the sensitivity weighted by the $L_{ij}/\lambda$. 
+
+The result of both of these is a matrix of the same dimensions as the Leslie matrix $L$, with larger values corresponding to a larger effect of that rate on overall dynamics. Specifically, sensitivity values would indicate the effect of an additive change in some Leslie matrix entry $L_{ij}$, corresponding to the stable age distribution scaled by the reproductive value of that age class (i.e., what happens if an entry of the Leslie matrix is increased by some small constant amount?). Elasticities address a similar question, but ask about proportional increase (i.e., what happens if an entry of the Leslie matrix is increased by some small percentage?). 
+
+
+
+```{r}
+
+sens <- demogR::eigen.analysis(projMatrix)
+
+sens$sensitivities
+
+sens$elasticities
+
+```
+
+Given these values, which age classes and/or demographic rates would we want to target to have the largest effect on overall $\lambda$? 
+
+
+```{r}
+
+projMatrix2 <- projMatrix
+projMatrix2[2,1] <- projMatrix2[2,1] * 1.1
+stageDynamics <- getStageDynamics(projMatrix, abund0, steps=50)
+stageDynamicsP <- getStageDynamics(projMatrix2, abund0, steps=50)
+
+layout(matrix(1:2,ncol=2))
+par(mar=c(4,4,0.5,0.5))
+plot(stageDynamics[,1], type='l', lwd=2,
+  col=colz[1], ylim=c(0,500),
+  ylab='Abundance', xlab='Time')
+lines(stageDynamics[,2], lwd=2, col=colz[2])
+lines(stageDynamics[,3], lwd=2, col=colz[3])
+legend('topleft', pch=16, col=colz[1:3],
+  c('Young', 'Middle', 'Old'), bty='n')
+eigen(projMatrix)
+
+
+plot(stageDynamicsP[,1], type='l', lwd=2,
+  col=colz[1], ylim=c(0,500),
+  ylab='Abundance', xlab='Time')
+lines(stageDynamicsP[,2], lwd=2, col=colz[2])
+lines(stageDynamicsP[,3], lwd=2, col=colz[3])
+legend('topleft', pch=16, col=colz[1:3],
+  c('Young', 'Middle', 'Old'), bty='n')
+eigen(projMatrix2)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Alright. Let's work through chapter 3, homework problem 3 together (page 64 of Case)
+
+> Make a life table for the fictional shrewd shrew. Two consecutive breeding censuses produce the following data for it.
+
+| Age x | Females (yr 1) | Females (yr 2) | Number female births from age x | 
+| :--  | :--  | :-- | :-- | 
+| 1  | 1000  | 1110 | 0    | 
+| 2  | 600   | 700  | 600  | 
+| 3  | 540   | 540  | 1620 | 
+

@@ -333,16 +333,21 @@ plot(1:(t+1), expoDynamics(n0, lambdas, steps=t),
 lines(1:(t+1), expoDynamics(n0, lambdaStatic, steps=t),
   col=adjustcolor(1,0.5), lwd=5)
 
+```
+
+
+
+
+
+```{r}
+
 # arithmetic mean
 mean(lambdas)
 mean(lambdaStatic)
 
-
 # geometric mean
 prod(lambdas)**(1/length(lambdas))
 prod(lambdaStatic)**(1/length(lambdaStatic))
-
-
 
 ```
 
