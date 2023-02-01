@@ -78,14 +78,19 @@ It may be more realistic to assume that populations intrinsically limit themselv
 
 ### Discrete model
 
-In the discrete model, we see that the population still grows at rate $r$ (which is equal to ln($\lambda$)) , but overall population size is discounted by a scaling term which relates the population size ($N_t$) to an upper threshold. This threshold is the \textbf{carrying capacity ($K$)}, which is the maximum sustainable population size, given potentially limiting resource such as resources, space, etc. 
+In the discrete model, we see that the population still grows at rate $R$, but overall population size is discounted by a scaling term which relates the population size ($N_t$) to an upper threshold. This threshold is the \textbf{carrying capacity ($K$)}, which is the maximum sustainable population size, given potentially limiting resource such as resources, space, etc. 
 
 
 \begin{equation}
-N_{t+1} = N_{t} + (rN_{t}(1 - \frac{N_t}{K}))
+N_{t+1} = N_{t} + (R N_{t}(1 - \frac{N_t}{K}))
 \end{equation}
 
+or 
 
+
+\begin{equation}
+N_{t+1} = N_{t} (1 + R(1 - \frac{N_t}{K}))
+\end{equation}
 
 
 
@@ -139,28 +144,24 @@ $N = 0, r < 0$ (stable)
 ```{r}
 
 n0 <- 1:150
-k <- 20
-r <- 1
 
-
-logisticGrowth <- function(n, r, k){
-  n*exp(r*(1-(n / k)))
+logisticGrowth <- function(n, R, k){
+  n*(1+(R*(1-(n / k))))
 }
-
 
 colz <- c(grey(0.1,0.9), 'dodgerblue', 'firebrick', 'forestgreen')
 #effect of growth rate
-plot(n0, logisticGrowth(n0,1.15,20),
-  type='l', las=1, 
+plot(n0, logisticGrowth(n0, 1.25, 50),
+  type='l', las=1, ylim=c(0,150), xlim=c(0,150), 
   xlab='Population size at time t', 
   ylab='Population size at time t+1', 
   col=colz[1])
-lines(n0, logisticGrowth(n0,1,20),
+lines(n0, logisticGrowth(n0,1,50),
   col=colz[2])
-lines(n0, logisticGrowth(n0,0.75,20),
+lines(n0, logisticGrowth(n0,0.5,50),
   col=colz[3])
 legend('topright', bty='n',
-  c('r=0.75', 'r=1', 'r=1.15'),
+  c('r=0.5', 'r=1', 'r=1.25'),
   pch=16, col=colz[c(3,2,1)])
 
 
@@ -200,25 +201,24 @@ plotSegs(100,100, color=colz[1])
 
 # But why is this? What situations would cause this to not be the case?
 
-plot(n0, logisticGrowth(n0,1.5, 50),
-  type='l', las=1, ylim=c(0,150),
+
+
+colz <- c(grey(0.1,0.9), 'dodgerblue', 'firebrick', 'forestgreen')
+#effect of growth rate
+plot(n0, logisticGrowth(n0, 1.25, 50),
+  type='l', las=1, ylim=c(0,150), xlim=c(0,150), 
   xlab='Population size at time t', 
   ylab='Population size at time t+1', 
-  col=colz[2])
-lines(n0, logisticGrowth(n0,1.5,100),
   col=colz[1])
-lines(n0, logisticGrowth(n0,1.5,10),
+lines(n0, logisticGrowth(n0,1,50),
+  col=colz[2])
+lines(n0, logisticGrowth(n0,0.5,50),
   col=colz[3])
 legend('topright', bty='n',
-  c('k=10', 'k=50', 'k=100'),
+  c('r=0.5', 'r=1', 'r=1.25'),
   pch=16, col=colz[c(3,2,1)])
 
-
-
-#Look at the peaks of the growth (where is the maximum population size here?)
-plotSegs(10,10, color=colz[3])
-plotSegs(50,50, color=colz[2])
-plotSegs(100,100, color=colz[1])
+plotSegs(50,50, color=1)
 
 
 
@@ -226,6 +226,9 @@ plotSegs(100,100, color=colz[1])
 abline(a=0,b=1)
 
 ```
+
+A few things of note about this figure. First, the value of $k$ does very little here apart from changing the size of the curve. It does not influence where that equilibrium point is or the shape of the curve. Second, there are regions of parameter space where the population size at time t+1 exceeds carrying capacity. That is, there are some initial population sizes that lead to populations larer than $k$. 
+
 
 
 
@@ -236,11 +239,6 @@ Alright. So now we can look at the actual dynamics across many generations.
 
 
 ```{r}
-
-
-logisticGrowth <- function(n, r, k){
-  return(n * (1+r*(1-(n/k))))
-}
 
 
 logisticDynamics <- function(n,r,k, steps=100){
@@ -268,7 +266,7 @@ logisticDynamics <- function(n,r,k, steps=100){
 stps <- 20
 
 plot(1:stps,
- logisticDynamics(n=30, r=1, k=30, steps=stps),
+ logisticDynamics(n=20, r=1, k=30, steps=stps),
   type='l', las=1, ylim=c(0,50),
   xlab='Time', 
   ylab='Population size', 
@@ -394,18 +392,18 @@ r=3.2
 
 ```{r, results='hide'}
 
-stps <- 20
+stps <- 100
 
 plot(1:stps,
- logisticDynamics(n=20, r=3.2, k=30, steps=stps),
-  type='l', las=1,ylim=c(0,100),
+ logisticDynamics(n=100, r=3, k=300, steps=stps),
+  type='l', las=1,ylim=c(0,400),
   xlab='Time', 
   ylab='Population size', 
   col=1)
 
 
-sapply(seq(1,100,by=5), function(x){
- lines(logisticDynamics(n=x, r=3.2, k=30, steps=stps), col='firebrick')
+sapply(seq(70,200,by=5), function(x){
+ lines(logisticDynamics(n=x, r=3, k=300, steps=stps), col='firebrick')
 })
 
 ```
@@ -424,18 +422,17 @@ r > 3.56
 
 ```{r, results='hide'}
 
-
 stps <- 100
 
 plot(1:stps,
- logisticDynamics(n=29, r=4.25, k=30, steps=stps),
-  type='l', las=1, ylim=c(0,150),
+ logisticDynamics(n=299, r=3.0, k=300, steps=stps),
+  type='l', las=1, ylim=c(0,400),
   xlab='Time', 
   ylab='Population size', 
   col=1)
 
-sapply(seq(1,100,by=5), function(x){
- lines(logisticDynamics(n=x, r=4.5, k=30, steps=stps), col='firebrick')
+sapply(seq(200,300,by=5), function(x){
+ lines(logisticDynamics(n=x, r=3, k=300, steps=stps), col='firebrick')
 })
 
 
@@ -508,6 +505,11 @@ We can explore this another way as well, to really cement the point about densit
 
 ```{r}
 
+
+dynamics <- expoDynamics(n0, 1.25, steps=t)
+relativeChange <- dynamics[2:length(dynamics)] / dynamics[1:(length(dynamics)-1)]
+
+
 plot(dynamics[1:(length(dynamics)-1)], 
     dynamics[2:length(dynamics)], 
     pch=16, type='b', 
@@ -539,16 +541,21 @@ This shows a clear curved relationship, where it starts off with one slope when 
 
 ```{r}
 
+plot(dynamicsL[1:(length(dynamicsL)-1)], 
+    dynamicsL[2:length(dynamicsL)], 
+    pch=16, type='b', 
+    ylab=expression(N[t+1]), 
+    xlab=expression(N[t]) 
+)
 
 plot(1:150, 
-    logisticGrowth(1:150, r=1.25, k=100),
+    logisticGrowth(1:150, R=1.25, k=100),
     pch=16, type='b', ylim=c(-50,300),
     ylab=expression(N[t+1]), 
     xlab=expression(N[t]) 
 )
 points(100,100, pch=16, col='red', cex=2)
 abline(b=1,a=0, lwd=2, col='grey')
-abline(h=0, lwd=2, col='dodgerblue')
 
 ```
 
@@ -559,7 +566,7 @@ And we can explore how this curve is influenced by changing the population growt
 ```{r}
 
 plot(1:150, 
-    logisticGrowth(1:150, r=3, k=100),
+    logisticGrowth(1:150, R=3, k=100),
     pch=16, type='b', ylim=c(-50,300),
     ylab=expression(N[t+1]), 
     xlab=expression(N[t]) 
@@ -579,9 +586,35 @@ It is important to note that the continuous time logistic model would not produc
 
 ```{r}
 
-logisticGrowth(200, r=3, k=100)
+logisticGrowth(200, R=3, k=100)
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+### Continuous time-lagged logistic model 
+
+The continuous time logistic model does not display any of the dynamic behaviors discussed above. The time lag in the discrete model enables overcompensatory dynamics, which are simply not present when you start to cut time into vanishingly small chunks. One way to recover some of the interesting cyclic behavior is to have a continuous time model with a time lag. What this effectively does is say that the population size that controls growth is not the population size right at time $t$, but is slightly before this (e.g., Case gives the example of an herbivore, so this time lag would be driven by resource populations, but we can also imagine situations where the fluctuations are more intrinsic, such as if a species regulates its birth based on current population size, but has a long gestation period). 
+
+\[ \frac{dN}{dt} = rN \left( \dfrac{K - N(t-T)}{K} \right)  \]
+
+By increasing the time lag $T$, we can start to observe different amplitudes of oscillations (see Case figure 5.28), where larger values of $T$ create larger amplitude fluctuations. There are a number of examples of this in natural and experimental systems in the Case text (page 120 in hard copy, around Fig 5.33). 
+
+
+### Modifications to the logistic model 
+
+Case brings up how the relationship between population size at time $t$ and $t+1$ may not resemble what we've seen previously (a sort of parabolic path). Especially at low densities, it is possible that birth rate is depressed, leading to a 'dip' in the curve at low $N_t$ values. What this means biologically is that there is density dependence in birth or death in that area. Think of a population of sexually reproducing species. At low densities, birth rate may be depressed due to lack of ability to find suitable mates. Also, in pack-hunting species or species with social group structure (where social group size is important to defense behavior, for instance), low population sizes will disproprtionately influence birth and/or death rates. 
+
+> What does this mean for the stability of the system, assuming logistic dynamics? (see Case fiure 5.46-5.48)
+
 
 Now we will introduce a model which incorporates density-dependence in population growth rate, but gets around some issues of the logistic model. 
 
@@ -592,6 +625,9 @@ The Ricker logistic equation uses an exponential term to ensure that the populat
 \begin{equation}
 N_{t+1} = N_{t} exp\left( R(1 - \frac{N_t}{K}) \right)
 \end{equation}
+
+
+By exponentiating the growth rate term, this will also lead to slightly different shape of the $N_t$ by $N_{t+1}$ figure, as it will now grow even faster at low densities, and tend to peak earlier. We can see this through simulation. 
 
 
 ```{r}
@@ -621,7 +657,7 @@ rickerDynamics <- function(n,r,k, steps=100){
 
 layout(matrix(c(1,2), ncol=2))
 plot(1:150, 
-    logisticGrowth(1:150, r=3, k=100),
+    logisticGrowth(1:150, R=3, k=100),
     pch=16, type='b', ylim=c(-50,300),
     ylab=expression(N[t+1]), 
     xlab=expression(N[t]) 
@@ -629,7 +665,6 @@ plot(1:150,
 title(line=-1, 'logistic model')
 points(100,100, pch=16, col='red', cex=2)
 abline(b=1,a=0, lwd=2, col='grey')
-abline(h=0, lwd=2, col='dodgerblue')
 
 plot(1:150, 
     rickerGrowth(1:150, r=3, k=100),
@@ -640,7 +675,106 @@ plot(1:150,
 title(line=-1, 'ricker logistic model')
 points(100,100, pch=16, col='red', cex=2)
 abline(b=1,a=0, lwd=2, col='grey')
-abline(h=0, lwd=2, col='dodgerblue')
 
 ```
+
+
+> What does this mean for the stability of the system as a function of $R$? (see Case 'Exercise' box on page 132 which starts "For the Ricker logistic equation, at what value of R...?").
+
+
+
+
+
+## Chapter 6
+
+### Interaction of density-dependent and density-independent factors 
+
+The logistic model is a model of density-dependence. The growth of the population is still determined by some growth rate $R$, but the addition of $K$ tempers the growth of the population in a manner dependent on the state variable $N_t$. What if we separate out the birth death process, and make one independent of density (e.g., birth rate is a function of density, but all individuals will die with some probability independent of population density)? 
+
+\[ \dfrac{dN}{dt} = rN \dfrac{K-N}{K} - DN \]
+
+where the model is pretty much the same as before, but now includes a density-independent mortality term $D$. 
+
+> Do the exercise right below Equation 6.1 in the Case text. 
+
+
+What does this density-independent mortality term mean for the relationship between population size and population growth rate (Figure 6.1) and per capita growth rate (Figure 6.2)? 
+
+
+
+
+### Detecting density dependence 
+
+How do we go about detecting the potential presence of density-dependence in our data? If we assume geometric growth, we can visualize population size at time $t$ and $t+1$ on a log scale, where the points through time should have a linear relationship with slope 1 and intercept $\lambda$. (Figure 6.4). A shallower slope is a potential sign of density dependent processes, as it means that at larger values of $N_t$, a weaker feedback in terms of $N_{t+1}$ is detected (the population is not growin at some fixed $\lambda$ in that region). Explorations of this in empirical time series demonstrated that the majority of populations were exhibiting density-dependent population dynamics. 
+
+Case goes into a model to demonstrate why this may not be the strongest test of density-dependence, and offers alternatives. Through the addition of noise in density-independent mortality, we are able to create a situation where the slope of that line described above is always less than 1 (Figure 6.6 and 6.7)
+
+What if we consider per capita growth rate instead of population growth rate? the relationship should be linear and negative, barring the presence of an Allee effect in density-dependent populations (Figure 6.10 - 6.12). 
+
+
+
+### Interaction of population regulation and environmental noise 
+
+Environmental noise can be considered a form of density-independent mortality, in a sense. Case explores how environmental noise will influence the range of fluctuations observed by considering the balance (and variance in) birth and death rates demonstrating the expectation that populations will fluctuate symmetrically around some population size $N$ (where the peak of this should be around $N = K$ under reasonable values of $R$). This is different than simply adding noise to the population growth rate $R$, as here there is no implicit balance between birth and death rates, as they are mashed into a single parameter $R$. One interesting result when considering birth and death separately is that the range of fluctuations observed can be mapped onto this space, where if the variation around birth and death rates with population size increases, the rane of population sizes that would be observed has larger variance and 'flattens' (Figure 6.14). This maps onto our intuition of how environmental variability influences the range of population sizes observed, as adding more environmental variability should produce more variable population dynamics (Figure 6.14)
+
+
+
+### Population regulation and limitation 
+
+Populations may self-regulate (through density-dependence caused by resource competition, for example), or may be limited (by a natural enemy like a predator or parasite). Case argues that these are quite different processes, though both are density-dependent (though Case argues that limiting factors may _or may not_ be density-dependent). 
+
+
+_Case goes into (supra)additive mortality effects, which I will not cover here. It seems a bit beyond scope of what we need to go over, but feel free to pursue some of those ideas if you are interested._ 
+
+
+
+
+
+
+
+
+### Distinguishing cycles from random fluctuations 
+
+So we can estimate density-dependence in population dynamics, but we often want to be able to parse out environmental forcing of population dynamics that may be independent of density from intrinsic cyclic dynamics. That is, a population may change over time if $R$ is a function of some environmental variable (e.g. temperature) or because $R$ is influenced by density. We can explore the periodicity of population dynamics by considering the temporal autocorrelation in the time series. 
+
+```{r}
+
+tmp <- data.frame(time=1:9, 
+  n=c(5,10,20,25,20,10,10,14,20))
+
+plot(y=tmp$n, x=tmp$time, type='b')
+
+```
+
+
+We can start to explore the autocorrelation by offsettin the time series from itself, and calculating the correlation coefficient. 
+
+```{r}
+#lag=0
+cor(tmp$n, tmp$n)
+
+#lag=1
+cor(tmp$n[1:8], tmp$n[2:9])
+
+#lag=2
+cor(tmp$n[1:7], tmp$n[3:9])
+
+```
+
+
+We can view the correlation across different lags to determine how a time series is cycling. Case does this for up to lag 3 in Figure 6.22. We can also do it for lags up to the length of the time series - 1 (though think of what this means for the amount of data used for the correlation). 
+
+```{r}
+
+acf(tmp$n)
+
+```
+
+The decline in positive correlation with increasing lags is suggestive that random noise is separating the dynamics a bit. Cyclic populations, as the Canadian lynx, show an interesting periodicity in the autocorrelation diagram, still maintaining clear autocorrelation over different time lags, indicative of some (potentially density-independent) forcing, which we will explore later. There is still an inherent difficulty in detecting density dependence from time series data, but exploring temporal autocorrelation is at least one tool for beginning to get at the structure of the time series data (Figure 6.26 shows density-independent population dynamics versus just slightly noisy dynamics, with Case arguing that density-dependence has a bit more autocorrelation at small time lags). 
+
+
+
+
+
+
 
