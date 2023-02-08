@@ -34,6 +34,29 @@ Using birds as an example, we can imagine how the number of offspring per reprod
 This simple conceptual model leads to some interesting (and testable) conclusions. If we impose a negative relationship of some shape between juvenile survival and clutch size, we create a hump-shaped curve between breeding success and clutch size. The point that maximizes this hump is the optimal clutch size. Also, lowering juvenile survival -- while keeping the shape of the survival curve the same -- results in lower optimal clutch sizes. 
 
 
+
+```{r}
+
+clutchSize <- 1:10
+jSurv0 <- dexp(clutchSize, rate=0.1)*2.7
+jSurv1 <- dexp(clutchSize, rate=0.5)*2.7
+jSurv2 <- dexp(clutchSize, rate=2)*2.7
+
+plot(x=clutchSize, y=jSurv0, type='b', ylim=c(0,1), pch=16, 
+  xlab='Clutch size', ylab='Juvenile survival')
+lines(x=clutchSize, y=jSurv1, col='firebrick', type='b', pch=16)
+lines(x=clutchSize, y=jSurv2, col='dodgerblue', type='b', pch=16)
+
+
+
+plot(x=clutchSize, y=jSurv0*clutchSize, type='b', ylim=c(0,2), pch=16, 
+  xlab='Clutch size', ylab='Breeding success')
+lines(x=clutchSize, y=jSurv1*clutchSize, col='firebrick', type='b', pch=16)
+lines(x=clutchSize, y=jSurv2*clutchSize, col='dodgerblue', type='b', pch=16)
+
+```
+
+
 ### David Lack's conceptual model of bird clutch size evolution
 
 > Natural selection should favor genotypes that have highest breeding success
@@ -44,9 +67,15 @@ Assumes:
 
 **empirical support**
 
-This conceptual model seems to hold in many natural systems, with some interesting caveats. The addition of eggs to a nest at the optimum tended to reduce nestling survival in experimental populations. 
+This conceptual model seems to hold in many natural systems, with some interesting caveats. 
 
-Latitude influences clutch size, such that birds at lower latitudes tended to have smaller clutches, a pattern seen both _interspecifically_ and _intraspecifically_. This makes sense with Lack's conceptual model, as predation may be higher towards the tropics, reducing optimal clutch size by reducing nestling survival. This is further evidenced by higher clutch sizes in cavity-nesting birds, where we might think predation is lower. However, island birds tend to have smaller clutches, even though predation pressure should be reduced for island populations. 
+The addition of eggs to a nest at the optimum tended to reduce nestling survival in experimental populations. 
+
+Latitude influences clutch size, such that birds at lower latitudes tended to have smaller clutches, a pattern seen both _interspecifically_ and _intraspecifically_. This makes sense with Lack's conceptual model, as predation may be higher towards the tropics, reducing optimal clutch size by reducing nestling survival. 
+
+This is further evidenced by higher clutch sizes in cavity-nesting birds, where we might think predation is lower. 
+
+However, island birds tend to have smaller clutches, even though predation pressure should be reduced for island populations. 
 
 
 
@@ -112,6 +141,25 @@ How does year to year variation influence optimal reproductive effort? Let's con
 This suggests that fluctuations in juvenile survival rate as a function of environmental variability (here incorporated only be considering years to be 'good' or 'bad') reduce $\lambda$, favoring lower optimal reproductive effort in variable environments. 
 
 
+Recall what we learned previously about geometric versus arithmetic means and the role of temporal variability in demographic parameters to resulting overall population growth rate. The idea was that the arithmetic mean was a poor estimator of lambda, as the effects of temporal variability in demographic rates were compounded in a way that the arithmetic mean did not capture. This also comes into play when considering temporal variability in optimal reproductive effort. Specifically, Case explores the relationship between the natural log of the geometric mean, and the arithmetic mean of the natural log of lambda. That is, the natural log of the geometric mean ($ln(G)$) is equal to the arithmetic mean of $ln(\lambda)$, meaning that a modification of the artihmetic mean $\mu$ is needed that considers the variance in $\lambda$ values over time. 
+
+\[ ln G = ln(\mu) - \dfrac{\sigma^{2}}{2\mu^{2}} \]
+
+Exponentiating both sides of this equation leads us to the relationship between geometric mean $G$ and arithmetic mean $\mu$
+
+\[ G = \mu - \dfrac{\sigma^{2}}{2\mu}  \]
+
+We can plug these values back into the equation for $\lambda$ as a function of birth and survival ($\lambda = Bs_0 + s_a$), we see that population growth rate $\lambda$ will always be reduced when there is variability in demographic rates relative to the situation of taking the mean demographic rate (equation on bottom of page 174 in Case). This results in 
+
+\[ G \approx \bar{\lambda} - \dfrac{\sigma_a^{2}}{2\bar{\lambda}} \]
+
+Case goes further and considers the case of temporal variation in a demographic parameter (in the above example he is incorporating temporal variation in adult survival $s_a$), leading to 
+
+\[ 1 - \dfrac{\sigma_a^{2}}{2} \]
+
+as a way to show the relative change in overall population growth rate as a function of temporal variability in adult survival. Note that making the with/without temporal variability geometric mean $\lambda$ values proportional (i.e., $G_{+} / G_{-}$), we remove the influence of mean $\lambda$, and create a situation in which any amount of temporal variability in survival will lead to a lower optimal reproductive output. Case argues this from a mean-variance scaling perspective. If there is a relationship between the mean and the variance in adult survival, and we want to reduce the variance in adult survival to lower the relative fitness reductions driven by temporal variability, then a situation with lower mean adult survival would be favored in more variable environments. Assuming that adult survival and fecundity are typically related (and much of what we have discussed tacitly assume this scaling), we can start to hypothesize about optimal life history strategies in variable environments with respect to both adult survival and birth rate. That is, we expect life history strategies favoring higher reproductive output and lower adult survival to perform better in more variable environments. 
+
+
 
 ### A graphical technique for optimal life history determination
 
@@ -120,7 +168,7 @@ Recall Figure 7.13, which shows the relationship between reproductive effort and
 
 ### Egg size and parental care 
 
-All of the above describes the optimal reproductive output (and all the tradeoffs involved), but once we have the optimal reproductive output, how should this output be allocated among offspring? Recall that producing more offspring will trade-off with offspring survival. For instance, annual plants may care more about offspring survival, and invest more in producing fewer high-quality offspring, where quality is proportional here with seed size (as seed size is a measure of energetic input). 
+All of the above describes the optimal reproductive output (and all the tradeoffs involved), but once we have the optimal reproductive output, how should this output be allocated among offspring? Recall that producing more offspring will trade-off with offspring survival. For instance, annual plants may care more about offspring survival, and invest more in producing fewer high-quality offspring, where quality is proportional here with seed size (as seed size is a measure of energetic input). This is due to annual plants not having to compete with their parents, as seeds would be growing where the previous parent was (but is no longer). However, for perennial plants, smaller, easier-dispersed seeds would be favored, as competition with the parent plant could otherwise be quite strong (related to some ideas around the Janzen-Connell hypothesis if folks are interested in this area). 
 
 
 

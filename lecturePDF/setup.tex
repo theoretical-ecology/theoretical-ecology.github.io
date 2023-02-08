@@ -1,0 +1,617 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Introduction to the course},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Introduction to the course}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{introductions}{%
+\subsubsection{Introductions}\label{introductions}}
+
+I can start this off. Then we can go around the room, thinking about
+
+\begin{itemize}
+\tightlist
+\item
+  what you want to get out of the course
+\item
+  how theory fits into your current research (if you are currently doing
+  research)
+\item
+  any worries/feelings/questions/concerns about the course
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{syllabus}{%
+\subsubsection{Syllabus}\label{syllabus}}
+
+Work through syllabus, clarify structure, discuss final project/Case
+text/homework structure/paper summaries/etc.
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://theoreticalEcology.github.io/syllabus/}{syllabus}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{course-website}{%
+\subsubsection{Course website}\label{course-website}}
+
+Go through the course website and make sure everyone has easy access and
+is clear on how to get the lecture notes, readings, and homeworks.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{notes}{%
+\subsubsection{Notes}\label{notes}}
+
+\begin{itemize}
+\tightlist
+\item
+  You may want to \href{https://www.r-project.org/}{download R} as we
+  will be using it to simulate some of the models we go over. However,
+  we will not be learning how to use R during the course (as this would
+  be a bit much to learn at the same time as the theory), but I
+  definitely encourage folks to check out the resources available for
+  working in R, as scientific research tends to need a bit of
+  programming.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{what-is-theoretical-ecology}{%
+\subsubsection{What is theoretical
+ecology?}\label{what-is-theoretical-ecology}}
+
+\textbf{Ecology}: study of species interactions
+
+\textbf{Theory}: Body of evidence linking a general explanation to a
+commonly observed phenomenon
+
+\begin{quote}
+Theoretical ecology attempts to explain patterns observed in nature
+through generalized models
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{models}{%
+\subsubsection{Models}\label{models}}
+
+\textbf{Statistical model}: A model exploring the statistical
+relationships between a response and some set of predictor variables.
+
+\begin{itemize}
+\item
+  can be completely independent of theory
+\item
+  can be focused on prediction or variable importance
+\item
+  requires data
+\end{itemize}
+
+e.g., linear regression
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{what-is-the-relationship-betwen-sepal-length-and-sepal-length-in-irises}{%
+\subsubsection{What is the relationship betwen sepal length and sepal
+length in
+irises?}\label{what-is-the-relationship-betwen-sepal-length-and-sepal-length-in-irises}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(iris)}
+\NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(iris}\SpecialCharTok{$}\NormalTok{Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ iris}\SpecialCharTok{$}\NormalTok{Sepal.Width)}
+\FunctionTok{plot}\NormalTok{(iris}\SpecialCharTok{$}\NormalTok{Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ iris}\SpecialCharTok{$}\NormalTok{Sepal.Width, }
+  \AttributeTok{col=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{[}\FunctionTok{as.numeric}\NormalTok{(iris}\SpecialCharTok{$}\NormalTok{Species)])}
+\FunctionTok{abline}\NormalTok{(mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{/media/tad/sanDisk1TB/Teaching/theoreticalEcology/website/lecturePDF/setup_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Phenomenological model}: A model describing some phenomenon,
+often independent of any data.
+
+\begin{itemize}
+\item
+  an idea of \emph{how} a system behaves given assumptions
+\item
+  incorporates theoretical expectations
+\item
+  incredibly useful when fit or compared to empirical data (where's the
+  disconnect?)
+\end{itemize}
+
+e.g., exponential growth
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{population-dynamics-with-exponential-growth}{%
+\subsubsection{Population dynamics with exponential
+growth}\label{population-dynamics-with-exponential-growth}}
+
+\[ N_{t+1} = N_t \lambda \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{expoGrowth }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n, }\AttributeTok{lambda=}\FloatTok{1.25}\NormalTok{, }\AttributeTok{times=}\DecValTok{100}\NormalTok{)\{}
+\NormalTok{  nt }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(n)}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{times)\{}
+\NormalTok{    nt[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ nt[i] }\SpecialCharTok{*}\NormalTok{ lambda}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(nt)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{expoGrowth}\NormalTok{(}\DecValTok{10}\NormalTok{), }\AttributeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab=}\StringTok{\textquotesingle{}Population size\textquotesingle{}}\NormalTok{, }
+  \AttributeTok{xlab=}\StringTok{\textquotesingle{}Time\textquotesingle{}}\NormalTok{, }\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{expoGrowth}\NormalTok{(}\DecValTok{10}\NormalTok{, }\AttributeTok{lambda=}\DecValTok{2}\NormalTok{), }\AttributeTok{col=}\StringTok{\textquotesingle{}dodgerblue\textquotesingle{}}\NormalTok{, }\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{/media/tad/sanDisk1TB/Teaching/theoreticalEcology/website/lecturePDF/setup_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+This course will focus pretty much entirely on phenomenological models
+(as I have defined them)
+\end{quote}
+
+\begin{quote}
+Also, evolutionary models do not really get emphasized in this book, but
+this could be good fodder for your paper summaries or final projects if
+you are interested
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{why-theoretical-ecology}{%
+\subsubsection{Why theoretical ecology?}\label{why-theoretical-ecology}}
+
+\begin{itemize}
+\tightlist
+\item
+  Theory allows us a lens with which to explain natural systems.
+\end{itemize}
+
+\textbf{Observation}: some set of ecological processes is causing this
+population to cycle
+
+\textbf{Conclusion}: this population is cycling
+
+\textbf{Theory}: which of the cycle-generating processes could cause
+cycles?
+
+\textbf{Generation of novel question}: can models create cycles under
+processes with different `strengths'?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{why-theoretical-ecology-1}{%
+\subsubsection{Why theoretical
+ecology?}\label{why-theoretical-ecology-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  It provides a useful interface for experimental and observational
+  studies.
+\end{itemize}
+
+\textbf{Population model}: Ricker model to explore population dynamics
+and the role of demographic/environmental stochasticity
+
+\textbf{Experiment}: fit models to experimental data and find
+demographic stochasticity important in controlled laboratory experiments
+
+\textbf{Observation}: fit models to empirical time series to explore the
+relative importance of demographic and environmental stochasticity in
+natural systems
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{why-theoretical-ecology-2}{%
+\subsubsection{Why theoretical
+ecology?}\label{why-theoretical-ecology-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  It shows us what ecological interactions \emph{could} look like in
+  different conditions
+\end{itemize}
+
+\includegraphics[width=1\textwidth,height=\textheight]{https://besjournals.onlinelibrary.wiley.com/cms/asset/7c4f8326-a40c-45f3-bb51-9693a5761a6d/jane13485-fig-0003-m.jpg}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{why-theoretical-ecology-3}{%
+\subsubsection{Why theoretical
+ecology?}\label{why-theoretical-ecology-3}}
+
+\begin{itemize}
+\tightlist
+\item
+  It provides us a concrete way to explore and explain natural processes
+\end{itemize}
+
+\includegraphics[width=0.6\textwidth,height=\textheight]{https://www.geographyrealm.com/wp-content/uploads/2014/11/Island-biogeography.jpg}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{barriers-to-a-more-theory-rich-discipline}{%
+\subsubsection{Barriers to a more theory-rich
+discipline}\label{barriers-to-a-more-theory-rich-discipline}}
+
+\begin{itemize}
+\tightlist
+\item
+  some ecologists are `bad' at theory. Why? (math/programming/courses)
+\item
+  Is the world too complex to model? No (most of the time)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Is a complex model useful? No (most of the time)
+  \end{itemize}
+\end{itemize}
+
+\url{https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(19)30171-5}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{the-promise-of-theory-in-ecology}{%
+\subsubsection{The promise of theory in
+ecology}\label{the-promise-of-theory-in-ecology}}
+
+\begin{itemize}
+\tightlist
+\item
+  we have lots of patterns, perhaps more patterns than theory?
+\end{itemize}
+
+\begin{quote}
+`To do science is to search for repeated patterns\ldots{} The best
+person to do this {[}in ecology{]} is the naturalist who loves to note
+changes in bird life up a mountainside, or changes in plant life from
+mainland to island, or changes in butterflies from temperate to tropics'
+- Robert MacArthur
+\end{quote}
+
+\emph{note: I 100\% disagree with the assertion that there is a `best'
+type of ecologist, and that the `best' type would be a naturalist}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{patterns-without-theory-can-be-deceiving}{%
+\subsubsection{Patterns without theory can be
+deceiving}\label{patterns-without-theory-can-be-deceiving}}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth,height=\textheight]{https://esajournals.onlinelibrary.wiley.com/cms/asset/edd898a5-4c22-468b-83d5-b78460ac7f97/ecy201596123386-fig-0001-m.jpg}
+\caption{distribution of birds in Bismarck Archipelago}
+\end{figure}
+
+\url{https://esajournals.onlinelibrary.wiley.com/doi/10.1890/14-1848.1}
+
+\begin{quote}
+Where did Diamond go wrong?
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{theory-requires-tests}{%
+\subsubsection{Theory requires tests}\label{theory-requires-tests}}
+
+There is an inherent feedback in developing some conceptual theory based
+on observations, and then testing this theory in different locations or
+in experimental trials.
+
+\includegraphics[width=0.3\textwidth,height=\textheight]{https://saylordotorg.github.io/text_general-chemistry-principles-patterns-and-applications-v1.0/section_05/4100bb1759822739546b1e01c77733a3.jpg}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{breaking-the-training-divide}{%
+\subsubsection{Breaking the training
+divide}\label{breaking-the-training-divide}}
+
+\includegraphics[width=0.6\textwidth,height=\textheight]{https://www.cell.com/cms/attachment/961bdd89-cb83-4b26-9b7b-d409690c7b1d/gr2.jpg}
+
+\url{https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(19)30171-5}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{so-youre-like-a-modeler}{%
+\subsubsection{So, you're like a
+`modeler'?}\label{so-youre-like-a-modeler}}
+
+\begin{itemize}
+\tightlist
+\item
+  The `modeler'/`empiricist' divide is a misnomer and is silly
+\item
+  The goal of this course is not to pull you away from natural systems,
+  but to give you tools to generalize and explain the dynamics of
+  natural systems
+\end{itemize}
+
+\url{https://royalsocietypublishing.org/doi/10.1098/rsfs.2012.0008}
+
+\url{https://www.journals.uchicago.edu/doi/pdfplus/10.1086/717206}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{discussion}{%
+\subsubsection{Discussion}\label{discussion}}
+
+\begin{quote}
+Codling and Dumbrell. 2012. Mathematical and theoretical ecology:linking
+models with ecological processes. \emph{Interface}
+\url{doi:10.1098/rsfs.2012.0008}
+\end{quote}
+
+\textbf{Note}:
+
+\begin{itemize}
+\item
+  This is an introduction to a special issue organized around
+  `Mathematical and theoretical ecology', so it spends some time trying
+  to tie the papers into a cohesive picture. This is useful for this
+  course, as it gives you an idea of types of theoretical articles.
+\item
+  \href{http://faculty.washington.edu/cet6/pub/Temp/CFR521e/Lawton_1996.pdf}{Additional
+  article some folks might find interesting}: Lawton discussing
+  `patterns' back in 1996, muddying some waters while also having some
+  pretty fair points in other places.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{the-paper-was-written-over-a-decade-ago.-in-what-ways-do-you-think-things-have-changed-in-the-field}{%
+\subsubsection{The paper was written over a decade ago. In what ways do
+you think things have changed in the
+field?}\label{the-paper-was-written-over-a-decade-ago.-in-what-ways-do-you-think-things-have-changed-in-the-field}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{what-were-your-reactions-when-you-read-this}{%
+\subsubsection{What were your reactions when you read
+this?}\label{what-were-your-reactions-when-you-read-this}}
+
+\begin{quote}
+``Without ecological theory, collecting data is a futile and meaningless
+endeavour. Likewise, producing elegantand beautiful mathematical models
+of ecological systems without validation against real data is an empty
+achievement''.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{simplifying-assumptions-and-the-mean-field-approximation}{%
+\subsubsection{Simplifying assumptions and the mean-field
+approximation}\label{simplifying-assumptions-and-the-mean-field-approximation}}
+
+\begin{itemize}
+\tightlist
+\item
+  The authors discuss (bottom left of page 145) the use of mean-field
+  techniques and sometimes when assumptions used in theoretical models
+  may be alright. This is an important point, because we will make
+  oodles of simplifying assumptions. What are some of the tradeoffs in
+  using simplifying assumptions (both from the article and in your own
+  research)?
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{generating-testable-predictions}{%
+\subsubsection{Generating testable
+predictions}\label{generating-testable-predictions}}
+
+\begin{itemize}
+\tightlist
+\item
+  One role of theory is to generate testable hypotheses. The Rands paper
+  from this issue (discussed on page 147) is a great example. Can we
+  collectively think of other examples of how theoretical models, in the
+  absence of data, have generated testable predictions?
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{lines-in-the-sand}{%
+\subsubsection{Lines in the sand}\label{lines-in-the-sand}}
+
+\begin{quote}
+Broadly speaking, ecological models can be split into two separate
+categories; simplistic mathematical models, which offer analytically
+tractable solutions and the examination of the underlying model
+properties, and more complex simulation-based models (cannot be solved
+analytically)
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  What does it mean to `analytically solve' a model, and how is this
+  useful?
+\item
+  To what extent has this distinction been eroded in more recent years
+  and why/how?
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{role-of-stochastic-processes}{%
+\subsubsection{Role of stochastic
+processes}\label{role-of-stochastic-processes}}
+
+\begin{quote}
+Ecological systems are very different from physical and chemical
+systems, notably containing more uncertainty and chaotic dynamics, and
+are often influenced by stochastic processes.
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  This gets at two things
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    ecological data are messy (imperfect detection etc.)
+  \item
+    ecological systems are messy (stochastic birth/death)
+  \end{enumerate}
+\end{itemize}
+
+To what extent can models incorporate either/or of these processes,
+allowing theory to easily bridge this data-model divide the authors try
+to emphasize?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ecology-in-the-absence-of-theory}{%
+\subsubsection{Ecology in the absence of
+theory}\label{ecology-in-the-absence-of-theory}}
+
+\begin{quote}
+After all, without theory providing testable hypotheses, ecology could
+become nothing more than data collection for its own sake
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  The authors are taking a bit of a biased (if not obtuse) view of the
+  field of ecology here (in my opinion). I was curious if this line
+  (towards of the end of article) generated any thoughts from you all.
+\end{itemize}
+
+\end{document}

@@ -10,7 +10,7 @@ markup: "mmark"
   Instructor | [Tad Dallas](https://taddallas.github.io)  <a href="mailto:tdallas@mailbox.sc.edu" title="email"><i class="fa fa-envelope"></i></a>  <a href="https://github.com/taddallas" title="GitHub"><i class="fa fa-github"></i></a> |
   Location     |  Jones 214  |
   Times        |  T & TH 2:50pm - 4:05pm     |
-  Drop-in hours |  Th from 1:00pm - 2:40pm  |
+  Drop-in hours &nbsp; &nbsp; &nbsp; &nbsp; |  Th from 1:00pm - 2:40pm  |
 
 
 
