@@ -95,7 +95,7 @@ stageDynamics <- getStageDynamics(projMatrix, abund0, steps=50)
 
 plot(stageDynamics[,1], type='l', lwd=2,
   col=colz[1], ylim=c(0,400),
-  ylab='Abundance', xlab='Time')
+  ylab='Abundance (of age x)', xlab='Time')
 lines(stageDynamics[,2], lwd=2, col=colz[2])
 lines(stageDynamics[,3], lwd=2, col=colz[3])
 lines(stageDynamics[,4], lwd=2, col=colz[4])
@@ -115,7 +115,7 @@ stageDynamics <- getStageDynamics(projMatrix,
 
 plot(stageDynamics[,1], type='l', lwd=2,
   col=colz[1], ylim=c(0,400),
-  ylab='Abundance', xlab='Time', las=1)
+  ylab='Abundance (of age x)', xlab='Time', las=1)
 lines(stageDynamics[,2], lwd=2, col=colz[2])
 lines(stageDynamics[,3], lwd=2, col=colz[3])
 lines(stageDynamics[,4], lwd=2, col=colz[4])
@@ -142,7 +142,7 @@ stageDynamics3 <- getStageDynamics(projMatrix,
 
 plot(rowSums(stageDynamics0), type='l', lwd=2,
   col=colz[1], ylim=c(0,1000),
-  ylab='Abundance', xlab='Time', las=1)
+  ylab='Abundance (total population)', xlab='Time', las=1)
 lines(rowSums(stageDynamics1), lwd=2, col=colz[2])
 lines(rowSums(stageDynamics2), lwd=2, col=colz[3])
 lines(rowSums(stageDynamics3), lwd=2, col=colz[4])
@@ -172,7 +172,7 @@ But how do we know the value of each age class to overall reproduction, independ
 Early reproduction should be rewarded, as survivorship needs to be considered in the reproductive value of an individual. Fisher came up with a formulation of reproductive value which considers the influence of survivorship. The argument underlying it is that the future reproductive potential of individuals age $x$ is equivalent to the number of female offspring produced by mothers that are age $x$ \textit{and older} divided by the number of mothers that are age $x$ this year, assuming the population is at the stable age structure distribution. We'll explore what this means mathematically now, separating the numerator from the denominator. 
 
 
-\textbf{Numerator}: the number of female offspring produced this year by mothers age x or older
+**Numerator**: the number of female offspring produced this year by mothers age x or older
 
 \begin{equation}
 \sum_{t=x} b_{t} c_{t} N(T)
@@ -185,7 +185,7 @@ where $c_{t}$ is the proportion of individuals in class $t$ (age $t$) compared t
 \end{equation}
 
 
-\textbf{Denominator}: the number of mothers of age $x$ this year. 
+**Denominator**: the number of mothers of age $x$ this year. 
 
 Earlier, we learned that the $c_{t}$ is a function of the overall population growth rate scaled by survival, taking the formulation
 
@@ -203,7 +203,7 @@ V_x = \frac{\lambda_x}{l_x} \sum_t=x \lambda^{-t}l_{t} b_{t}
 \label{vx}
 \end{equation}
 
-In the textbook, Case goes into how $b_t$ (the raw birth rate of age class $t$) can be replaced by the fecundity ($F_t$) data from the Leslie matrix, where $F_x = s_o b_x$. Note that this will change $\lambda^{-t}$ to $\lambda^{-(t+1)}$ in Equation \ref{vx}.
+In the textbook, Case goes into how $b_t$ (the raw birth rate of age class $t$) can be replaced by the fecundity ($F_t$) data from the Leslie matrix, where $F_x = s_o b_x$. Note that this will change $\lambda^{-t}$ to $\lambda^{-(t+1)}$ in Equation \ref{vx}. Why?
 
 So now we have a way to estimate reproductive value $V_x$, which considers the total reproductive potential of mothers in age class $x$ to future offspring. That is, $V_x$ is fundamentally composed of \textit{two parts}
 
