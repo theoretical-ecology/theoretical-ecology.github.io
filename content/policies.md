@@ -59,9 +59,9 @@ Over the course, it is expected that students gain
 + March 2: second homework due
 + March 30: third homework due
 + April 20: second paper summary due
-+ April 27: fourth homework due
-+ May 2: final project turned in and presented
-+ May 2: final exam (4pm)
++ April 20: fourth homework due
++ April 25: final project turned in and presented
++ May 2: final exam (take-home to be distributed May 1. Due at 4pm May 2.)
 
 
 
@@ -82,7 +82,7 @@ There will be a total of 500 points, consisting of 4 assignments, a paper summar
 | Assignments | 4 x 75 | 300 |
 | Attendance/Participation | 50 | 50 |
 | Paper summary | 50 | 50 |
-| Final exam | 100 | 100 |
+| Final exam (or final project) | 100 | 100 |
 
 
 
@@ -194,7 +194,7 @@ This course affirms equality and respect for all gendered identities and express
 
 ### Disability services
 
-Student Disability Resource Center (http://www.sa.sc.edu/sds/): The Student Disability Resource Center (SDRC) empowers students to manage challenges and limitations imposed by disabilities. Students with disabilities are encouraged to contact me to discuss the logistics of any accommodations needed to fulfill course requirements (within the first week of the semester). In order to receive reasonable accommodations from me, you must be registered with the Student Disability Resource Center (1705 College Street, Close-Hipp Suite 102, Columbia, SC 29208, 803-777-6142). Any student with a documented disability should contact the SDRC to make arrangements for appropriate accommodations.
+Student Disability Resource Center (http://www.sa.sc.edu/sds/): The Student Disability Resource Center (SDRC) empowers students to manage challenges and limitations imposed by disabilities. Students with disabilities are encouraged to contact me to discuss the logistics of any accommodations needed to fulfill course requirements (within the first week of the semester). In order to receive reasonable accommodations from me, you must be registered with the Student Disability Resource Center (1705 College Street, Close-Hipp Suite 102, Columbia, SC 29208, 803-777-6142). Any student with a documented disability should contact the SDRC to make arrangements for appropriate accommodations.
 
 ### Student Success Center
 
