@@ -84,9 +84,13 @@ Changes to the syllabus may be made during the semester. The most up-to-date and
 
 + April 20: second paper summary due
 
-+ April 27: fourth homework due
++ April 20: fourth homework due
 
-+ May 2: final project turned in and presented
++ April 25: final project turned in and presented
+
++ May 2: final exam (take-home to be distributed May 1. Due at 4pm May 2.)
+
+
 
 
 
