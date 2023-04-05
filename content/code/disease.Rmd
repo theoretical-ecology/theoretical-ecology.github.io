@@ -241,6 +241,13 @@ lines(out$I, col='red', lty=4)
 
 
 
+
+
+
+
+
+
+
 ### Next generation estimation of R_0
 
 Next generation operator ($\mathbf{FV}^{-1}$) gives rate at which individuals in compartment $j$ generate new infections in compartment $i$ times average length of time individual spends in single visit to compartment. The dominant eigenvalue of this next generation operator is $R_0$. We will take that to be true without proof at this point, as diving down into it is a bit beyond the scope here.  
@@ -316,6 +323,43 @@ a == b
 
 
 
+## macroparasites versus microparasites
+
+Everything above has been focused on microparasites (viruses, bacteria, protozoans), where the transmission mode is best characterized as 'direct' (see Anderson and May paper for further distinction and other characteristics). Models of macroparasites (helminths, arthropods, etc.) are different in structure from the SIR/SEIR type models discussed above. For macroparasites, we now have to consider the dynamics of the pathogen population more explicitly. 
+
+
+\[ H = rH - \alpha P \]
+\[ P = \beta LH - (\mu + \alpha + b)P - (\alpha* (P^{2}/H)*\frac{k+1}{K} \]
+\[ L = \lambda P - \gamma L - \beta LH \]
+
+where we have 3 state variables 
+
+H = number of hosts
+P = number of parasites
+L = number of free-living (infective) stages (e.g. larvae)
+
+
+and several parameters:
+
+r = host growth rate
+$\alpha$ = parasite impact on host mortality
+$\beta$ = rate at which hosts pick up infecting stages
+$\mu$ = parasite death rate
+k = aggregation parameter
+$\lambda$ = rate of production of new free-living stages (i.e. parasite fertility)
+$\gamma$ = death rate of free-living stages
+
+This model assumes that only the larval stage of the parasite is infectious, such that the adult parasite population is controlled through the success of the larval stage infections of the host population $H$. 
+
+
+Determining the R0 for this model is perhaps a bit beyond what we will cover here, but explore the model and think critically about how the dynamics will change with changes to parameters. For instance, what does the aggregation parameter $k$ do? How would you calculate the average parasite burden per host? 
+
+More information on this model is presented in May and Anderson 1978 (https://www.jstor.org/stable/3934). 
+
+
+
+
+
 
 
 
@@ -377,11 +421,117 @@ The SIR model which we introduced assumes a well-mixed population, which doesn't
 
 
 
+```{r results='hide'}
 
-```{r}
+nets <- lapply(seq(0.05,1, length.out=100), function(x){igraph::sample_gnp(100, x)})
+sims <- lapply(nets, igraph::sir, beta=0.1, gamma=0.1)
 
+# very low connectance
+plot(sims[[1]][[1]]$times, sims[[1]][[1]]$NI, type='l', 
+  xlab='Time', ylab='Number infected', las=1, ylim=c(0,100), 
+  col=adjustcolor(1, 0.25))
+sapply(sims[[1]], function(x){
+  lines(x$times, x$NI, col=adjustcolor(1,0.25))
+})
+
+# moderate connectance 
+plot(sims[[50]][[1]]$times, sims[[50]][[1]]$NI, type='l', 
+  xlab='Time', ylab='Number infected', las=1, ylim=c(0,100), 
+  col=adjustcolor(1, 0.25))
+sapply(sims[[50]], function(x){
+  lines(x$times, x$NI, col=adjustcolor(1,0.25))
+})
+
+
+# high connectance
+plot(sims[[100]][[1]]$times, sims[[100]][[1]]$NI, type='l', 
+  xlab='Time', ylab='Number infected', las=1, ylim=c(0,100), 
+  col=adjustcolor(1, 0.25))
+sapply(sims[[100]], function(x){
+  lines(x$times, x$NI, col=adjustcolor(1,0.25))
+})
 
 ```
+
+
+
+
+
+The relative effects of connectance will be tempered by the balance between beta and gamma, with attention on the variability in expected epidemic dynamics. That is, we would expect to see more variability in epidemic trajectories when networks are small (or links are non-randomly distributed, resulting in clusters of interactions), and when beta and gamma are approximately equal (as above). Let's play around with this code to explore some of the effects of network structure, size, and infection parameters (beta and gamma) on epidemic dynamics. 
+
+```{r results='hide'}
+
+nets0 <- lapply(seq(0.05,1, length.out=100), function(x){igraph::sample_gnp(10, x)})
+sims0 <- lapply(nets0, igraph::sir, beta=0.1, gamma=0.1)
+
+# very low connectance
+plot(sims0[[1]][[1]]$times, sims0[[1]][[1]]$NI, type='l', 
+  xlab='Time', ylab='Number infected', las=1, ylim=c(0,10), xlim=c(0,100), 
+  col=adjustcolor(1, 0.25))
+sapply(sims0[[1]], function(x){
+  lines(x$times, x$NI, col=adjustcolor(1,0.25))
+})
+
+# moderate connectance 
+plot(sims0[[50]][[1]]$times, sims0[[50]][[1]]$NI, type='l', 
+  xlab='Time', ylab='Number infected', las=1, ylim=c(0,10), xlim=c(0,100), 
+  col=adjustcolor(1, 0.25))
+sapply(sims0[[50]], function(x){
+  lines(x$times, x$NI, col=adjustcolor(1,0.25))
+})
+
+
+# high connectance
+plot(sims0[[100]][[1]]$times, sims0[[100]][[1]]$NI, type='l', 
+  xlab='Time', ylab='Number infected', las=1, ylim=c(0,10), xlim=c(0,100), 
+  col=adjustcolor(1, 0.25))
+sapply(sims0[[100]], function(x){
+  lines(x$times, x$NI, col=adjustcolor(1,0.25))
+})
+
+```
+
+
+
+
+For incorporation variation in network structure, we'll use the stochastic block model. 
+
+
+In the first example, we create a graph that has two clusters of 50 nodes each, with a total network size of 100 nodes. 
+
+```{r results='hide'}
+
+pm <- cbind( c(0.1, 0.001), c(0.001, 0.1) )
+g <- igraph::sample_sbm(100, pref.matrix=pm, block.sizes=c(50,50))
+
+igraph::edge_density(g)
+igraph::edge_density(nets[[1]])
+
+
+clusterSims <- igraph::sir(g, beta=0.1, gamma=0.1)
+
+
+plot(sims[[1]][[1]]$times, sims[[1]][[1]]$NI, type='l', 
+  xlab='Time', ylab='Number infected', las=1, ylim=c(0,100), xlim=c(0,100), 
+  col=adjustcolor(1, 0.25))
+sapply(sims[[1]], function(x){
+  lines(x$times, x$NI, col=adjustcolor(1,0.25))
+})
+
+
+sapply(clusterSims, function(x){
+  lines(x$times, x$NI, col=adjustcolor('dodgerblue',0.25))
+})
+
+```
+
+
+
+What are the differences here and why? How would we expect these differences to change as connectance is increased? How about if the number of modules is increased? 
+
+
+
+
 
 
 

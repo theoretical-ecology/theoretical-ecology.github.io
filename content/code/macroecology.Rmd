@@ -37,11 +37,12 @@ Macroecological relationships allow scientists to undercover generalized _laws_ 
 
 **The dimensionality of macroecology** The scope of macroecology is perhaps best depicted in terms of spatial, temporal, and taxonomic scales of study. How many of these do you think would need to be incorporated to qualify as "macroecology"?
 
-
-```{r fig1, out.width = '100%', fig.cap = "Figure taken from McGill (2019) https://doi.org/10.1111/geb.12855."}
-# knitr::include_graphics("figs/macro.jpg")
+```{r echo = FALSE, results = 'asis'}
+image = "https://onlinelibrary.wiley.com/cms/asset/f0869e4b-be4a-4240-85fc-15c3cd576c2a/geb12855-fig-0001-m.jpg"
+cat(paste0('<center><img src="', image,'"></center>')) 
 ```
 
+[See here for a graphical depiction](https://onlinelibrary.wiley.com/cms/asset/f0869e4b-be4a-4240-85fc-15c3cd576c2a/geb12855-fig-0001-m.jpg)
 
 
 
@@ -63,10 +64,34 @@ _climatic stability hypothesis_: Fluctuating environments tend to cause species 
 **The mid-domain effect** The inherent constraints on latitude and shifting species ranges causes species richness to peak at middle latitudes. That is, assuming the random placement of a species with some fixed latitudinal range, there will still be more species near the equator. 
 
 
----
-# ((draw this out)) 
----
+```{r}
 
+rng <- 1:100
+
+startz <- sample(rng, 50, replace=TRUE)
+endz <- sample(rng, 50, replace=TRUE)
+
+par(mar=c(4,4,0.5,0.5))
+plot(1:50, startz, pch=16)
+points(1:50, endz, pch=16)
+segments(x0=1:50, y0=startz, y1=endz, pch=16, col='grey', lwd=2)
+
+sr <- c()
+for(i in 1:length(rng)){
+  sr[i] <- sum(sapply(1:length(startz), function(x){
+    sum(rng[i] %in% startz[x]:endz[x])})
+  )
+}
+
+
+par(mar=c(4,4,0.5,0.5))
+plot(sr, 
+  xlab='"Latitudinal" position', ylab='Species richness', 
+  pch=16, lwd=2, type='b')
+
+
+
+```
 
 
 
@@ -94,19 +119,63 @@ These two approaches tend to yield the same results, and oftentimes it's really 
 Species abundance distributions are common ways to describe the structure of ecological communities, and can be compared across spatial gradients. For a given area, the species abundance distribution is really similar to the rank abundance distribution, which we went over previously. Here, the x-axis is species counts (abundances) and the y-axis is the frequency that a species is found with that abundance (so the number of species which fall into a given abundance class). The shape of the relationship is important, because different proposed mechanisms will lead to different shapes. We won't go over the details about the different models for explaining the shape of the species abundance distribution, but you should know that pretty much every ecological community species abundance distribution has a _hollow curve_ shape with many rare species and just a few common species. 
 
 
----
-# ((sketch this to clarify)) 
----
+```{r echo = FALSE, results = 'asis'}
+image = "https://www.nature.com/scitable/content/ne0000/ne0000/ne0000/ne0000/23163026/verberk_ne_1_2.jpg"
+cat(paste0('<center><img src="', image,'"></center>')) 
+```
+
+[See here for a graphical depiction](https://www.nature.com/scitable/content/ne0000/ne0000/ne0000/ne0000/23163026/verberk_ne_1_2.jpg)
+
+
+
+
+
+
+
+
+
+
+**Occupancy -- abundance relationships**
+
+Perhaps one of the best supported macroecological relationships posits that more widespread species are also more locally abundant. That is, species that are found to occupy a larger number of sampled sites are expected to also be quite abundant, calculated as the mean abundance across all occupied sites. From our own work, we have found evidence for this relationship in a wide diversity of taxa from zooplankton to mammals, but the relationships are quite weak. Some have proposed that these relationships can be used to predict abundance from occupancy (which you only need presence-absence data for). This is probably a bad idea though, since the weak explanatory power of the relationship suggests that other factors are important. 
+
+
+Can we formalize this conceptual theory into something more rigorous? Probably. Have we? No. This is what we've done. We have assumed the relationship between the binomial probability of species detection ($p$) and the Poisson abundance at a particular patch ($\mu$). 
+
+\begin{equation}
+\begin{aligned} 
+   p &= 1 - e^{-\mu}  \\
+   a &= \frac{\mu}{p}
+\end{aligned} 
+\label{eq1}
+\end{equation}
+
+This would suggest that species always follow abundance--occupancy relationships because of an artefactual relationship between two statistical processes, a binomial process controlling occupancy, and a Poisson process controlling species abundance. Much of the underlying theory on abundance--occupancy relationships inherently assumes a link between these two random variables. 
+
+What is a more agnostic way we can model spatial occupancy and abundance? We could have a model of spatial population dynamics, sampling our species across it's distribution through time, allowing us to incorporate variation in sampling effort and other factors. 
+
+
+> When would we expect species to deviate from abundance-occupancy relationships? 
+
+
+
+
+Related to occupancy-abundance relationships are a more general class of relationships called 'distribution-abundance' relationships, of which occupancy-abundance relationships are one instance of. However, instead of sampling individual sites and estimating occupancy-abundance relationships, some researchers have argued that another relationship exists without having to sample extensively across a species range. That is, much like Rapoport's rule, there is a general relationship between species geographic range size and mean local abundance. Keep in mind how many of these relationships relate to one another. 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 **Abundant-center hypothesis** The abundant center hypothesis is a classic distance-abundance relationship, where we relate some measure of distance of a population to an aspect of the species entire range to species abundance at that particular site. Specifically, the abundant center hypothesis states that species density should be highest in the center of species range. 
-
-
-
----
-# ((sketch this to clarify)) 
----
 
 This makes a number of assumptions, some of which are:
 
@@ -116,23 +185,7 @@ This makes a number of assumptions, some of which are:
 
 So how do we operationalize this relationship? We measure species density across a species range, we calculate the range boundaries and measure distance (either to the range center or to the range boundary) and then we regress species density (y-axis) and the measure of distance we went with. If we measured distance from the range edge, we would expect a negative relationship between distance and abundance (density) if distance was measured as distance from the range center, and a positive relationship if distance was measured as distance from the range edge. 
 
-
-
-
-
-
-
-**Occupancy -- abundance relationships **
-
-Perhaps one of the best supported macroecological relationships posits that more widespread species are also more locally abundant. That is, species that are found to occupy a larger number of sampled sites are expected to also be quite abundant, calculated as the mean abundance across all occupied sites. From our own work, we have found evidence for this relationship in a wide diversity of taxa from zooplankton to mammals, but the relationships are quite weak. Some have proposed that these relationships can be used to predict abundance from occupancy (which you only need presence-absence data for). This is probably a bad idea though, since the weak explanatory power of the relationship suggests that other factors are important. 
-
-
-Related to occupancy-abundance relationships are a more general class of relationships called 'distribution-abundance' relationships, of which occupancy-abundance relationships are one instance of. However, instead of sampling individual sites and estimating occupancy-abundance relationships, some researchers have argued that another relationship exists without having to sample extensively across a species range. That is, much like Rapoport's rule, there is a general relationship between species geographic range size and mean local abundance. Keep in mind how many of these relationships relate to one another. 
-
-
----
-# ((sketch this to clarify)) 
----
+[see Dallas and Santini 2020 for some fun simulations](https://taddallas.github.io/papers/Dallas2020Ecography.pdf)
 
 
 
@@ -140,10 +193,14 @@ Related to occupancy-abundance relationships are a more general class of relatio
 
 
 
-### Notes
+
+
+
+
+
 
  
-
+_This has been the most theory-light lecture in terms of equations, as much of macroecology is either theory-light, or we just didn't have time to go into some of it. This emphasizes the distinction between conceptual theory (we have a conceptual/non-formalized idea of the potential relationship) versus much of the theory we have covered, which is a bit more formal in defining the parameters and building the system from first principles._
 
 
 
